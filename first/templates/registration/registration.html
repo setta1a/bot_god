@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form class="col-6 offset-3" method="post" action="/registration/"><br>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
+            <div class="form-text">Уже есть аккаунт? <a href="/login/" style="text-decoration: none">Войти</a></div>
+        </form>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+
+    <div class="alert {{message.tags}} alert-dismissible fade show">
+
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
