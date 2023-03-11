@@ -30,5 +30,6 @@ urlpatterns = [
             "pageheader": "Авторизация"
         }
     )),
-    path("registration/", registration)
+    path("registration/", registration),
+    path('logout/', auth_views.LogoutView.as_view()),
 ]

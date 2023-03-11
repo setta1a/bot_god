@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/list/">Список голосований</a>
+                    <a class="nav-link" href="/create_bot/">Создать бота</a>
                 </li>
                 {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
@@ -16,9 +16,6 @@
                     <a class="nav-link" href="/admin_panel/">Панель администратора</a>
                 </li>
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/add_voting/">Cоздать голосование</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/complaint/">Пожаловаться</a>
                 </li>

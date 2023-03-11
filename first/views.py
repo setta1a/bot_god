@@ -41,7 +41,7 @@ def registration(request):
     else:
         form = UserCreationForm()
         context['form'] = form
-    return render(request, 'registration/registrarion.html', context)
+    return render(request, 'registration/registration.html', context)
 
 
 # Create your views here.

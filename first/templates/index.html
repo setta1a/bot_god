@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <h1>Добро пожаловать на сайт BotGod</h1>
+<div class="container mt-5">
+    <div class="row mt-5">
+        <div class="col-6 offset-3 mt-5">
+            <h2 style="font-size: 36px;" class="text-center">Добро пожаловать на сайт BotGod</h2>
+            <p style="font-size: 24px;">На этом сайте вы можете создать своего уникального телеграмм-бота. Начните прямо сейчас!</p>
+            {% if request.user.is_authenticated %}
+                <a class="text-center" href="/create_bot/"><input type="button" class="btn btn-primary p-3 col-6 offset-3" value="Создать бота"></a>
+            {% else %}
+                <a href="/login/"><input type="button" style="height: 10vh" class="btn btn-primary col-4 ml-2 mt-5 offset-1 fs-3" value="Вход"></a>
+                <a href="/registration/"><input type="button" style="height: 10vh" class="btn btn-primary p-3 col-4 ml-2 mt-5 offset-2 fs-3" value="Регистрация"></a>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}
