@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md fixed-top" style="background-color: #3271a5; color: white">
+<nav class="navbar navbar-expand-md fixed-top text-light" style="background-color: #0c71e0; color: white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">BotGod</a>
+        <a class="navbar-brand text-light" href="/">BotGod</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,26 +8,26 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/create_bot/">Создать бота</a>
+                    <a class="nav-link text-light" href="/create_bot/">Создать бота</a>
                 </li>
                 {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin_panel/">Панель администратора</a>
+                    <a class="nav-link text-light" href="/admin_panel/">Панель администратора</a>
                 </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/complaint/">Пожаловаться</a>
+                    <a class="nav-link text-light" href="/complaint/">Пожаловаться</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile/{{request.user.id}}/">Профиль</a>
+                    <a class="nav-link text-light" href="/profile/{{request.user.id}}/">Профиль</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout/">Выйти</a>
+                    <a class="nav-link text-light" href="/logout/">Выйти</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/login/">Войти</a>
+                    <a class="nav-link text-light" href="/login/">Войти</a>
                 </li>
                 {% endif %}
             </ul>

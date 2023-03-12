@@ -4,9 +4,10 @@
     <div class="row mt-5">
         <h3 class="mt-5 text-center">Введите данные, чтобы создать своего личного телеграмм-бота</h3>
         <form class="col-6 offset-3 form card p-2" method="post" action="/create_bot/"><br>
-            <input type="text" class="form-control m-1" placeholder="Bot TOKEN">
-            <input type="text" class="form-control m-1" placeholder="Bot name">
-            <input type="text" class="form-control m-1" placeholder="Bpt short name">
+            {% csrf_token %}
+            <input required type="text" class="form-control m-1" placeholder="Bot TOKEN">
+            <input required type="text" class="form-control m-1" placeholder="Bot name">
+            <input required type="text" class="form-control m-1" placeholder="Bot short name">
             <input type="button" class="form-control m-1 btn btn-primary" value="Добавить функции">
             <input class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
         </form>
