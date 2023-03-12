@@ -1,5 +1,7 @@
+import os
 import time
-import bs4
+from bs4 import BeautifulSoup
+import mouse as mouse
 import pyowm
 import requests
 import telebot
@@ -7,11 +9,12 @@ import wikipedia
 from telebot import TeleBot
 from config import config
 from telebot import types
+from PIL import Image, ImageGrab, ImageDraw
+import platform
+
 
 wikipedia.set_lang("ru")
 bot = TeleBot(config["token"])
-owm = pyowm.OWM('7b7c3dcc26c794e9fc67e795781cbcba')
-
 
 
 
@@ -21,32 +24,13 @@ value = ""
 old_value = ""
 
 keyboard = telebot.types.InlineKeyboardMarkup()
-keyboard.row(telebot.types.InlineKeyboardButton(" ", callback_data="no"),
-             telebot.types.InlineKeyboardButton("C", callback_data="C"),
-             telebot.types.InlineKeyboardButton(" ", callback_data="no"),
-             telebot.types.InlineKeyboardButton("/", callback_data="/"))
-
-keyboard.row(telebot.types.InlineKeyboardButton("7", callback_data="7"),
-             telebot.types.InlineKeyboardButton("8", callback_data="8"),
-             telebot.types.InlineKeyboardButton("9", callback_data="9"),
-             telebot.types.InlineKeyboardButton("×", callback_data="*"))
-
-keyboard.row(telebot.types.InlineKeyboardButton("4", callback_data="4"),
-             telebot.types.InlineKeyboardButton("5", callback_data="5"),
-             telebot.types.InlineKeyboardButton("6", callback_data="6"),
-             telebot.types.InlineKeyboardButton("-", callback_data="-"))
-
-keyboard.row(telebot.types.InlineKeyboardButton("1", callback_data="1"),
-             telebot.types.InlineKeyboardButton("2", callback_data="2"),
-             telebot.types.InlineKeyboardButton("3", callback_data="3"),
-             telebot.types.InlineKeyboardButton("+", callback_data="+"))
-
-keyboard.row(telebot.types.InlineKeyboardButton(" ", callback_data="no"),
-             telebot.types.InlineKeyboardButton("0", callback_data="0"),
-             telebot.types.InlineKeyboardButton(",", callback_data="."),
-             telebot.types.InlineKeyboardButton("=", callback_data="="))
+btn = telebot.types.InlineKeyboardButton
+keyboard.row(btn(" ", callback_data="no"), btn("C", callback_data="C"), btn(" ", callback_data="no"), btn("/", callback_data="/"))
+keyboard.row(btn("7", callback_data="7"), btn("8", callback_data="8"), btn("9", callback_data="9"), btn("×", callback_data="*"))
+keyboard.row(btn("4", callback_data="4"), btn("5", callback_data="5"), btn("6", callback_data="6"), btn("-", callback_data="-"))
+keyboard.row(btn("1", callback_data="1"), btn("2", callback_data="2"), btn("3", callback_data="3"), btn("+", callback_data="+"))
+keyboard.row(btn(" ", callback_data="no"), btn("0", callback_data="0"), btn(",", callback_data="."), btn("=", callback_data="="))
 #вид калькулятора и изменение
-
 
 
 @bot.message_handler(commands = ["calculater"])
@@ -77,15 +61,12 @@ def callback_func(query):
             bot.edit_message_text(chat_id=query.message.chat.id, message_id=query.message.message_id, text="0", reply_markup=keyboard)
         else:
             bot.edit_message_text(chat_id=query.message.chat.id, message_id=query.message.message_id, text=value, reply_markup=keyboard)
-
     old_value = value
     if value == "Ошибка!": value = ""
 #конец калькулятора
 
 
-
 #wiki
-
 @bot.message_handler(commands=['wiki'])
 def wiki(message):
     try:
@@ -101,24 +82,62 @@ def wiki(message):
             bot.send_message(message.chat.id, '{}'.format(sder))
     except:
         bot.send_message(message.chat.id, "будь добр написать /wiki 'что желаешь найти'")
-#wiki надо найти try accept
-
-
 
 
 def getanekdot():
-    z = ''
-    s = requests.get('http://anekdotme.ru/random')
-    b = bs4.BeautifulSoup(s.text, "html.parser")
-    p = b.select('.anekdot_text')
-    for x in p:
-        s = (x.getText().strip())
-        z = z + s + '\n\n'
-    return s
+    r = requests.get('https://www.anekdot.ru/random/anekdot/')
+    soup = BeautifulSoup(r.text, 'html.parser')
+    anekdot = soup.find_all('div', class_="text")
+    for article in anekdot:
+        article_title = article.text.strip()
+    return article_title
+
+
 @bot.message_handler(commands=["anekdot"])
-def anekdot(message):
+def anekdotes(message):
     bot.send_message(message.from_user.id, getanekdot())
 
+
+@bot.message_handler(commands=["capture"])
+def capture_pc(message):
+    bot.send_chat_action(message.chat.id, 'upload_photo')
+    try:
+        currentMouseX, currentMouseY = mouse.get_position()
+        img = ImageGrab.grab()
+        img.save("screen.png", "png")
+        img = Image.open("screen.png")
+        draw = ImageDraw.Draw(img)
+        draw.polygon(
+            (currentMouseX, currentMouseY, currentMouseX, currentMouseY + 15, currentMouseX + 10, currentMouseY + 10),
+            fill="white", outline="black")
+        img.save("screen_with_mouse.png", "PNG")
+        bot.send_photo(message.chat.id, open("screen_with_mouse.png", "rb"))
+        os.remove("screen.png")
+        os.remove("screen_with_mouse.png")
+    except:
+        bot.send_message(message.chat.id, "Компьютер заблокирован")
+
+
+@bot.message_handler(commands=["komp"])
+def komp(message):
+    req = requests.get('http://ip.42.pl/raw')
+    ip = req.text
+    uname = os.getlogin()
+    windows = platform.platform()
+    processor = platform.processor()
+    bot.send_message(message.from_user.id, f"*Пользователь:* {uname}\n*IP:* {ip}\n*ОС:* {windows}\n*Процессор:* {processor}", parse_mode="markdown")
+
+
+@bot.message_handler(commands=["off"])
+def offer(message):
+    bot.send_message(message.chat.id, "Выключение...")
+    os.system('shutdown -p')
+
+
+@bot.message_handler(commands=["reload"])
+def reloader(message):
+    bot.send_message(message.chat.id, "Перезагрузка компьютера...")
+    os.system('reboot')
 
 
 @bot.message_handler(commands=["panda"])
@@ -130,8 +149,6 @@ def panda(message):
     bot.send_message(message.from_user.id, url)
 
 
-
-
 @bot.message_handler(commands=["start"])
 def hello_user(message):
     greetengs = f"Дарова, <b>{message.from_user.first_name}</b>"
@@ -141,26 +158,6 @@ def hello_user(message):
 @bot.message_handler(commands=["info"])
 def get_info(message):
     bot.reply_to(message, f"ваше имя:{message.from_user.first_name}, ваш username: {message.from_user.username}")
-
-@bot.message_handler(commands=["weather"])
-def text(message):
-    keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=False)
-    button_geo = types.KeyboardButton(text="Отправить местоположение", request_location=True)
-    keyboard.add(button_geo)
-    bot.send_message(message.chat.id, "Привет! Нажми на кнопку и передай мне свое местоположение", reply_markup=keyboard)
-
-@bot.message_handler(content_types=["location"])
-def location(message):
-    if message.location is not None:
-        lat = message.location.latitude
-        lon = message.location.longitude
-        observation = owm.weather_at_coords(lat,lon)
-        w = str(observation.get_weather()).split(",")
-        sde=str(w).split("=")
-        bot.reply_to(message, sde[3])
-        print(w)
-
-
 
 
 count = 0
@@ -186,21 +183,9 @@ def chat_bot(message):
         bot.send_message(message.chat.id, "я тебя не понимаю")
 
 
-
-
-
-
-
-
 @bot.message_handler()
 def det_msg(message):
     bot.send_message(message.chat.id, message.text)
-
-
-
-
-
-
 
 
 if __name__=="__main__":
