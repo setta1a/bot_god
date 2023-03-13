@@ -8,9 +8,32 @@
             <input required type="text" class="form-control m-1" placeholder="Bot TOKEN">
             <input required type="text" class="form-control m-1" placeholder="Bot name">
             <input required type="text" class="form-control m-1" placeholder="Bot short name">
-            <input type="button" class="form-control m-1 btn btn-primary" value="Добавить функции">
+            <input id="add" type="button" class="form-control m-1 btn btn-primary" value="Добавить функции">
+            <div id="functions"></div>
             <input class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
         </form>
     </div>
 </div>
+<script>
+    'use strict';
+
+    document.querySelector("#add").addEventListener("click", () => {
+        let new_section = document.createElement("select")
+        new_section.classList.add("form-select")
+        let first_option = document.createElement("option")
+        first_option.innerHTML = "Выберите функцию"
+        first_option.setAttribute("selected", true)
+        new_section.appendChild(first_option)
+        let names = ["Калькулятор", "Википедия", "Анекдот", "Скриншот", "Информация о компьютере", 
+                "Выключение ПК", "Перезагрузка ПК", "Панда"]
+        for (let i = 0; i < names.length; ++i) {
+            let new_option = document.createElement("option")
+
+            new_option.innerHTML = names[i]
+            new_option.value = toString(i)
+            new_section.appendChild(new_option)
+        }
+        document.querySelector("#functions").appendChild(new_section)
+    })
+</script>
 {% endblock %}
