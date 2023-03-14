@@ -58,8 +58,8 @@
     console.log(cards.lenght)
     for(let i = 0; i < cards.length; ++i){
         let card_values = cards[i]
-        let template = `<div id="card" class="card mb-3" style="max-width: 900px;">
-            <label class="checkbox-ios d-flex align-items-end">
+        let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px">
+            <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
                             <input type="checkbox">
                             <span class="checkbox-ios-switch"></span>
                         </label>
@@ -74,6 +74,7 @@
                           <p class="card-text card-price"><small class="text-muted">${card_values.price}</small></p>
                         </div>
                       </div>
+                      <button id="question" class="btn card-text text-muted text-end" style="margin-left: auto; font-size: 36px; margin-right: 10px">?</button>
                     </div>
                 </div>`
             
