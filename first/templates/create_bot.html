@@ -1,15 +1,31 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 <div class="container">
     <div class="row mt-5">
         <h3 class="mt-5 text-center">Введите данные, чтобы создать своего личного телеграмм-бота</h3>
-        <form class="col-6 offset-3 form card p-2" method="post" action="/create_bot/"><br>
+        <form class="col-8 offset-2 form card p-2" method="post" action="/create_bot/"><br>
             {% csrf_token %}
             <input required type="text" class="form-control m-1" placeholder="Bot TOKEN">
             <input required type="text" class="form-control m-1" placeholder="Bot name">
             <input required type="text" class="form-control m-1" placeholder="Bot short name">
-            <input id="add" type="button" class="form-control m-1 btn btn-primary" value="Добавить функции">
-            <div id="functions"></div>
+            <div id="functions">
+                <template id="card" class="card mb-3" style="max-width: 900px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/langru-200px-Smiley.svg.png" class="card-pic img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text card-description">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                          <p class="card-text card-price"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                </template>
+            </div>
             <input class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
         </form>
     </div>
@@ -17,23 +33,57 @@
 <script>
     'use strict';
 
-    document.querySelector("#add").addEventListener("click", () => {
-        let new_section = document.createElement("select")
-        new_section.classList.add("form-select")
-        let first_option = document.createElement("option")
-        first_option.innerHTML = "Выберите функцию"
-        first_option.setAttribute("selected", true)
-        new_section.appendChild(first_option)
-        let names = ["Калькулятор", "Википедия", "Анекдот", "Скриншот", "Информация о компьютере", 
-                "Выключение ПК", "Перезагрузка ПК", "Панда"]
-        for (let i = 0; i < names.length; ++i) {
-            let new_option = document.createElement("option")
-
-            new_option.innerHTML = names[i]
-            new_option.value = i
-            new_section.appendChild(new_option)
+    class Card{
+        constructor(name, descriprion, price, photo, os) {
+            this.name = name
+            this.descriprion = descriprion
+            this.price = price
+            this.photo = photo
+            this.os = os
         }
-        document.querySelector("#functions").appendChild(new_section)
-    })
+
+        returnValues() {
+            return this.name, this.descriprion, this.price, this.photo, this.os 
+        }
+    }
+
+    let cards = [new Card("Wiki", "Эта фукнция позволяет вам получить статью с википедии по ключевому запросу прямо в телеграмм", "free", "../photos/wiki.svg", [1,1,1]),
+    new Card("Anekdot", "Эта функция присылает ыам случайный анекдот и поднимает вам настроение", "free", "../photos/smile.svg.png", [1,1,1]),
+    new Card("Screenshot", "Эта функция присылает снимок экрана вашего компьютера в чат с ботом", "free", "../photos/wiki.svg", [1,0,0]),
+    new Card("Info about PC", "Эта фукнция присылает вам полную техническую информацию о вашем компьютере", "free", "../photos/wiki.svg", [1,0,0]),
+    new Card("Turn off the PC", "Эта фукнция позволяет выключить ваш компьютер дистанционно", "free", "../photos/wiki.svg", [1, 0, 0]),
+    new Card("Reboot the PC", "Эта фукнция позволяет перезагрузить ваш компьютер(для этого даже не обязательно находится рядом с ним)", "free", "../photos/wiki.svg", [1, 0, 0]),
+    new Card("Panda", "Эта фукнция присылает вам фотографию милой панды. Разве кто-то не любит панд?", "free", "../photos/wiki.svg", [1,1,1])]
+
+    console.log(cards.lenght)
+    for(let i = 0; i < cards.length; ++i){
+        let card_values = cards[i]
+        let template = `<div id="card" class="card mb-3" style="max-width: 900px;">
+            <label class="checkbox-ios d-flex align-items-end">
+                            <input type="checkbox">
+                            <span class="checkbox-ios-switch"></span>
+                        </label>
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/langru-200px-Smiley.svg.png" class="card-pic img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">${card_values.name}</h5>
+                          <p class="card-text card-description">${card_values.descriprion}</p>
+                          <p class="card-text card-price"><small class="text-muted">${card_values.price}</small></p>
+                        </div>
+                      </div>
+                    </div>
+                </div>`
+            
+        let result = new DOMParser().parseFromString(template, "text/html").getElementsByTagName("div")[0]
+
+        console.log(typeof(result))
+
+        functions.appendChild(result)
+        console.log()
+    }
+
 </script>
 {% endblock %}
