@@ -13,6 +13,8 @@ from PIL import Image, ImageGrab, ImageDraw
 import platform
 from pdf2docx import parse
 from typing import Tuple
+from pdf2image import convert_from_path
+
 
 
 wikipedia.set_lang("ru")
@@ -40,14 +42,14 @@ def convert_pdf2docx(input_file: str, output_file: str, pages: Tuple = None):
 
 @bot.message_handler(commands=['pdf2docx'])
 def pdf2docx_command(message):
-    os.mkdir("files")
+    if not os.path.exists('files'):
+        os.mkdir("files")
     send = bot.send_message(message.chat.id, 'Отправьте pdf файл')
     bot.register_next_step_handler(send, pdf2docx)
 
 def pdf2docx(message):
     file_info = bot.get_file(message.document.file_id)
     downloaded_file = bot.download_file(file_info.file_path)
-
     src = 'files/' + message.document.file_name
     tmpdocx = open("files/tmpdocx.docx", "w")
     tmpdocx.close()
@@ -59,6 +61,30 @@ def pdf2docx(message):
     os.remove("files/tmpdocx.docx")
     os.remove(src)
     os.remove(srcdocx)
+
+@bot.message_handler(commands=['pdf2jpg'])
+def pdf2jpg_command(message):
+    if not os.path.exists('files'):
+        os.mkdir("files")
+    send = bot.send_message(message.chat.id, 'Отправьте pdf файл')
+    bot.register_next_step_handler(send, pdf2jpg)
+
+def pdf2jpg(message):
+    file_info = bot.get_file(message.document.file_id)
+    downloaded_file = bot.download_file(file_info.file_path)
+    src = 'files/' + message.document.file_name
+    with open(src, 'wb') as new_file:
+        new_file.write(downloaded_file)
+    pages = convert_from_path(src)
+    for i in range(len(pages)):
+        pages[i].save('files/page' + str(i) + '.jpg', 'JPEG')
+    for i in range(len(pages)):
+        bot.send_document(message.chat.id, open('files/page' + str(i) + '.jpg', 'rb'))
+    for i in range(len(pages)):
+        os.remove('files/page' + str(i) + '.jpg')
+    os.remove(src)
+
+
 
 
 

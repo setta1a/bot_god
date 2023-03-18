@@ -7,3 +7,4 @@ telebot
 wikipedia
 Pillow
 pdf2docx
+pdf2image
