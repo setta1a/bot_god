@@ -11,6 +11,8 @@ from config import config
 from telebot import types
 from PIL import Image, ImageGrab, ImageDraw
 import platform
+from pdf2docx import parse
+from typing import Tuple
 
 
 wikipedia.set_lang("ru")
