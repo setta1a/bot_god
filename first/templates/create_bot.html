@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+<div class="modal" id="modal"></div>
 <div class="container">
     <div class="row mt-5">
         <h3 class="mt-5 text-center">Введите данные, чтобы создать своего личного телеграмм-бота</h3>
@@ -11,23 +12,26 @@
             <input required type="text" class="form-control m-1" placeholder="Bot name">
             <input required type="text" class="form-control m-1" placeholder="Bot short name">
             <div id="functions">
-                <template id="card" class="card mb-3" style="max-width: 900px;">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/langru-200px-Smiley.svg.png" class="card-pic img-fluid rounded-start" alt="...">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text card-description">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                          <p class="card-text card-price"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                      </div>
-                    </div>
-                </template>
             </div>
             <input class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
         </form>
+        <button type="button" id="${card_values.name}_question" class="btn card-text text-muted text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display: none; margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?</button>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>
@@ -47,13 +51,13 @@
         }
     }
 
-    let cards = [new Card("Wiki", "Эта фукнция позволяет вам получить статью с википедии по ключевому запросу прямо в телеграмм", "free", "../photos/wiki.svg", [1,1,1]),
-    new Card("Anekdot", "Эта функция присылает ыам случайный анекдот и поднимает вам настроение", "free", "../photos/smile.svg.png", [1,1,1]),
-    new Card("Screenshot", "Эта функция присылает снимок экрана вашего компьютера в чат с ботом", "free", "../photos/wiki.svg", [1,0,0]),
-    new Card("Info about PC", "Эта фукнция присылает вам полную техническую информацию о вашем компьютере", "free", "../photos/wiki.svg", [1,0,0]),
-    new Card("Turn off the PC", "Эта фукнция позволяет выключить ваш компьютер дистанционно", "free", "../photos/wiki.svg", [1, 0, 0]),
-    new Card("Reboot the PC", "Эта фукнция позволяет перезагрузить ваш компьютер(для этого даже не обязательно находится рядом с ним)", "free", "../photos/wiki.svg", [1, 0, 0]),
-    new Card("Panda", "Эта фукнция присылает вам фотографию милой панды. Разве кто-то не любит панд?", "free", "../photos/wiki.svg", [1,1,1])]
+    let cards = [new Card("Wiki", "Эта фукнция позволяет вам получить статью с википедии по ключевому запросу прямо в телеграмм", "free", "wiki.svg", [1,1,1]),
+    new Card("Anekdot", "Эта функция присылает ыам случайный анекдот и поднимает вам настроение", "free", "smile.svg.png", [1,1,1]),
+    new Card("Screenshot", "Эта функция присылает снимок экрана вашего компьютера в чат с ботом", "free", "wiki.svg", [1,0,0]),
+    new Card("Info about PC", "Эта фукнция присылает вам полную техническую информацию о вашем компьютере", "free", "wiki.svg", [1,0,0]),
+    new Card("Turn off the PC", "Эта фукнция позволяет выключить ваш компьютер дистанционно", "free", "wiki.svg", [1, 0, 0]),
+    new Card("Reboot the PC", "Эта фукнция позволяет перезагрузить ваш компьютер(для этого даже не обязательно находится рядом с ним)", "free", "wiki.svg", [1, 0, 0]),
+    new Card("Panda", "Эта фукнция присылает вам фотографию милой панды. Разве кто-то не любит панд?", "free", "wiki.svg", [1,1,1])]
 
     console.log(cards.lenght)
     for(let i = 0; i < cards.length; ++i){
@@ -65,7 +69,7 @@
                         </label>
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/langru-200px-Smiley.svg.png" class="card-pic img-fluid rounded-start" alt="...">
+                        <img src=" {% static 'photos/wiki.svg' %}" alt="..." style="max-width: 150px">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body">
@@ -74,13 +78,29 @@
                           <p class="card-text card-price"><small class="text-muted">${card_values.price}</small></p>
                         </div>
                       </div>
-                      <button id="question" class="btn card-text text-muted text-end" style="margin-left: auto; font-size: 36px; margin-right: 10px">?</button>
+                      <button type="button" id="${card_values.name}_question" class="btn card-text text-muted text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?</button>
                     </div>
-                </div>`
+                </div>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Understood</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                `
             
         let result = new DOMParser().parseFromString(template, "text/html").getElementsByTagName("div")[0]
-
-        console.log(typeof(result))
 
         functions.appendChild(result)
         console.log()
