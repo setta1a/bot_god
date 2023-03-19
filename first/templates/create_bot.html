@@ -15,19 +15,19 @@
             </div>
             <input class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
         </form>
-        <button type="button" id="${card_values.name}_question" class="btn card-text text-muted text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display: none; margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?</button>
+        <button type="button" id="question" class="btn card-text text-muted text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display: none; margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?</button>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
-                <div class="modal-body">
+                <div id="modal_content" class="modal-body">
                     ...
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
                 </div>
                 </div>
             </div>
@@ -62,6 +62,7 @@
     console.log(cards.lenght)
     for(let i = 0; i < cards.length; ++i){
         let card_values = cards[i]
+        console.log(card_values.name.split(" ")[0])
         let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px">
             <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
                             <input type="checkbox">
@@ -78,31 +79,20 @@
                           <p class="card-text card-price"><small class="text-muted">${card_values.price}</small></p>
                         </div>
                       </div>
-                      <button type="button" id="${card_values.name}_question" class="btn card-text text-muted text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?</button>
+                      <button type="button" id="${card_values.name.split(" ")[0]}_question" class="btn card-text text-muted text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?</button>
                     </div>
                 </div>
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Understood</button>
-                        </div>
-                        </div>
-                    </div>
                 </div>
                 `
-            
+        
         let result = new DOMParser().parseFromString(template, "text/html").getElementsByTagName("div")[0]
 
         functions.appendChild(result)
+        console.log(document.querySelector(`#${card_values.name}_question`))
+        document.querySelector(`#${card_values.name.split(" ")[0]}_question`).addEventListener("click", () => {
+            staticBackdropLabel.innerHTML = card_values.name
+            modal_content.innerHTML = card_values.descriprion
+        })
         console.log()
     }
 
