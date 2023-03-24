@@ -8,9 +8,30 @@
         <h3 class="mt-5 text-center">Введите данные, чтобы создать своего личного телеграмм-бота</h3>
         <form class="col-8 offset-2 form card p-2" method="post" action="/create_bot/"><br>
             {% csrf_token %}
-            <input required type="text" class="form-control m-1" placeholder="Bot TOKEN">
-            <input required type="text" class="form-control m-1" placeholder="Bot name">
-            <input required type="text" class="form-control m-1" placeholder="Bot short name">
+            <div class="col-10 offset-1">
+                <input required type="text" class="form-control m-1" placeholder="Bot TOKEN">
+                <input required type="text" class="form-control m-1" placeholder="Bot name">
+                <input required type="text" class="form-control m-1" placeholder="Bot short name">
+                <button type="button" id="question" class="btn card-text text-primary text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" 
+                style="font-size: 24px; margin-right: 10px;display: inline-block; text-decoration: underline;">Где взять данные?</button>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                        </div>
+                        <div id="modal_content" class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Поиск по функциям"><br>
             <div id="functions">
             </div>
             <input href="../payment/" class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">

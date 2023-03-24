@@ -5,32 +5,34 @@
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/create_bot/">Создать бота</a>
-                </li>
-                {% if request.user.is_authenticated %}
-                {% if request.user.is_superuser %}
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/admin_panel/">Панель администратора</a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/complaint/">Пожаловаться</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/profile/{{request.user.id}}/">Профиль</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/logout/">Выйти</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/login/">Войти</a>
-                </li>
-                {% endif %}
-            </ul>
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/create_bot/">Создать бота</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_superuser %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="/admin_panel/">Панель администратора</a>
+                                </li>
+                            {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link text-light text-right" href="/complaint/">Пожаловаться</a>
+                        </li>
+                            <li style="" class="nav-item text-right ml-5">
+                                <a class="nav-link text-light text-right" href="/profile/{{request.user.id}}/">Профиль</a>
+                            </li>
+                            {% if request.user.is_authenticated %}
+                                <li style="float: right" class="nav-item text-right">
+                                    <a class="nav-link text-light text-right" href="/logout/">Выйти</a>
+                                </li>
+                            {% else %}
+                            <li style="float: right" class="nav-item">
+                                    <a class="nav-link text-light text-right" href="/login/">Войти</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+            
         </div>
     </div>
 </nav>
