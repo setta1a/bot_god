@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section style="background-color: #eee; border: 2px solid #cacaca; border-radius: 40px;margin: 50px;" class="m-20">
+    <div class="container py-5">
+        <div class="row">
+            <form action=""  method="POST" enctype="multipart/form-data" class="row">
+                {% csrf_token %}
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="../../media/{{photo}}"
+                             alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <input type="file" class="form-control" id="image" data-buttonText="фотография" name="image">
+                        <h5 class="my-3" id="full_name">{{profile.last_name}}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Имя</p>
+                            </div>
+                            <div class="col-sm-9">
+                                {% if profile.last_name %}
+                                    <input class="mb-0 form-control" name="last_name" value="{{profile.last_name}}"
+                                        id="full_name_input">
+                                {% else %}
+                                    <input class="mb-0 form-control" name="last_name" value="Тут могло быть ваше имя"
+                                        id="full_name_input">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                {% if profile.email %}
+                                    <input type="email" name="email" class="mb-0 form-control"
+                                        value="{{profile.email}}"></input>
+                                {% else %}
+                                    <input type="email" name="email" class="mb-0 form-control"
+                                    value="Тут мог быть ваш email"></input>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">НикНэйм</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{profile.username}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Телефон</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">89774345266</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <input class="btn btn-success" type="submit" value="Редактировать">
+                        <a class="btn btn-primary" href="/profile/{{profile.id}}/" type="button" value="Редактировать">Назад</a>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</section>
+
+<script>
+    'use strict';
+
+    full_name_input.addEventListener("input", () => {
+        full_name.innerHTML = full_name_input.value
+    })
+
+</script>
+{% endblock %}

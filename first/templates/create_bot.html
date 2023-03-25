@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row mt-5">
         <h3 class="mt-5 text-center">Введите данные, чтобы создать своего личного телеграмм-бота</h3>
-        <form class="col-8 offset-2 form card p-2" method="post" action="/create_bot/"><br>
+        <form class="col-8 offset-2 form card p-2" method="post" action="/create_bot/"  style=""><br>
             {% csrf_token %}
             <div class="col-10 offset-1">
                 <input required type="text" class="form-control m-1" placeholder="Bot TOKEN">
@@ -82,7 +82,7 @@
 
     for(let i = 0; i < cards.length; ++i){
         let card_values = cards[i]
-        let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px">
+        let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px; background-color: #eff7ff">
             <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
                             <input type="checkbox">
                             <span class="checkbox-ios-switch"></span>

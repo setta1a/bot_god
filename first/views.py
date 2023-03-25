@@ -20,6 +20,43 @@ def create_bot(request):
     return render(request, "create_bot.html", context)
 
 
+@login_required(login_url='/login/')
+def profile(request, profile_id):
+    """
+        Страница профиля пользователя
+
+        :param request: объект с деталями HTTP-запроса
+        :return: Объект с деталями HTTP-ответа
+    """
+    context = {}
+    profile = User.objects.get(id=profile_id)
+    context["profile"] = profile
+    context["profile"] = User.objects.get(id=profile_id)
+    return render(request, "profile.html", context)
+
+
+@login_required(login_url='/login/')
+def redact_profile(request, redact_profile_id):
+    """
+        Обработчик страницы редактирования профиля
+
+        :param request: объект с деталями HTTP-запроса
+        :return: Объект с деталями HTTP-ответа
+    """
+    context = {}
+
+    if request.method == "POST":
+        profile = User.objects.get(id=redact_profile_id)
+        context["profile"] = profile
+        profile.last_name = request.POST["last_name"]
+        profile.email = request.POST["email"]
+        profile.save()
+
+    return render(request, "redact_profile.html", context)
+
+
+
+
 def payment(request):
     context = {}
     return render(request, "payment.html", context)
