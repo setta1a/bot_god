@@ -2,6 +2,11 @@ import uuid
 import speech_recognition as sr
 
 
+
+r = sr.Recognizer()
+language='ru_RU'
+
+
 def recognise(filename):
     with sr.AudioFile(filename) as source:
         audio_text = r.listen(source)
