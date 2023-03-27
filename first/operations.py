@@ -1,5 +1,5 @@
 import peewee
-from models import *
+from first.models import *
 
 
 def create_tables():
