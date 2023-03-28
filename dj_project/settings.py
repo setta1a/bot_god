@@ -91,10 +91,10 @@ WSGI_APPLICATION = 'dj_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'myproject',
-        'USER': 'myprojectuser',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'NAME': 'bot_god_db',
+        'USER': 'superuser',
+        'PASSWORD': 'postgreSQL_pass',
+        'HOST': 'http://62.84.98.50/',
         'PORT': '',
     }
 }
