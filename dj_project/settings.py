@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'bot_god_db',
         'USER': 'superuser',
         'PASSWORD': 'postgreSQL_pass',
-        'HOST': 'http://62.84.98.50/',
+        'HOST': '62.84.98.50',
         'PORT': '',
     }
 }
