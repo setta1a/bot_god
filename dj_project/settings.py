@@ -90,12 +90,11 @@ WSGI_APPLICATION = 'dj_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bot_god_db',
-        'USER': 'superuser',
-        'PASSWORD': 'postgreSQL_pass',
-        'HOST': '62.84.98.50',
-        'PORT': '',
+        'USER': 'vasya',
+        'PASSWORD': 'promprog',
+        'HOST': '62.84.98.50'
     }
 }
 
