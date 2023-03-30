@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'bot_god_db',
         'USER': 'vasya',
         'PASSWORD': 'promprog',
-        'HOST': '62.84.98.50'
+        'HOST': 'localhost'
     }
 }
 
