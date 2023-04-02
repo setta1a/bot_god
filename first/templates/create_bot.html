@@ -4,7 +4,7 @@
 {% block content %}
 <div class="modal" id="modal"></div>
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-5 card">
         <h3 class="mt-5 text-center">Введите данные, чтобы создать своего личного телеграмм-бота</h3>
         <form class="col-8 offset-2 form card p-2" method="post" action="/create_bot/"  style=""><br>
             {% csrf_token %}
@@ -13,7 +13,7 @@
                 <input required type="text" class="form-control m-1" placeholder="Bot name">
                 <input required type="text" class="form-control m-1" placeholder="Bot short name">
                 <button type="button" id="question" class="btn card-text text-primary text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" 
-                style="font-size: 24px; margin-right: 10px;display: inline-block; text-decoration: underline;">Где взять данные?</button>
+                style="font-size: 24px; margin-right: 10px;display: inline-block;">Где взять данные?</button>
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -31,8 +31,8 @@
                     </div>
                 </div>
             </div>
-            <input type="text" class="form-control" placeholder="Поиск по функциям"><br>
-            <div id="functions">
+            <input id="search" type="text" class="form-control col-6 offset-1" placeholder="Поиск по функциям"><br>
+            <div id="functions" class="offset-2">
             </div>
             <input href="../payment/" class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
         </form>
@@ -82,14 +82,15 @@
 
     for(let i = 0; i < cards.length; ++i){
         let card_values = cards[i]
-        let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px; background-color: #eff7ff">
+        console.log(card_values.photo)
+        let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px; background-color: #fff;">
             <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
                             <input type="checkbox">
                             <span class="checkbox-ios-switch"></span>
                         </label>
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img src=" {% static 'photos/wiki.svg' %}" alt="..." style="max-width: 150px">
+                        <img src=" {% static 'photos/${card_values.photo}' %}" alt="..." style="max-width: 150px">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body">
@@ -110,6 +111,19 @@
         document.querySelector(`#${card_values.name.split(" ")[0]}_question`).addEventListener("click", () => {
             staticBackdropLabel.innerHTML = card_values.name
             modal_content.innerHTML = card_values.descriprion
+        })
+
+        search.addEventListener("input", () => {
+            for (let i = 0; i < cards.length; ++i) {
+                let name = cards[i].name.toLowerCase()
+                let descriprion = cards[i].descriprion.toLowerCase()
+                let search_text = search.value.toLowerCase()
+                if ((name.includes(search_text) || descriprion.includes(search_text)) == false) {
+                    functions.children[i].style.display = "none"
+                } else {
+                    functions.children[i].style.display = "block"
+                }
+            }
         })
     }
 
