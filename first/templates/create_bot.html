@@ -17,7 +17,7 @@
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header" id="modal_header">
                             <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                         </div>
@@ -36,23 +36,6 @@
             </div>
             <input href="../payment/" class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
         </form>
-        <button type="button" id="question" class="btn card-text text-muted text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display: none; margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?</button>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                </div>
-                <div id="modal_content" class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
-                </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <script>
@@ -82,7 +65,6 @@
 
     for(let i = 0; i < cards.length; ++i){
         let card_values = cards[i]
-        console.log(card_values.photo)
         let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px; background-color: #fff;">
             <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
                             <input type="checkbox">
@@ -90,7 +72,7 @@
                         </label>
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img src=" {% static 'photos/${card_values.photo}' %}" alt="..." style="max-width: 150px">
+                        <img src=" {% static '${card_values.photo}' %}" alt="..." style="max-width: 150px">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body">
@@ -109,7 +91,8 @@
 
         functions.appendChild(result)
         document.querySelector(`#${card_values.name.split(" ")[0]}_question`).addEventListener("click", () => {
-            staticBackdropLabel.innerHTML = card_values.name
+            console.log(modal_content)
+            modal_header.innerHTML = card_values.name
             modal_content.innerHTML = card_values.descriprion
         })
 
