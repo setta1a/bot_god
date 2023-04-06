@@ -18,6 +18,7 @@ Welcome to Bot_good's documentation!
 
    Site_views.rst
    models_db.rst
+   html_page.rst
 
 
 
