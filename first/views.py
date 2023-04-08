@@ -1,11 +1,14 @@
 import datetime
+import os
 import random
-
+from django.core.files import File
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
+
+from first.models import BotFunctions
 
 
 def index(request):
@@ -15,8 +18,19 @@ def index(request):
 
 def create_bot(request):
     context = {}
+    print(os.getcwd())
     if request.method == "POST":
-        print(request.POST)
+        function_names = request.POST.getlist('functions')
+        print(function_names)
+        with open("BOT.py", "w") as bot:
+            functions = []
+            for name in function_names:
+                functions.append(BotFunctions.objects.get(func_name=name))
+            for func in functions:
+                print(func.file_name)
+                with open(f'first/botTelegram/{func.file_name}', 'r') as file:
+                    code = file.read()
+                    bot.write(code)
         return redirect("../payment/")
     return render(request, "create_bot.html", context)
 
