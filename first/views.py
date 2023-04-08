@@ -16,6 +16,7 @@ def index(request):
 def create_bot(request):
     context = {}
     if request.method == "POST":
+        print(request.POST)
         return redirect("../payment/")
     return render(request, "create_bot.html", context)
 

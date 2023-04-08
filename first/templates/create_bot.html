@@ -6,27 +6,32 @@
 <div class="container">
     <div class="row mt-5 card">
         <h3 class="mt-5 text-center">Введите данные, чтобы создать своего личного телеграмм-бота</h3>
-        <form class="col-8 offset-2 form card p-2" method="post" action="/create_bot/"  style=""><br>
+        <form action=""></form>
+        <form class="col-8 offset-2 form card p-2" method="POST" action="" style=""><br>
             {% csrf_token %}
             <div class="col-10 offset-1">
-                <input required type="text" class="form-control m-1" placeholder="Bot TOKEN">
-                <input required type="text" class="form-control m-1" placeholder="Bot name">
-                <input required type="text" class="form-control m-1" placeholder="Bot short name">
-                <button type="button" id="question" class="btn card-text text-primary text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" 
-                style="font-size: 24px; margin-right: 10px;display: inline-block;">Где взять данные?</button>
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <input required type="text" class="form-control m-1" placeholder="Bot TOKEN" name="token">
+                <input required type="text" class="form-control m-1" placeholder="Bot name" name="name">
+                <input required type="text" class="form-control m-1" placeholder="Bot short name" name="short_name">
+                <button type="button" id="question" class="btn card-text text-primary text-end" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"
+                        style="font-size: 24px; margin-right: 10px;display: inline-block;">Где взять данные?
+                </button>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                        </div>
-                        <div id="modal_content" class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
-                        </div>
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Закрыть"></button>
+                            </div>
+                            <div id="modal_content" class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -35,24 +40,29 @@
             <div id="functions" class="offset-2">
             </div>
             <input href="../payment/" class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
-        </form>
-        <button type="button" id="question" class="btn card-text text-muted text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display: none; margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?</button>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                </div>
-                <div id="modal_content" class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
-                </div>
+            <button type="button" id="question" class="btn card-text text-muted text-end" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                    style="display: none; margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?
+            </button>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Закрыть"></button>
+                        </div>
+                        <div id="modal_content" class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <script>
@@ -85,7 +95,7 @@
         console.log(card_values.photo)
         let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px; background-color: #fff;">
             <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
-                            <input type="checkbox">
+                            <input type="checkbox" name="functions" value="${card_values.name}">
                             <span class="checkbox-ios-switch"></span>
                         </label>
                     <div class="row g-0">
@@ -126,6 +136,7 @@
             }
         })
     }
+
 
 </script>
 {% endblock %}
