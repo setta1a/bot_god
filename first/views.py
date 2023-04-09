@@ -1,12 +1,10 @@
-import datetime
+import json
 import os
-import random
-from django.core.files import File
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 
 from first.models import BotFunctions
 
@@ -26,11 +24,21 @@ def create_bot(request):
             functions = []
             for name in function_names:
                 functions.append(BotFunctions.objects.get(func_name=name))
+            with open("first/botTelegram/start_template.py", 'r') as start_file:
+                bot.write(start_file.read())
             for func in functions:
                 print(func.file_name)
                 with open(f'first/botTelegram/{func.file_name}', 'r') as file:
                     code = file.read()
                     bot.write(code)
+            with open("first/botTelegram/end_template.py", 'r') as end_file:
+                bot.write(end_file.read())
+        with open('first/botTelegram/config.json', 'w') as json_file:
+            data = {}
+            data["name"] = request.POST['name']
+            data["username"] = request.POST['short_name']
+            data["token"] = request.POST['token']
+            json.dump(data, json_file)
         return redirect("../payment/")
     return render(request, "create_bot.html", context)
 

@@ -13,3 +13,4 @@ def wiki(message):
             bot.send_message(message.chat.id, '{}'.format(sder))
     except:
         bot.send_message(message.chat.id, "будь добр написать /wiki 'что желаешь найти'")
+

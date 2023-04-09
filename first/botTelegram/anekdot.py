@@ -8,3 +8,4 @@ def getanekdot():
 @bot.message_handler(commands=["anekdot"])
 def anekdotes(message):
     bot.send_message(message.from_user.id, getanekdot())
+

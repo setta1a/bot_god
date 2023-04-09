@@ -16,3 +16,4 @@ def capture_pc(message):
         os.remove("screen_with_mouse.png")
     except:
         bot.send_message(message.chat.id, "Компьютер заблокирован")
+

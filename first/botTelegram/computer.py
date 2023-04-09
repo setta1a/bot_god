@@ -6,3 +6,4 @@ def komp(message):
     windows = platform.platform()
     processor = platform.processor()
     bot.send_message(message.from_user.id, f"*Пользователь:* {uname}\n*IP:* {ip}\n*ОС:* {windows}\n*Процессор:* {processor}", parse_mode="markdown")
+
