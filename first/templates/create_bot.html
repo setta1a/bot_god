@@ -4,10 +4,12 @@
 {% block content %}
 <div class="modal" id="modal"></div>
 <div class="container">
-    <div class="row mt-5 card">
+    <div class="row mt-5">
         <h3 class="mt-5 text-center">Введите данные, чтобы создать своего личного телеграмм-бота</h3>
+        <br>
+        <hr class="col-10 offset-1">
         <form action=""></form>
-        <form class="col-8 offset-2 form card p-2" method="POST" action="" style=""><br>
+        <form class="col-8 offset-2 form p-2" method="POST" action="" style=""><br>
             {% csrf_token %}
             <div class="col-10 offset-1">
                 <input required type="text" class="form-control m-1" placeholder="Bot TOKEN" name="token">
@@ -36,7 +38,7 @@
                 </div>
                 <input id="search" type="text" class="form-control" placeholder="Поиск по функциям"><br>
             </div>
-            <div id="functions" class="offset-2">
+            <div id="functions" class="offset-0">
             </div>
             <input href="../payment/" class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
         </form>
