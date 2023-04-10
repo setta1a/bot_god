@@ -21,37 +21,9 @@
                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Закрыть"></button>
-                            </div>
-                            <div id="modal_content" class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <input id="search" type="text" class="form-control col-6 offset-1" placeholder="Поиск по функциям"><br>
-            <div id="functions" class="offset-2">
-            </div>
-            <input href="../payment/" class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
-            <button type="button" id="question" class="btn card-text text-muted text-end" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
-                    style="display: none; margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?
-            </button>
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                 aria-labelledby="staticBackdropLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header" id="modal_header">
                             <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Закрыть"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                         </div>
                         <div id="modal_content" class="modal-body">
                             ...
@@ -59,9 +31,14 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
                         </div>
+                        </div>
                     </div>
                 </div>
+                <input id="search" type="text" class="form-control" placeholder="Поиск по функциям"><br>
             </div>
+            <div id="functions" class="offset-2">
+            </div>
+            <input href="../payment/" class="btn btn-primary col-4 offset-4" type="submit" value="Отправить">
         </form>
     </div>
 </div>
@@ -82,17 +59,16 @@
         }
     }
 
-    let cards = [new Card("Wiki", "Эта фукнция позволяет вам получить статью с википедии по ключевому запросу прямо в телеграмм", "free", "wiki.svg", [1,1,1]),
-    new Card("Anekdot", "Эта функция присылает ыам случайный анекдот и поднимает вам настроение", "free", "smile.svg.png", [1,1,1]),
-    new Card("Screenshot", "Эта функция присылает снимок экрана вашего компьютера в чат с ботом", "free", "wiki.svg", [1,0,0]),
-    new Card("Info about PC", "Эта фукнция присылает вам полную техническую информацию о вашем компьютере", "free", "wiki.svg", [1,0,0]),
-    new Card("Turn off the PC", "Эта фукнция позволяет выключить ваш компьютер дистанционно", "free", "wiki.svg", [1, 0, 0]),
-    new Card("Reboot the PC", "Эта фукнция позволяет перезагрузить ваш компьютер(для этого даже не обязательно находится рядом с ним)", "free", "wiki.svg", [1, 0, 0]),
-    new Card("Panda", "Эта фукнция присылает вам фотографию милой панды. Разве кто-то не любит панд?", "free", "wiki.svg", [1,1,1])]
+    let cards = [new Card("Wiki", "Данная функция обеспечивает возможность получения статьи с веб-ресурса 'Википедия' на основе заданного ключевого запроса прямо в мессенджере", "free", "wiki.svg", [1,1,1]),
+    new Card("Anekdot", "Данная функция отправляет вам случайный анекдот", "free", "smile.png", [1,1,1]),
+    new Card("Screenshot", "Данная функция осуществляет отправку изображения экрана вашего персонального компьютера в диалог с ботом", "free", "camera.png", [1,0,0]),
+    new Card("Info about PC", "Данная функция предоставляет Вам полный комплекс технической информации о Вашем компьютере", "free", "info.png", [1,0,0]),
+    new Card("Turn off the PC", "Данная функция обеспечивает возможность удаленного выключения компьютера", "free", "turnoff.png", [1, 0, 0]),
+    new Card("Reboot the PC", "Данная функция предоставляет возможность осуществления перезагрузки компьютера, не присутствуя при этом находясь в непосредственной близости от него.", "free", "reboot.png", [1, 0, 0]),
+    new Card("Panda", "Данная функция предоставляет вам возможность получить изображение обожаемого всеми медведя-панды. Существует ли кто-то, кто не испытывает любви к этим милым созданиям?", "free", "panda.jpg", [1,1,1])]
 
     for(let i = 0; i < cards.length; ++i){
         let card_values = cards[i]
-        console.log(card_values.photo)
         let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px; background-color: #fff;">
             <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
                             <input type="checkbox" name="functions" value="${card_values.name}">
@@ -100,7 +76,7 @@
                         </label>
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img src=" {% static 'photos/${card_values.photo}' %}" alt="..." style="max-width: 150px">
+                        <img src='../../staticroot/media/${card_values.photo}' alt="" style="max-width: 150px">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body">
@@ -119,7 +95,8 @@
 
         functions.appendChild(result)
         document.querySelector(`#${card_values.name.split(" ")[0]}_question`).addEventListener("click", () => {
-            staticBackdropLabel.innerHTML = card_values.name
+            console.log(modal_content)
+            modal_header.innerHTML = card_values.name
             modal_content.innerHTML = card_values.descriprion
         })
 
