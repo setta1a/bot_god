@@ -23,6 +23,7 @@ a.nav-hover:hover{
 
 .btn.btn-primary{
 	background-color: #023653;
+	transition: .3s;
 	--bs-btn-color:#fff;
 	--bs-btn-bg:#023653;
 	--bs-btn-border-color:#023653;
@@ -37,6 +38,10 @@ a.nav-hover:hover{
 	--bs-btn-disabled-color:#fff;
 	--bs-btn-disabled-bg:#023653;
 	--bs-btn-disabled-border-color:#0d6efd
+}
+
+.btn.btn-primary:hover{
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
 .checkbox-ios {

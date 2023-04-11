@@ -18,9 +18,21 @@
 <h1 class="title">{{ pageheader }}</h1>
 {% block content %}
 {% endblock %}
+
+{% include 'footer.html' %}
 <script src="{% static 'bootstrap.bundle.min.js' %}"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 <script src="{% static 'jquery.js'%}"></script>
+<style>
+    .btn.btn-primary{
+        transition: .3s;
+    }
+    .btn.btn-primary:hover{
+        transform: scale(1.05);
+	    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    }
+
+</style>
 </body>
 </html>
