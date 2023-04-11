@@ -1,17 +1,9 @@
 import os
 import time
-import json
-from bs4 import BeautifulSoup
-import mouse as mouse
 import requests
-import telebot
 import wikipedia
 from telebot import TeleBot
 from config import config
-from telebot import types
-from PIL import Image, ImageGrab, ImageDraw
-import platform
-
 
 
 wikipedia.set_lang("ru")
