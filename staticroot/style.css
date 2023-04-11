@@ -13,6 +13,13 @@ a, p, span{
 	font-weight: 400;
 }
 
+a.nav-hover{
+	transition: 0.3s;
+}
+
+a.nav-hover:hover{
+	transform: scale(1.05);
+}
 
 .btn.btn-primary{
 	background-color: #023653;

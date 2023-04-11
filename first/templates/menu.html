@@ -1,8 +1,8 @@
-<nav class="navbar" style="background-color: #023653; color: white">
-    <div class="container-fluid">
-            <a href="/" style="margin: -80px; margin-left: -50px;"><img src="../../staticroot/media/main_logo (1).png" alt="Logo" width="300" height="220" class="d-inline-block align-text-top"></a>
-        <form class="d-flex col-10">
-                <a class="nav-link text-light m-2" href="/create_bot/">Создать бота</a>
+<nav class="navbar p-3" style="background-color: #023653; color: white; position: fixed; width: 100%; margin: 0; z-index: 100000; top: 0;">
+    <div class="container-fluid" width="300" height="00">
+            <a href="/" style="margin: -150px; margin-left: -70px; margin-bottom: -180px;"><img src="../../staticroot/media/main_logo (1).png" alt="Logo" width="300" height="300" class="d-inline-block align-text-top"></a>
+        <form class="d-flex col-11 offset-3">
+                <a class="nav-link nav-hover m-2 icon-link icon-link-hover fs-5" href="/create_bot/">Создать бота</a>
             {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
                         <a class="nav-link m-2" href="/admin_panel/">Панель администратора</a>
@@ -20,3 +20,13 @@
       {% endif %}
     </div>
   </nav>
+  <style>
+        a.nav-hover{
+	        transition: 0.2s;
+        }
+
+        a.nav-hover:hover{
+                transform: scale(1.05);
+                text-shadow: 1px 1px 2px black, 0 0 1em #1981b9, 0 0 0.2em #1981b9;
+        }
+  </style>
