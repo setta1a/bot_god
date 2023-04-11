@@ -1,7 +1,7 @@
 Database
 ========
 
-The project uses *PostgreSQL*- object-relational database or ORDBMS with
+The project uses *MySQL*- object-relational database or ORDBMS with
 features such as table inheritance, as well as function overloading.
 
 Our database contains tables:

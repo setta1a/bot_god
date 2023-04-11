@@ -1,5 +1,12 @@
 # BotGad
 
+## Getting started
+
+To get started, you need to install a number of packages.
+```
+pip install -r requirements.txt
+```
+
 
 
 ## Getting started
