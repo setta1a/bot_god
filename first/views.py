@@ -78,11 +78,14 @@ def redact_profile(request, redact_profile_id):
     return render(request, "redact_profile.html", context)
 
 
-
-
 def payment(request):
     context = {}
     return render(request, "payment.html", context)
+
+
+def complaint(request):
+    context = {}
+    return render(request, "complaint.html", context)
 
 
 def registration(request):

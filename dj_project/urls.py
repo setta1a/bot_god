@@ -17,7 +17,7 @@ from operator import index
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from first.views import index, create_bot, registration, payment, profile, redact_profile
+from first.views import index, create_bot, registration, payment, profile, redact_profile, complaint
 
 
 urlpatterns = [
@@ -30,6 +30,7 @@ urlpatterns = [
             "pageheader": "Авторизация"
         }
     )),
+    path("complaint/", complaint),
     path("registration/", registration),
     path('logout/', auth_views.LogoutView.as_view()),
     path("payment/", payment),
