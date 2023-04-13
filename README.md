@@ -26,6 +26,12 @@ pip install -r requirements.txt
     * urls.py
     * wsgi.py
 * first
+    * migrations
+        * 0001_initial.py
+        * 0002_rename_name_botfunctions_file_name_and_more.py
+    * botTelegram
+      * server.bat
+      * *.py ( bot functions )
     * apps.py
     * models.py
     * tests.py
@@ -45,6 +51,7 @@ pip install -r requirements.txt
 * make.dat
 * Makefile
 * manage.py
+* generate.py
 * README.md
 * requirements.txt
 
