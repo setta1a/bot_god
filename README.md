@@ -35,7 +35,7 @@ pip install -r requirements.txt
     * apps.py
     * models.py
     * tests.py
-    * views.py
+    * views.py ( site functions )
     * templates
       * *.html ( site pages )
 * source ( sphinx )
