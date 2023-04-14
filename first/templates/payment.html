@@ -4,19 +4,14 @@
     <div class="row mt-5">
         <div class="col-6 offset-3 mt-5">
             <h2 class="text-left">Выберите способ оплаты</h2>
-            <form method="POST" class="card p-2" action="https://yoomoney.ru/quickpay/confirm.xml">
+            <form method="POST" action="https://yoomoney.ru/quickpay/confirm.xml">
                 <input type="hidden" name="receiver" value="4100118151035496"/>
                 <input type="hidden" name="label" value="$order_id"/>
                 <input type="hidden" name="quickpay-form" value="button"/>
-                <input type="hidden" name="sum" value="2" data-type="number"/>
-                <input type="hidden" name="successURL" value="https://my.informatics.ru/" data-type="number"/>
-                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="paymentType" value="PC" id="btnradio1" autocomplete="off">
-                    <label class="btn btn-outline-primary --bs-purple" style="border: 1px solid #6f42c1; color: #6f42c1" for="btnradio1">ЮMoney</label>
-                    <input type="radio" class="btn-check" name="paymentType" value="AC" id="btnradio2" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio2">Банковской картой</label>
-                </div><br>
-                <input type="submit" class="btn btn-primary" value="Оплатить"/>
+                <input type="hidden" name="sum" value="4568.25" data-type="number"/>
+                <label><input type="radio" name="paymentType" value="PC"/>ЮMoney</label>
+                <label><input type="radio" name="paymentType" value="AC"/>Банковской картой</label>
+                <input type="submit" value="Перевести"/>
             </form>
         </div>
     </div>
