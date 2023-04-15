@@ -9,11 +9,24 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 
 def index(request):
+    """
+        Главная страница
+
+        :param request: объект с деталями HTTP-запроса
+        :return: **context** - объект с деталями HTTP-ответа (пустой)
+    """
     context = {}
     return render(request, "index.html", context)
 
 
 def create_bot(request):
+    """
+        Страница создания бота
+
+        :param request: объект с деталями HTTP-запроса
+        :return: **context** - объект с деталями HTTP-ответа (пустой)
+        :return: **redirect** - перекидование на страницу оплаты
+    """
     context = {}
     if request.method == "POST":
         return redirect("../payment/")
@@ -25,8 +38,8 @@ def profile(request, profile_id):
     """
         Страница профиля пользователя
 
-        :param request: объект с деталями HTTP-запроса
-        :return: Объект с деталями HTTP-ответа
+        :param request: объект с деталями HTTP-запроса, **id** пользователя
+        :return: **context** - объект с деталями HTTP-ответа
     """
     context = {}
     profile = User.objects.get(id=profile_id)
@@ -40,8 +53,8 @@ def redact_profile(request, redact_profile_id):
     """
         Обработчик страницы редактирования профиля
 
-        :param request: объект с деталями HTTP-запроса
-        :return: Объект с деталями HTTP-ответа
+        :param request: объект с деталями HTTP-запроса, **id** пользователя
+        :return: **context** - объект с деталями HTTP-ответа
     """
     context = {}
 
@@ -67,7 +80,7 @@ def registration(request):
         Обработчик страницы регистрации
 
         :param request: объект с деталями HTTP-запроса
-        :return: Объект с деталями HTTP-ответа
+        :return: **context** - объект с деталями HTTP-ответа
     """
     context = {}
     context["pagetitle"] = "Registration"
