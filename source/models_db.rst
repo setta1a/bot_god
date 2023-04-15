@@ -6,6 +6,9 @@ features such as table inheritance, as well as function overloading.
 
 Our database contains tables:
 
+User
+------
+
 .. table:: User
 
     +--------------------+---------------+-----------------------------+
@@ -25,6 +28,9 @@ Our database contains tables:
     +--------------------+---------------+-----------------------------+
     | hash               | String / text | Hash code                   |
     +--------------------+---------------+-----------------------------+
+
+BotFunctions
+-----------
 
 .. table:: BotFunctions
 
