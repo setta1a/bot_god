@@ -11,6 +11,21 @@
                 {% endif %}
                 <a class="nav-link text-light m-2" href="/complaint/">Пожаловаться</a>
         </form>
+        <div class="position-absolute bottom-25 end-0">
+            <ul class="navbar-nav flex-row-reverse">
+                <li class="nav-item=">
+                    <a class="nav-link nav-hover text-light m-2  fs-5" href="/profile/{{request.user.id}}/">Профиль</a>
+                </li>
+                <li class="vl"></li>
+                <li class="nav-item=">
+                    {% if request.user.is_authenticated %}
+                        <a class="nav-link nav-hover text-light m-2 fs-5" href="/logout/">Выйти</a>
+                    {% else %}
+                        <a class="nav-link nav-hover text-light m-2 fs-5" href="/login/">Войти</a>
+                    {% endif %}
+                </li>
+          </ul>
+        </div>
       <form class="d-flex" role="search">
                     <a class="nav-link text-light text-right m-2" href="/profile/{{request.user.id}}/">Профиль</a>
                 {% if request.user.is_authenticated %}
