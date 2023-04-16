@@ -116,4 +116,9 @@ def tech_support(request):
     return render(request, "tech_support.html", context)
 
 
-# Create your views here.
+def create_file():
+    with open('example.json', 'r') as f:
+        data = json.loads(f.read())
+        for i in data['employees']['employee']:
+            if i['id'] == '3':
+                print(i['photo'])
