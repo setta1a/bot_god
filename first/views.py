@@ -111,4 +111,9 @@ def registration(request):
     return render(request, 'registration/registration.html', context)
 
 
+def tech_support(request):
+    context = {}
+    return render(request, "tech_support.html", context)
+
+
 # Create your views here.
