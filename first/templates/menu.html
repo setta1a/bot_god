@@ -1,6 +1,8 @@
+{% load static %}
+
 <nav class="navbar p-3" style="background-color: #023653; color: white; position: fixed; width: 100%; margin: 0; z-index: 100000; top: 0;">
     <div class="container-fluid" width="300" height="00">
-            <a href="/" style="margin: -150px; margin-left: -70px; margin-bottom: -180px;"><img src="../../staticroot/media/main_logo (1).png" alt="Logo" width="300" height="300" class="d-inline-block align-text-top"></a>
+            <a href="/" style="margin: -150px; margin-left: -70px; margin-bottom: -180px;"><img src="{% static 'media/main_logo.png' %}" alt="Logo" width="300" height="300" class="d-inline-block align-text-top"></a>
         <form class="d-flex col-11 offset-3">
                 <a class="nav-link nav-hover m-2 icon-link icon-link-hover fs-5" href="/create_bot/">Создать бота</a>
             {% if request.user.is_authenticated %}
