@@ -44,15 +44,15 @@
                     </label>
                     <span>Windows</span>
                     <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
-                        <input type="checkbox" id="mac" name="functions" value="mac">
-                        <span class="checkbox-ios-switch"></span>
-                    </label>
-                    <span>Linux</span>
-                    <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
                         <input type="checkbox" id="linux" name="functions" value="linux">
                         <span class="checkbox-ios-switch"></span>
                     </label>
                     <span>Mac</span>
+                    <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
+                        <input type="checkbox" id="mac" name="functions" value="mac">
+                        <span class="checkbox-ios-switch"></span>
+                    </label>
+                    <span>Linux</span>
                 </div>
             </div>
             <div id="functions" class="offset-0">
@@ -118,6 +118,32 @@
             modal_header.innerHTML = card_values.name
             modal_content.innerHTML = card_values.descriprion
         })
+
+        let os = [0,0,0]
+        console.log(os[0] == 0)
+
+        let elems = [windows, mac, linux]
+
+        for (let i = 0; i < elems.length; ++i){
+            elems[i].addEventListener("input", () => {
+                if (elems[i].checked) {
+                    os[i] = 1
+                } else {
+                    os[i] = 0
+                }
+                for (let j = 0; j < cards.length; ++j) {
+                    if (cards[j].os[i] == 0){
+                        functions.children[j].style.display = "none"
+                    } else {
+                        functions.children[j].style.display = "block"
+                    }
+                    if (os[0] == 0 && os[1] == 0 && os[2] == 0){
+                        functions.children[j].style.display = "block"
+                    }
+                }
+            })
+        }
+
 
         search.addEventListener("input", () => {
             for (let i = 0; i < cards.length; ++i) {
