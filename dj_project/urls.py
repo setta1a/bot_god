@@ -19,7 +19,6 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from first.views import index, create_bot, registration, payment, profile, redact_profile, tech_support
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", index),
