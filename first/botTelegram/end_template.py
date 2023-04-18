@@ -3,11 +3,17 @@ def hello_user(message):
     greetengs = f"Дарова, <b>{message.from_user.first_name}</b>"
     bot.send_message(message.chat.id, greetengs, parse_mode="html")
 
+menu.append(telebot.types.BotCommand("/start", "Приветствует пользователя"))
 
 @bot.message_handler(commands=["info"])
 def get_info(message):
     bot.reply_to(message, f"ваше имя:{message.from_user.first_name}, ваш username: {message.from_user.username}")
 
+
+@bot.message_handler(commands=["нет"])
+def off(message):
+    a = telebot.types.ReplyKeyboardRemove()
+    bot.send_message(message.chat.id, "Ну и фиг с тобой",reply_markup=a)
 
 count = 0
 @bot.message_handler(content_types=["text"])
@@ -35,6 +41,7 @@ def chat_bot(message):
 def det_msg(message):
     bot.send_message(message.chat.id, message.text)
 
+bot.set_my_commands(menu)
 
 if __name__=="__main__":
     bot.polling(none_stop=True, timeout=123, interval=0)

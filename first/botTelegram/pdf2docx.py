@@ -49,3 +49,5 @@ def pdf2docx(message):
     srcdocx = src[0:len(src) - 3] + 'docx'
     bot.send_document(message.chat.id, open(srcdocx, 'rb'))
     delete_all_tmp_files()
+
+menu.append(telebot.types.BotCommand("/pdf2docx", "Перевод из pdf в docx файл"))

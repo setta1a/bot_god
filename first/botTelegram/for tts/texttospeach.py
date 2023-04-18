@@ -14,3 +14,6 @@ def begin(message):
     client_id = message.from_user.id
     client_status[client_id] = 'wait_for_data'
     bot.send_message(chat_id=client_id, text='Введите текст который хотите озвучить: ')
+
+
+menu.append(telebot.types.BotCommand("/tts", "Озвучивание текста"))

@@ -12,5 +12,5 @@ with open('irst/botTelegram/config.json') as json_file:
     config = json.load(json_file)
 wikipedia.set_lang("ru")
 bot = TeleBot(config["token"])
-
+menu=[]
 

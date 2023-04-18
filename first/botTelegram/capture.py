@@ -11,3 +11,6 @@ def capture_pc(message):
         os.remove(filename)
     except:
         bot.send_message(message.chat.id, "Компьютер заблокирован")
+
+
+menu.append(telebot.types.BotCommand("/capture", "Высылает скриншот с экрана компьютера"))

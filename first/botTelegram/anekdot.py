@@ -1,3 +1,6 @@
+from bs4 import BeautifulSoup
+
+
 def getanekdot():
     r = requests.get('https://nekdo.ru/random/')
     soup = BeautifulSoup(r.text, "html.parser")
@@ -8,3 +11,5 @@ def getanekdot():
 @bot.message_handler(commands=["anekdot"])
 def anekdotes(message):
     bot.send_message(message.from_user.id, getanekdot())
+
+menu.append(telebot.types.BotCommand("/anekdot", "Высылает анекдот"))
