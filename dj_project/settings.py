@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-7un*8t0g_h@fh!vznc=2fy0(a(k9$7@4t#y90ss_##%#m5q#*+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["weak-camels-dress-94-143-50-138.loca.lt"]
+ALLOWED_HOSTS = ["weak-camels-dress-94-143-50-138.loca.lt", '127.0.0.1']
 
 # Основной url для управления медиафайлами
 MEDIA_URL = '/media/'
