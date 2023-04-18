@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-7un*8t0g_h@fh!vznc=2fy0(a(k9$7@4t#y90ss_##%#m5q#*+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["grumpy-ties-swim-94-143-50-138.loca.lt"]
+ALLOWED_HOSTS = ["weak-camels-dress-94-143-50-138.loca.lt"]
 
 # Основной url для управления медиафайлами
 MEDIA_URL = '/media/'
@@ -46,8 +46,6 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'first',
-    'crispy_forms',
-    "crispy_bootstrap5"
 ]
 
 LOCAL_APPS = [
