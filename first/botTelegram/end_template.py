@@ -33,6 +33,12 @@ def chat_bot(message):
                 break
             time.sleep(0.01)
             bot.send_message(message.chat.id, "извинись")
+
+
+
+
+
+
     else:
         bot.send_message(message.chat.id, "я тебя не понимаю")
 
