@@ -15,10 +15,11 @@ Including another URLconf
 """
 from operator import index
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from first.views import index, create_bot, registration, payment, profile, redact_profile, tech_support
+from django.views.generic import TemplateView
 
+from first.views import index, create_bot, registration, payment, profile, redact_profile, tech_support, telegram_auth
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,10 +31,13 @@ urlpatterns = [
             "pageheader": "Авторизация"
         }
     )),
+    path('auth/', include('social_django.urls', namespace='social')),
     path("registration/", registration),
     path('logout/', auth_views.LogoutView.as_view()),
     path("payment/", payment),
     path('profile/<int:profile_id>', profile),
     path('redact_profile/<int:redact_profile_id>', redact_profile),
-    path("tech_support/", tech_support)
+    path("tech_support/", tech_support),
+    path('profile2/', TemplateView.as_view(template_name='profile2.html'), name='profile'),
+    path("telegram_auth/", TemplateView.as_view(template_name='telegram_auth.html'))
 ]

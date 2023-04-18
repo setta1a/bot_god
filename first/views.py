@@ -11,7 +11,14 @@ from first.models import BotFunctions
 
 def index(request):
     context = {}
+    if request.method == "GET":
+        print(request.GET)
     return render(request, "index.html", context)
+
+
+def telegram_auth(request):
+    context = {}
+    return render(request, "telegram_auth.html", context)
 
 
 def create_bot(request):
