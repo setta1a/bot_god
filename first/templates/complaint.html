@@ -6,24 +6,30 @@
 <div class="modal" id="modal"></div>
 <div class="container">
     <div class="row mt-5">
-        <h3 class="mt-5 text-center">Запрос в службу поддержки</h3>
+        <h3 class="mt-5 mb-4 text-center">Запрос в службу поддержки</h3>
         <br>
         <hr class="col-10 offset-1">
-        <div class="container text-center " style="width:50%">
+        <div class="container text-center mt-5" style="width:50%">
             <div class="row row-cols-2 text-center">
                 <div class="col mr-5">
-                    <input required type="text" class="form-control m-1" placeholder="name" name="user_name">
+                   <div class="form-floating mb-3">
+                       <input type="name" class="form-control" id="floatingInput" placeholder="name@example.com">
+                       <label for="floatingInput">Имя</label>
+                   </div>
                 </div>
                 <div class="col ml-5">
-                    <input required type="text" class="form-control m-1" placeholder="e-mail" name="user_email">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput2" placeholder="name@example.com">
+                        <label for="floatingInput">Email</label>
+                    </div>
                 </div>
             </div>
             <div class="row text-start mt-2" style="color:#4e4e52">
-                <p class="ms-2">Message:<Br>
-                <textarea name="message" cols="40" rows="3" class="rounded w-100" style="border-color: #d2d2d4"></textarea></p>
+                <p style="color:black">Сообщение:<Br>
+                <textarea class="form-control" aria-label="With textarea" style="border-color: #d2d2d4; height:200px"></textarea>
             </div>
-            <div class="row text-start mt-2" style="color:#4e4e52">
-                <input href="" class="btn btn-primary col-3 offset-4 p-2 fs-5" type="submit" value="Отправить">
+            <div class="row text-start mt-5" style="color:#4e4e52">
+                <input href="" class="btn btn-primary col-4 offset-4 p-2 fs-5" type="submit" value="Отправить">
             </div>
 
         </div>

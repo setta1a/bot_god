@@ -3,15 +3,23 @@
 <div class="container mt-10" style="min-height: 56.5vh;">
     <div class="row mt-10">
         <div class="col-8 offset-2 mt-5">
-            <h2 style="font-size: 36px;" class="text-center mt-5">Добро пожаловать на сайт BotGod</h2>
-            <hr class="col-10 offset-1">
-            <p style="font-size: 24px;" class="text-center">На этом сайте вы можете создать своего уникального телеграмм-бота. Начните прямо сейчас!</p>
-            <hr class="col-8 offset-2">
+            <h2 style="font-size: 36px;" class="text-center mt-4 mb-3">Добро пожаловать на сайт BotGod</h2>
+            <hr class="col-10 offset-1 mb-3 mt-3">
+            <p style="font-size: 24px; margin: 20px; margin-top:40px; margin-bottom:40px" class="text-center">На этом сайте вы можете создать своего уникального телеграмм-бота. Начните прямо сейчас!</p>
+            <hr class="col-10 offset-1 mb-5">
             {% if request.user.is_authenticated %}
-                <a class="text-center" href="/create_bot/"><input type="button" class="shadow btn btn-primary p-3 col-6 offset-3" value="Создать бота"></a>
+                <a class="text-center" href="/create_bot/"><input type="button" style="height:60px" class="shadow btn btn-primary mt-4 col-4 offset-4 p-2 fs-5" value="Создать бота"></a>
             {% else %}
-                <a href="/login/"><input type="button" style="height: 10vh" class="shadow btn btn-primary col-4 ml-2 mt-5 offset-1 fs-3" value="Вход"></a>
-                <a href="/registration/"><input type="button" style="height: 10vh" class="shadow btn btn-primary p-3 col-4 ml-2 mt-5 offset-2 fs-3" value="Регистрация"></a>
+                <div class="container">
+                    <div class="row text-center col-10 offset-1">
+                        <div class="col">
+                            <a class="text-center" href="/login/"><input type="button" style="height:60px; width:80%" class="shadow btn btn-primary fs-5" value="Вход"></a>
+                        </div>
+                        <div class="col">
+                            <a class="text-center" href="/registration/"><input type="button" style="height:60px; width:80%" class="shadow btn btn-primary fs-5" value="Регистрация"></a>
+                        </div>
+                  </div>
+                </div>
             {% endif %}
         </div>
     </div>

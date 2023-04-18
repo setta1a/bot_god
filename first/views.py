@@ -83,11 +83,6 @@ def payment(request):
     return render(request, "payment.html", context)
 
 
-def complaint(request):
-    context = {}
-    return render(request, "complaint.html", context)
-
-
 def registration(request):
     """
         Обработчик страницы регистрации

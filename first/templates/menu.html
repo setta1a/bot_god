@@ -1,19 +1,18 @@
 {% load static %}
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #023653; color: white">
-    <a class="navbar-brand" href="/" style="margin: -150px; margin-left: -70px; margin-bottom: -180px;">
-        <img src="../../staticroot/media/main_logo.png" alt="Logo" width="300" height="300" class="d-inline-block align-text-top">
-    </a>
-    <div class="collapse navbar-collapse" id="navbarText">
+    <a class="navbar-brand" href="/" style="width:6%">
+            <img src="../../staticroot/media/main_logo_new.png" alt="Logo" width="150%" height="150%" class="d-inline-block align-text-top ms-2">
+        </a>
+    <div class="collapse navbar-collapse" id="navbarText" style="margin-left: 60px">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link nav-hover text-light m-2 fs-5" href="/create_bot/">Создать бота</a>
+                <a class="nav-link text-light m-2 nav-hover icon-link icon-link-hover fs-5" href="/tech_support/">Поддержка</a>
             </li>
             <li class="nav-item">
                 {% if request.user.is_authenticated %}
-                    <a class="nav-link text-light m-2 nav-hover icon-link icon-link-hover fs-5" href="/tech_support/">Пожаловаться</a>
+                    <a class="nav-link nav-hover text-light m-2 fs-5" href="/create_bot/">Создать бота</a>
                 {% endif %}
-
             </li>
             <li class="nav-item">
                 {% if request.user.is_superuser %}
@@ -23,17 +22,23 @@
         </ul>
         <div class="position-absolute bottom-25 end-0">
             <ul class="navbar-nav flex-row-reverse">
-                <li class="nav-item=">
-                    <a class="nav-link nav-hover text-light m-2  fs-5" href="/profile/{{request.user.id}}/">Профиль</a>
-                </li>
-                <li class="vl"></li>
-                <li class="nav-item=">
-                    {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item=">
+                        <a class="nav-link nav-hover text-light m-2  fs-5" href="/profile/{{request.user.id}}/">Профиль</a>
+                    </li>
+                    <li class="vl"></li>
+                    <li class="nav-item=">
                         <a class="nav-link nav-hover text-light m-2 fs-5" href="/logout/">Выйти</a>
-                    {% else %}
+                    </li>
+                {%else%}
+                    <li class="nav-item=">
+                        <a class="nav-link nav-hover text-light m-2  fs-5" href="/registration/">Регистрация</a>
+                    </li>
+                    <li class="vl"></li>
+                    <li class="nav-item=">
                         <a class="nav-link nav-hover text-light m-2 fs-5" href="/login/">Войти</a>
-                    {% endif %}
-                </li>
+                    </li>
+                {% endif %}
           </ul>
         </div>
     </div>
