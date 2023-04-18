@@ -120,3 +120,5 @@ def create_file():
         for i in data['employees']['employee']:
             if i['id'] == '3':
                 print(i['photo'])
+
+
