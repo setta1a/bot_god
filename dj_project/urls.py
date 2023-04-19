@@ -34,9 +34,8 @@ urlpatterns = [
     path('auth/', include('social_django.urls', namespace='social')),
     path('logout/', auth_views.LogoutView.as_view()),
     path("payment/", payment),
-    path('profile/', profile),
+    path('profile/', TemplateView.as_view(template_name='profile.html'), name='profile'),
     path('redact_profile/<int:redact_profile_id>', redact_profile),
     path("tech_support/", tech_support),
-    path('profile2/', TemplateView.as_view(template_name='profile2.html'), name='profile'),
     path("telegram_auth/", TemplateView.as_view(template_name='telegram_auth.html'))
 ]
