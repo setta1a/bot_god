@@ -3,6 +3,7 @@ import os
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 
 from first.models import BotFunctions, UsersBalance
 
@@ -47,7 +48,7 @@ def create_bot(request):
         return redirect("../payment/")
     return render(request, "create_bot.html", context)
 
-
+@login_required(login_url='/telegram_auth/')
 def profile(request):
     """
         Страница профиля пользователя
@@ -56,19 +57,17 @@ def profile(request):
         :return: Объект с деталями HTTP-ответа
     """
     context = {}
-    if UsersBalance.objects.filter(user_id=request.user).count() == 0:
-        new_balance = UsersBalance(balance=0, user_id=request.user)
-        new_balance.save()
-
     try:
-        user_balance = UsersBalance.objects.get(user_id=request.user)
+        user_balance = UsersBalance.objects.get(user_id=request.user.id)
         context['balance'] = user_balance.balance
     except:
-        pass
+        new_balance = UsersBalance(balance=0, user_id=request.user.id)
+        new_balance.save()
+
     return render(request, "profile.html", context)
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/telegram_auth/')
 def redact_profile(request, redact_profile_id):
     """
         Обработчик страницы редактирования профиля
@@ -91,6 +90,23 @@ def redact_profile(request, redact_profile_id):
 def payment(request):
     context = {}
     return render(request, "payment.html", context)
+
+
+def replenish(request):
+    context = {}
+    if True:
+        print("POST!!!")
+        summ = request.GET["sum"]
+        if "payment_type_1" in request.GET:
+            print(2)
+            return HttpResponseRedirect(
+                f"https://yoomoney.ru/quickpay/confirm.xml?receiver=4100118151035496&quickpay-form=button&sum={summ}&paymentType=PC&successURL=127.0.0.1&sum={summ}")
+        else:
+            print(3)
+            return HttpResponseRedirect(
+                    f"https://yoomoney.ru/quickpay/confirm.xml?receiver=4100118151035496&quickpay-form=button&sum={summ}&paymentType=AC")
+
+    return render(request, "replenish.html", context)
 
 
 def tech_support(request):
