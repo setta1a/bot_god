@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from first.models import BotFunctions
+from first.models import BotFunctions, UsersBalance
 
 
 def index(request):
@@ -56,6 +56,15 @@ def profile(request):
         :return: Объект с деталями HTTP-ответа
     """
     context = {}
+    if UsersBalance.objects.filter(user_id=request.user).count() == 0:
+        new_balance = UsersBalance(balance=0, user_id=request.user)
+        new_balance.save()
+
+    try:
+        user_balance = UsersBalance.objects.get(user_id=request.user)
+        context['balance'] = user_balance.balance
+    except:
+        pass
     return render(request, "profile.html", context)
 
 
