@@ -48,7 +48,7 @@ def create_bot(request):
         return redirect("../payment/")
     return render(request, "create_bot.html", context)
 
-
+@login_required(login_url='/telegram_auth/')
 def profile(request):
     """
         Страница профиля пользователя
@@ -57,19 +57,17 @@ def profile(request):
         :return: Объект с деталями HTTP-ответа
     """
     context = {}
-    if UsersBalance.objects.filter(user_id=request.user).count() == 0:
-        new_balance = UsersBalance(balance=0, user_id=request.user)
-        new_balance.save()
-
     try:
-        user_balance = UsersBalance.objects.get(user_id=request.user)
+        user_balance = UsersBalance.objects.get(user_id=request.user.id)
         context['balance'] = user_balance.balance
     except:
-        pass
+        new_balance = UsersBalance(balance=0, user_id=request.user.id)
+        new_balance.save()
+
     return render(request, "profile.html", context)
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/telegram_auth/')
 def redact_profile(request, redact_profile_id):
     """
         Обработчик страницы редактирования профиля
