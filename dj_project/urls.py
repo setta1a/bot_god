@@ -37,7 +37,6 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('redact_profile/<int:redact_profile_id>', redact_profile),
     path("tech_support/", tech_support),
-    path('profile2/', TemplateView.as_view(template_name='profile2.html'), name='profile'),
     path("telegram_auth/", TemplateView.as_view(template_name='telegram_auth.html')),
     path("replenish/", replenish),
 ]
