@@ -1,19 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section style="background-color: #eee; border: 2px solid #cacaca; border-radius: 40px;margin: 50px;" class="m-20">
+<section style="background-color: #eee; margin-top: 8vh; margin-bottom: 0;" class="p-2">
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-body text-center">
-                        <img src="../../media/{{photo}}"
-                             alt="avatar"
-                             class="rounded-circle img-fluid" style="width: 150px;">
-                        <h5 class="my-3" id="full_name">{{profile.last_name}}</h5>
-                    </div>
-                </div>
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">Имя Фамилия</h5>
+            <div class="d-flex justify-content-center mb-2 mt-4">
+                <div><h6>Баланс: </h6></div><br>
+                <a style="display: block;" href=""><input class="btn btn-primary" type="button" value="Пополнить"></a>
             </div>
+          </div>
+        </div>
+      </div>
       <div class="col-lg-8">
         <div class="card mb-4">
           <div class="card-body">
@@ -22,7 +25,7 @@
                 <p class="mb-0">Имя</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{profile.last_name}}</p>
+                <p class="text-muted mb-0">Имя Фамилия</p>
               </div>
             </div>
             <hr>
@@ -31,16 +34,7 @@
                 <p class="mb-0">Email</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{profile.email}}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">НикНэйм</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{profile.username}}</p>
+                <p class="text-muted mb-0">example@example.com</p>
               </div>
             </div>
             <hr>
@@ -49,37 +43,56 @@
                 <p class="mb-0">Телефон</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">89774345266</p>
+                <p class="text-muted mb-0">(097) 234-5678</p>
               </div>
             </div>
-            <hr>
-            <a class="btn btn-primary" href="/redact_profile/{{profile.id}}/" type="button" value="Редактировать">Редактировать</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 w-100">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4">Ваши боты</p>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Имя бота</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">01.04.2023</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Имя бота</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">01.04.2023</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Имя бота</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">01.04.2023</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Имя бота</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">01.04.2023</p>
+                    </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <table class="table">
-        <tr>
-          <td>Название</td>
-          <td>Дата создания</td>
-          <td>Скачать</td>
-        </tr>
-        {% for voting in votings %}
-        <tr>
-          <td>Создание голосования</td>
-          <td>{{ voting.name }}</td>
-          <td>{{ voting.id }}</td>
-        </tr>
-        {% endfor %}
-        {% for fact in votefacts %}
-        <tr>
-          <td>Голосование зa вариант</td>
-          <td>{{ fact.variant.description }}</td>
-          <td>{{ fact.variant.id }}</td>
-        </tr>
-        {% endfor %}
-      </table>
     </div>
   </div>
 </section>

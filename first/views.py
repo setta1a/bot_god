@@ -1,8 +1,6 @@
 import json
 import os
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
@@ -50,8 +48,7 @@ def create_bot(request):
     return render(request, "create_bot.html", context)
 
 
-@login_required(login_url='/login/')
-def profile(request, profile_id):
+def profile(request):
     """
         Страница профиля пользователя
 
@@ -59,9 +56,6 @@ def profile(request, profile_id):
         :return: Объект с деталями HTTP-ответа
     """
     context = {}
-    profile = User.objects.get(id=profile_id)
-    context["profile"] = profile
-    context["profile"] = User.objects.get(id=profile_id)
     return render(request, "profile.html", context)
 
 
@@ -85,47 +79,12 @@ def redact_profile(request, redact_profile_id):
     return render(request, "redact_profile.html", context)
 
 
-
-
 def payment(request):
     context = {}
     return render(request, "payment.html", context)
-
-
-def registration(request):
-    """
-        Обработчик страницы регистрации
-
-        :param request: объект с деталями HTTP-запроса
-        :return: Объект с деталями HTTP-ответа
-    """
-    context = {}
-    context["pagetitle"] = "Registration"
-    context["pageheader"] = "Регистрация"
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            context['form'] = form
-            messages.add_message(request, messages.SUCCESS, "Новый пользователь создан")
-        else:
-            form = UserCreationForm()
-            context['form'] = form
-            messages.add_message(request, messages.ERROR, "Введены некорректные данные")
-    else:
-        form = UserCreationForm()
-        context['form'] = form
-    return render(request, 'registration/registration.html', context)
 
 
 def tech_support(request):
     context = {}
     return render(request, "tech_support.html", context)
 
-
-def create_file():
-    with open('example.json', 'r') as f:
-        data = json.loads(f.read())
-        for i in data['employees']['employee']:
-            if i['id'] == '3':
-                print(i['photo'])
