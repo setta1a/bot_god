@@ -148,12 +148,12 @@
                 }
                 for (let j = 0; j < cards.length; ++j) {
                     if (cards[j].os[i] == 0){
-                        functions.children[j].style.display = "none"
+                        functions.children[j].classList.add("d-none")
                     } else {
-                        functions.children[j].style.display = "block"
+                        functions.children[j].classList.remove("d-none")
                     }
                     if (os[0] == 0 && os[1] == 0 && os[2] == 0){
-                        functions.children[j].style.display = "block"
+                        functions.children[j].classList.remove("d-none")
                     }
                 }
             })
