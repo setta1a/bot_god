@@ -166,9 +166,9 @@
                 let descriprion = cards[i].descriprion.toLowerCase()
                 let search_text = search.value.toLowerCase()
                 if ((name.includes(search_text) || descriprion.includes(search_text)) == false) {
-                    functions.children[i].style.display = "none"
+                    functions.children[i].classList.add("d-none")
                 } else {
-                    functions.children[i].style.display = "block"
+                    functions.children[i].classList.remove("d-none")
                 }
             }
         })
