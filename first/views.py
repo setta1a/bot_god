@@ -1,5 +1,9 @@
 import json
 import os
+import smtplib
+from email.mime.text import MIMEText
+
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -111,4 +115,35 @@ def replenish(request):
 
 def tech_support(request):
     context = {}
+    if request.method == "POST":
+        print("post")
+        if 'email' in request.POST and 'email_text' in request.POST:
+            message = request.POST['email_text']
+            user_email = request.POST['email']
+            sender = "botgod.sp@gmail.com"
+            try:
+                with open('first/email_password.json') as file:
+                    password = json.load(file)["email_password"]
+            except:
+                print("pass error")
+                return render(request, "tech_support.html", context)
+
+            server = smtplib.SMTP("smtp.gmail.com", 587)
+            server.starttls()
+            message += f"\n Почта пользователя: {user_email}"
+            try:
+                print(1)
+                server.login(sender, password)
+                msg = MIMEText(message)
+                msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
+                server.sendmail(sender, "andreysitalo09@gmail.com", msg.as_string())
+
+                message = "Ваша жалоба отправлена и ожидает рассмотрения"
+                msg = MIMEText(message)
+                msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
+                server.sendmail(sender, user_email, msg.as_string())
+
+            except Exception as _ex:
+                print(f"{_ex}\nCheck your login or password please!")
+
     return render(request, "tech_support.html", context)
