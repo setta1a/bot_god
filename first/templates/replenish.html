@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row mt-5">
+        <div class="col-6 offset-3 mt-5">
+            <form method="POST">
+                <input type="number" class="form-control" name="sum" placeholder="Введите сумму пополнения баланса">
+                <input type="submit" class="btn btn-primary" value="ЮMoney" name="payment_type_1">
+                <input type="submit" class="btn btn-primary" value="Банковская карта" name="payment_type_2">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

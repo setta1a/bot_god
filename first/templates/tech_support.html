@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="modal" id="modal"></div>
+<div class="container">
+    <div class="row mt-5">
+        <h3 class="mt-5 mb-4 text-center">Запрос в службу поддержки</h3>
+        <br>
+        <hr class="col-10 offset-1">
+        <div class="container text-center mt-5" style="width:50%">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row row-cols-2 text-center">
+                    <div class="col mr-5">
+                       <div class="form-floating mb-3">
+                           <input type="name" class="form-control" id="floatingInput" placeholder="name@example.com">
+                           <label for="floatingInput">Имя</label>
+                       </div>
+                    </div>
+                    <div class="col ml-5">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="email" id="floatingInput2" placeholder="name@example.com">
+                            <label for="floatingInput">Email</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-start mt-2" style="color:#4e4e52">
+                    <p style="color:black">Сообщение:<Br>
+                    <textarea class="form-control" aria-label="With textarea" name="email_text" style="border-color: #d2d2d4; height:200px"></textarea>
+                </div>
+                <div class="row text-start mt-5" style="color:#4e4e52">
+                    <input class="btn btn-primary col-4 offset-4 p-2 fs-5" type="submit" value="Отправить">
+                </div>
+            </form>
+        </div>
+
+<!--<div class="container" style="margin-top: 10vh;">-->
+<!--    <div class="row">-->
+<!--        <h3 class="text-center">Вы можете оставить жалобу или написать нам предложение для сервиса</h3>-->
+<!--        <form action=""></form>-->
+<!--        <div class="col-8 offset-2 p-5 card" style="min-height: 56.5vh;">-->
+<!--            <form action="" method="post">-->
+<!--                {% csrf_token %}-->
+<!--                <div class="form-floating mb-3">-->
+<!--                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" required>-->
+<!--                    <label for="floatingInput">Email</label>-->
+<!--                </div>-->
+<!--                <div class="input-group" style="min-height: 40vh;">-->
+<!--                    <span class="input-group-text">Напишите текст сообщения</span>-->
+<!--                    <textarea class="form-control" aria-label="With textarea" name="email_text" required></textarea>-->
+<!--                </div>-->
+<!--                <input type="submit" class="btn btn-primary p-2 mt-3 fs-4" value="Отправить" >-->
+<!--            </form>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--</div>-->
+
+{% endblock %}

@@ -1,17 +1,27 @@
 import json
 import os
+import smtplib
+from email.mime.text import MIMEText
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 
-from first.models import BotFunctions
+from first.models import BotFunctions, UsersBalance
 
 
 def index(request):
     context = {}
+    if request.method == "GET":
+        print(request.GET)
     return render(request, "index.html", context)
+
+
+def telegram_auth(request):
+    context = {}
+    return render(request, "telegram_auth.html", context)
 
 
 def create_bot(request):
@@ -42,9 +52,8 @@ def create_bot(request):
         return redirect("../payment/")
     return render(request, "create_bot.html", context)
 
-
-@login_required(login_url='/login/')
-def profile(request, profile_id):
+@login_required(login_url='/telegram_auth/')
+def profile(request):
     """
         Страница профиля пользователя
 
@@ -52,13 +61,17 @@ def profile(request, profile_id):
         :return: Объект с деталями HTTP-ответа
     """
     context = {}
-    profile = User.objects.get(id=profile_id)
-    context["profile"] = profile
-    context["profile"] = User.objects.get(id=profile_id)
+    try:
+        user_balance = UsersBalance.objects.get(user_id=request.user.id)
+        context['balance'] = user_balance.balance
+    except:
+        new_balance = UsersBalance(balance=0, user_id=request.user.id)
+        new_balance.save()
+
     return render(request, "profile.html", context)
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/telegram_auth/')
 def redact_profile(request, redact_profile_id):
     """
         Обработчик страницы редактирования профиля
@@ -78,37 +91,59 @@ def redact_profile(request, redact_profile_id):
     return render(request, "redact_profile.html", context)
 
 
-
-
 def payment(request):
     context = {}
     return render(request, "payment.html", context)
 
 
-def registration(request):
-    """
-        Обработчик страницы регистрации
-
-        :param request: объект с деталями HTTP-запроса
-        :return: Объект с деталями HTTP-ответа
-    """
+def replenish(request):
     context = {}
-    context["pagetitle"] = "Registration"
-    context["pageheader"] = "Регистрация"
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            context['form'] = form
-            messages.add_message(request, messages.SUCCESS, "Новый пользователь создан")
+    if True:
+        print("POST!!!")
+        summ = request.GET["sum"]
+        if "payment_type_1" in request.GET:
+            print(2)
+            return HttpResponseRedirect(
+                f"https://yoomoney.ru/quickpay/confirm.xml?receiver=4100118151035496&quickpay-form=button&sum={summ}&paymentType=PC&successURL=127.0.0.1&sum={summ}")
         else:
-            form = UserCreationForm()
-            context['form'] = form
-            messages.add_message(request, messages.ERROR, "Введены некорректные данные")
-    else:
-        form = UserCreationForm()
-        context['form'] = form
-    return render(request, 'registration/registration.html', context)
+            print(3)
+            return HttpResponseRedirect(
+                    f"https://yoomoney.ru/quickpay/confirm.xml?receiver=4100118151035496&quickpay-form=button&sum={summ}&paymentType=AC")
+
+    return render(request, "replenish.html", context)
 
 
-# Create your views here.
+def tech_support(request):
+    context = {}
+    if request.method == "POST":
+        print("post")
+        if 'email' in request.POST and 'email_text' in request.POST:
+            message = request.POST['email_text']
+            user_email = request.POST['email']
+            sender = "botgod.sp@gmail.com"
+            try:
+                with open('first/email_password.json') as file:
+                    password = json.load(file)["email_password"]
+            except:
+                print("pass error")
+                return render(request, "tech_support.html", context)
+
+            server = smtplib.SMTP("smtp.gmail.com", 587)
+            server.starttls()
+            message += f"\n Почта пользователя: {user_email}"
+            try:
+                print(1)
+                server.login(sender, password)
+                msg = MIMEText(message)
+                msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
+                server.sendmail(sender, "andreysitalo09@gmail.com", msg.as_string())
+
+                message = "Ваша жалоба отправлена и ожидает рассмотрения"
+                msg = MIMEText(message)
+                msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
+                server.sendmail(sender, user_email, msg.as_string())
+
+            except Exception as _ex:
+                print(f"{_ex}\nCheck your login or password please!")
+
+    return render(request, "tech_support.html", context)
