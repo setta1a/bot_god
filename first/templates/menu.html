@@ -1,42 +1,49 @@
 {% load static %}
 
-<nav class="navbar p-3" style="background-color: #023653; color: white; position: fixed; width: 100%; margin: 0; z-index: 100000; top: 0;">
-    <div class="container-fluid" width="300" height="00">
-            <a href="/" style="margin: -150px; margin-left: -70px; margin-bottom: -180px;"><img src="{% static 'media/main_logo.png' %}" alt="Logo" width="300" height="300" class="d-inline-block align-text-top"></a>
-        <form class="d-flex col-11 offset-3">
-                <a class="nav-link nav-hover m-2 icon-link icon-link-hover fs-5" href="/create_bot/">Создать бота</a>
-            {% if request.user.is_authenticated %}
-                {% if request.user.is_superuser %}
-                        <a class="nav-link m-2" href="/admin_panel/">Панель администратора</a>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #023653; color: white">
+    <a class="navbar-brand" href="/" style="width:6%">
+            <img src="../../staticroot/media/main_logo_new.png" alt="Logo" width="150%" height="150%" class="d-inline-block align-text-top ms-2">
+        </a>
+    <div class="collapse navbar-collapse" id="navbarText" style="margin-left: 60px">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link text-light m-2 nav-hover icon-link icon-link-hover fs-5" href="/tech_support/">Поддержка</a>
+            </li>
+            <li class="nav-item">
+                {% if request.user.is_authenticated %}
+                    <a class="nav-link nav-hover text-light m-2 fs-5" href="/create_bot/">Создать бота</a>
                 {% endif %}
-                <a class="nav-link text-light m-2" href="/complaint/">Пожаловаться</a>
-        </form>
+            </li>
+            <li class="nav-item">
+                {% if request.user.is_superuser %}
+                    <a class="nav-link nav-hover text-light m-2 fs-5" href="/admin/">Панель администратора</a>
+                {% endif %}
+            </li>
+        </ul>
         <div class="position-absolute bottom-25 end-0">
             <ul class="navbar-nav flex-row-reverse">
-                <li class="nav-item=">
-                    <a class="nav-link nav-hover text-light m-2  fs-5" href="/profile/{{request.user.id}}/">Профиль</a>
-                </li>
-                <li class="vl"></li>
-                <li class="nav-item=">
-                    {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item=">
+                        <a class="nav-link nav-hover text-light m-2  fs-5" href="/profile/{{request.user.id}}/">Профиль</a>
+                    </li>
+                    <li class="vl"></li>
+                    <li class="nav-item=">
                         <a class="nav-link nav-hover text-light m-2 fs-5" href="/logout/">Выйти</a>
-                    {% else %}
+                    </li>
+                {%else%}
+                    <li class="nav-item=">
+                        <a class="nav-link nav-hover text-light m-2  fs-5" href="/registration/">Регистрация</a>
+                    </li>
+                    <li class="vl"></li>
+                    <li class="nav-item=">
                         <a class="nav-link nav-hover text-light m-2 fs-5" href="/login/">Войти</a>
-                    {% endif %}
-                </li>
+                    </li>
+                {% endif %}
           </ul>
         </div>
-      <form class="d-flex" role="search">
-                    <a class="nav-link text-light text-right m-2" href="/profile/{{request.user.id}}/">Профиль</a>
-                {% if request.user.is_authenticated %}
-                        <a class="nav-link text-light text-right m-2" href="/logout/">Выйти</a>
-                {% else %}
-                        <a class="nav-link text-light text-right m-2" href="/login/">Войти</a>
-                {% endif %}
-      </form>
-      {% endif %}
     </div>
-  </nav>
+</nav>
+
   <style>
         a.nav-hover{
 	        transition: 0.2s;
@@ -46,4 +53,11 @@
                 transform: scale(1.05);
                 text-shadow: 1px 1px 2px black, 0 0 1em #1981b9, 0 0 0.2em #1981b9;
         }
+
+        .vl {
+            border-left: 1px solid white;
+            height: 50px;
+            margin-top: 7px;
+        }
+
   </style>

@@ -112,4 +112,3 @@ def replenish(request):
 def tech_support(request):
     context = {}
     return render(request, "tech_support.html", context)
-
