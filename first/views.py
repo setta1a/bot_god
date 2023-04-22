@@ -99,7 +99,11 @@ def payment(request):
 
 def payment_success(request):
     context = {}
-    context["sum"] = request.GET["sum"]
+    summ = request.GET["sum"]
+    context["sum"] = summ
+    balance = UsersBalance.get(user=request.user.id)
+    balance.balance += int(summ)
+    balance.save()
     return render(request, "payment_success.html", context)
 
 
