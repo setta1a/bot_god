@@ -93,6 +93,7 @@ def redact_profile(request, redact_profile_id):
 
 def payment(request):
     context = {}
+    context["summ_of_increase"] = 2
     return render(request, "payment.html", context)
 
 
