@@ -100,8 +100,8 @@ def replenish(request):
     context = {}
     if True:
         print("POST!!!")
-        summ = request.GET["sum"]
-        if "payment_type_1" in request.GET:
+        summ = request.POST["sum"]
+        if "payment_type_1" in request.POST:
             print(2)
             return HttpResponseRedirect(
                 f"https://yoomoney.ru/quickpay/confirm.xml?receiver=4100118151035496&quickpay-form=button&sum={summ}&paymentType=PC&successURL=127.0.0.1&sum={summ}")
