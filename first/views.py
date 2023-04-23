@@ -83,6 +83,7 @@ def create_bot(request):
                 data["username"] = request.POST['short_name']
                 data["token"] = request.POST['token']
                 json.dump(data, json_file)
+            os.system(f"sudo pyinstaller --noconfirm --onefile --console --add-data '{os.getcwd()}/bot/bot:bot' '{os.getcwd()}/BOT/BOT.py'")
             return redirect("../payment/")
     return render(request, "create_bot.html", context)
 
