@@ -130,23 +130,6 @@ def payment(request):
     return render(request, "payment.html", context)
 
 
-def replenish(request):
-    context = {}
-    if True:
-        print("POST!!!")
-        summ = request.GET["sum"]
-        if "payment_type_1" in request.GET:
-            print(2)
-            return HttpResponseRedirect(
-                f"https://yoomoney.ru/quickpay/confirm.xml?receiver=4100118151035496&quickpay-form=button&sum={summ}&paymentType=PC&successURL=127.0.0.1&sum={summ}")
-        else:
-            print(3)
-            return HttpResponseRedirect(
-                    f"https://yoomoney.ru/quickpay/confirm.xml?receiver=4100118151035496&quickpay-form=button&sum={summ}&paymentType=AC")
-
-    return render(request, "replenish.html", context)
-
-
 def tech_support(request):
     context = {}
     if request.method == "POST":
