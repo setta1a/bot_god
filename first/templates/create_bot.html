@@ -38,21 +38,12 @@
                 </div>
                 <input id="search" type="text" class="form-control" placeholder="Поиск по функциям"><br>
                 <div id="os_search" class="col-8 offset-3 mb-3">
-                    <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
-                        <input type="checkbox" id="windows" name="function_win" value="win">
-                        <span class="checkbox-ios-switch"></span>
-                    </label>
-                    <span>Windows</span>
-                    <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
-                        <input type="checkbox" id="linux" name="functions_linux" value="linux">
-                        <span class="checkbox-ios-switch"></span>
-                    </label>
-                    <span>Mac</span>
-                    <label class="checkbox-ios" style="margin-left: auto; margin-top: 10px">
-                        <input type="checkbox" id="mac" name="functions_mac" value="mac">
-                        <span class="checkbox-ios-switch"></span>
-                    </label>
-                    <span>Linux</span>
+                    <input name="os"  value="win" id="win" required type="radio" class="form-check-input">
+                    <label>Windows</label>
+                    <input name="os" value="mac" id="mac" required type="radio" class="form-check-input">
+                    <label>MacOs</label>
+                    <input name="os" value="linux" id="linux" required type="radio" class="form-check-input">
+                    <label>Linux</label>
                 </div>
             </div>
             <div id="functions" class="offset-0">
@@ -133,31 +124,36 @@
             modal_header.innerHTML = card_values.name
             modal_content.innerHTML = card_values.descriprion
         })
+        
 
         let os = [0,0,0]
-        console.log(os[0] == 0)
 
-        let elems = [windows, mac, linux]
-
-        for (let i = 0; i < elems.length; ++i){
-            elems[i].addEventListener("input", () => {
-                if (elems[i].checked) {
-                    os[i] = 1
+        function search_os_function(os_){
+            os = os_
+            for (let i = 0; i < cards.length; ++i){
+                console.log(functions.children[i])
+                if (cards[i].os[0] & os[0] || cards[i].os[1] & os[1]  || cards[i].os[2] & os[2]){
+                    console.log(0)
+                    functions.children[i].classList.remove("d-none")
                 } else {
-                    os[i] = 0
+                    console.log(1)
+                    functions.children[i].classList.add("d-none")
                 }
-                for (let j = 0; j < cards.length; ++j) {
-                    if (cards[j].os[i] == 0){
-                        functions.children[j].classList.add("d-none")
-                    } else {
-                        functions.children[j].classList.remove("d-none")
-                    }
-                    if (os[0] == 0 && os[1] == 0 && os[2] == 0){
-                        functions.children[j].classList.remove("d-none")
-                    }
+                if (os[0] == 0 && os[1] == 0 && os[2] == 0){
+                    functions.children[i].classList.remove("d-none")
                 }
-            })
+            }
         }
+
+        win.addEventListener("input", () => {
+            search_os_function([1,0,0])
+        })
+        mac.addEventListener("input", () => {
+            search_os_function([0,1,0])
+        })
+        linux.addEventListener("input", () => {
+            search_os_function([0,0,1])
+        })
 
 
         search.addEventListener("input", () => {
