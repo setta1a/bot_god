@@ -1,7 +1,7 @@
 # Created by https://www.gitignore.io/api/linux,macos,python,django,windows,virtualenv,pycharm+all
 # Edit at https://www.gitignore.io/?templates=linux,macos,python,django,windows,virtualenv,pycharm+all
 database.json
-BOT.py
+BOT
 ### Django ###
 *.log
 *.pot
