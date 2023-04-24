@@ -27,9 +27,9 @@ def telegram_auth(request):
 
 def create_bot(request):
     context = {}
-    print(os.getcwd())
+    print(f"{os.getcwd()}/static_root/bot_exe:bot_exe")
     if request.method == "POST":
-        if 'functions' in request.POST:
+        if 'functions' in request.POST and 'os' in request.POST:
             function_names = request.POST.getlist('functions')
             print(function_names)
             if os.path.exists(os.getcwd() + "/BOT"):
@@ -83,8 +83,11 @@ def create_bot(request):
                 data["username"] = request.POST['short_name']
                 data["token"] = request.POST['token']
                 json.dump(data, json_file)
-            os.system(f"sudo pyinstaller --noconfirm --onefile --console --add-data '{os.getcwd()}:bot_gad' '{os.getcwd()}/BOT/BOT.py'")
-            return redirect("../payment/")
+            if request.POST['os'] == 'win':
+                os.system(f"pyinstaller --noconfirm --onefile --console --add-data '/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe' '/home/prom/PycharmProjects/bot_gad/BOT/BOT.py'")
+            else:
+                os.system(f"sudo pyinstaller --noconfirm --onefile --console --add-data '/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe' '/home/prom/PycharmProjects/bot_gad/BOT/BOT.py'")
+            return redirect(f"../download_bot/?os={request.POST['os']}")
     return render(request, "create_bot.html", context)
 
 @login_required(login_url='/telegram_auth/')
@@ -124,6 +127,7 @@ def redact_profile(request, redact_profile_id):
         profile.save()
 
     return render(request, "redact_profile.html", context)
+
 
 
 def payment(request):

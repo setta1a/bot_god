@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if request.os == "win" %}
+        <a href="../../dist/BOT.exe" download="">
+            Скачать БОТА
+        </a>
+    {% else %}
+        <a href="../../dist/BOT" download="">
+            Скачать БОТА
+        </a>
+    {% endif %}
+</body>
+</html>
