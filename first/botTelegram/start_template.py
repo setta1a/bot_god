@@ -6,6 +6,7 @@ import requests
 import wikipedia
 from telebot import TeleBot
 from PIL import Image, ImageGrab, ImageDraw
+import subprocess
 import platform
 import json
 with open('irst/botTelegram/config.json') as json_file:

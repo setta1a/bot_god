@@ -1,5 +1,6 @@
 from telebot import types
 
+
 @bot.message_handler(commands=["reload"])
 def reloader(message):
     keyboard_markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
@@ -11,6 +12,10 @@ def reloader(message):
 @bot.message_handler(commands=["конечно"])
 def f(message):
     bot.send_message(message.chat.id, "Перезагрузка компьютера...")
-    os.system('reboot')
+    if platform.system() == "Windows":
+        os.system('reboot')
+    elif platform.system() == "Linux":
+        subprocess.check_call(['systemctl', 'reboot', '-i'])
+
 
 menu.append(telebot.types.BotCommand("/reload", "Перезгрузка компьютера"))

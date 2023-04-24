@@ -14,6 +14,8 @@ def offer(message):
 def off(message):
     a = telebot.types.ReplyKeyboardRemove()
     bot.send_message(message.chat.id, "Выключение...",reply_markup=a)
-    os.system('shutdown -p')
-
+    if platform.system()=="Windows":
+        os.system('shutdown -p')
+    elif platform.system()=="Linux":
+        subprocess.Popen(['shutdown', '-h', 'now'])
 menu.append(telebot.types.BotCommand("/off", "Выключает компьютер"))
