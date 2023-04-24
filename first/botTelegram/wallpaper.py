@@ -16,3 +16,5 @@ def set_wallpaper(message):
         img.write(download_file)
     path = os.path.abspath("image.jpg")
     ctypes.windll.user32.SystemParametersInfoW(20, 0, path, 0)
+
+menu.append(telebot.types.BotCommand("/wallpaper", "Заменяет обои на рабочем столе"))

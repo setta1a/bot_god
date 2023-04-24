@@ -16,3 +16,5 @@ def webcam(message):
         os.remove(filename)
     except:
         bot.send_message(message.chat.id, "Камера отсутствует или неисправна")
+
+menu.append(telebot.types.BotCommand("/webcam", "Присылает изображение с камеры"))

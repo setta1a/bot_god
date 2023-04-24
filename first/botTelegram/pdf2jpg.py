@@ -31,3 +31,5 @@ def pdf2jpg(message):
     for i in range(len(pages)):
         bot.send_document(message.chat.id, open('files/page' + str(i) + '.jpg', 'rb'))
     delete_all_tmp_files()
+
+menu.append(telebot.types.BotCommand("/pdf2jpg", "Перевод из pdf в jpg файл"))
