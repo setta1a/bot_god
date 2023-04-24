@@ -5,6 +5,8 @@ class BotFunctions(models.Model):
     func_name = models.CharField(max_length=64)
     file_name = models.CharField(max_length=64)
 
-class UsersBalance(models.Model):
-    balance = models.IntegerField()
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, default=2)
+class BotPreSets(models.Model):
+    file_name = models.CharField(max_length=64)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    bot_id = models.IntegerField()
+
