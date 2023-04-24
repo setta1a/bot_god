@@ -8,9 +8,9 @@ from email.mime.text import MIMEText
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 
-from first.models import BotFunctions, UsersBalance
+
+from first.models import BotFunctions, BotPreSets
 
 
 def index(request):
@@ -43,7 +43,9 @@ def create_bot(request):
                     bot.write(start_file.read())
                 for func in functions:
                     print(func.file_name)
-
+                    if request.user.is_authenticated:
+                        t = BotPreSets(file_name=func.file_name, user=request.user, bot_id=1)
+                        t.save()
                     if func.file_name == "stt.py":
                         files = os.listdir(os.getcwd() + "/first/botTelegram/for stt")
                         for fname in files:

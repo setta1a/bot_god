@@ -8,9 +8,7 @@ from telebot import TeleBot
 from PIL import Image, ImageGrab, ImageDraw
 import platform
 import json
-with open('irst/botTelegram/config.json') as json_file:
+with open('config.json') as json_file:
     config = json.load(json_file)
 wikipedia.set_lang("ru")
 bot = TeleBot(config["token"])
-
-
