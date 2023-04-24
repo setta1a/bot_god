@@ -1,9 +1,10 @@
 import json
 import os
+import shutil
 import smtplib
+from distutils.dir_util import copy_tree
 from email.mime.text import MIMEText
 
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -28,28 +29,62 @@ def create_bot(request):
     context = {}
     print(os.getcwd())
     if request.method == "POST":
-        function_names = request.POST.getlist('functions')
-        print(function_names)
-        with open("BOT.py", "w") as bot:
-            functions = []
-            for name in function_names:
-                functions.append(BotFunctions.objects.get(func_name=name))
-            with open("first/botTelegram/start_template.py", 'r') as start_file:
-                bot.write(start_file.read())
-            for func in functions:
-                print(func.file_name)
-                with open(f'first/botTelegram/{func.file_name}', 'r') as file:
-                    code = file.read()
-                    bot.write(code)
-            with open("first/botTelegram/end_template.py", 'r') as end_file:
-                bot.write(end_file.read())
-        with open('first/botTelegram/config.json', 'w') as json_file:
-            data = {}
-            data["name"] = request.POST['name']
-            data["username"] = request.POST['short_name']
-            data["token"] = request.POST['token']
-            json.dump(data, json_file)
-        return redirect("../payment/")
+        if 'functions' in request.POST:
+            function_names = request.POST.getlist('functions')
+            print(function_names)
+            if os.path.exists(os.getcwd() + "/BOT"):
+                shutil.rmtree(os.getcwd() + "/BOT")
+            os.mkdir(os.getcwd() + "/BOT")
+            with open("BOT/BOT.py", "w") as bot:
+                functions = []
+                for name in function_names:
+                    functions.append(BotFunctions.objects.get(func_name=name))
+                with open("first/botTelegram/start_template.py", 'r') as start_file:
+                    bot.write(start_file.read())
+                for func in functions:
+                    print(func.file_name)
+
+                    if func.file_name == "stt.py":
+                        files = os.listdir(os.getcwd() + "/first/botTelegram/for stt")
+                        for fname in files:
+                            shutil.copy2(os.path.join("first/botTelegram/for stt", fname), "BOT/")
+                        if not os.path.exists(os.getcwd() + "/BOT/ready"):
+                            os.mkdir(os.getcwd() + "/BOT/ready")
+                        if not os.path.exists(os.getcwd() + "/BOT/voice"):
+                            os.mkdir(os.getcwd() + "/BOT/voice")
+                        with open(f'BOT/{func.file_name}', 'r') as file:
+                            code = file.read()
+                            bot.write(code)
+
+                    elif func.file_name == "tts.py":
+                        files = os.listdir(os.getcwd() + "/first/botTelegram/for tts")
+                        for fname in files:
+                            print(fname)
+                            if os.path.isdir("first/botTelegram/for tts/" + fname):
+                                copy_tree("first/botTelegram/for tts/" + fname, "BOT/models/")
+                            else:
+                                shutil.copy2(os.path.join("first/botTelegram/for tts", fname), "BOT/")
+                        if not os.path.exists(os.getcwd() + "/BOT/ready"):
+                            os.mkdir(os.getcwd() + "/BOT/ready")
+                        if not os.path.exists(os.getcwd() + "/BOT/voice"):
+                            os.mkdir(os.getcwd() + "/BOT/voice")
+                        with open(f'BOT/{func.file_name}', 'r') as file:
+                            code = file.read()
+                            bot.write(code)
+                    else:
+                        with open(f'first/botTelegram/{func.file_name}', 'r') as file:
+                            code = file.read()
+                            bot.write(code)
+                with open("first/botTelegram/end_template.py", 'r') as end_file:
+                    bot.write(end_file.read())
+            with open('BOT/config.json', 'w') as json_file:
+                data = {}
+                data["name"] = request.POST['name']
+                data["username"] = request.POST['short_name']
+                data["token"] = request.POST['token']
+                json.dump(data, json_file)
+            os.system(f"sudo pyinstaller --noconfirm --onefile --console --add-data '{os.getcwd()}:bot_gad' '{os.getcwd()}/BOT/BOT.py'")
+            return redirect("../payment/")
     return render(request, "create_bot.html", context)
 
 @login_required(login_url='/telegram_auth/')
@@ -89,22 +124,6 @@ def redact_profile(request, redact_profile_id):
         profile.save()
 
     return render(request, "redact_profile.html", context)
-
-
-def payment(request):
-    context = {}
-    context["summ_of_increase"] = 2
-    return render(request, "payment.html", context)
-
-
-def payment_success(request):
-    context = {}
-    summ = request.GET["sum"]
-    context["sum"] = summ
-    balance = UsersBalance.get(user=request.user.id)
-    balance.balance += int(summ)
-    balance.save()
-    return render(request, "payment_success.html", context)
 
 
 def tech_support(request):
