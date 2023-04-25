@@ -95,8 +95,15 @@ def create_bot(request):
                 os.system(f"pyinstaller --noconfirm --onefile --console --add-data '/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe' '/home/prom/PycharmProjects/bot_gad/BOT/BOT.py'")
             else:
                 os.system(f"sudo pyinstaller --noconfirm --onefile --console --add-data '/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe' '/home/prom/PycharmProjects/bot_gad/BOT/BOT.py'")
-            return redirect(f"../download_bot/?os={request.POST['os']}")
+            return redirect(f"../download_bot/?os={request.POST['os']}&file={short_name}.py")
     return render(request, "create_bot.html", context)
+
+def download_bot(request):
+    context = {}
+    if request.method == "GET":
+        context['os'] = request.GET['os']
+        context['file'] = request.GET['file']
+    return render(request, "download_bot.html", context)
 
 @login_required(login_url='/telegram_auth/')
 def profile(request):

@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
 from first.views import index, create_bot, payment, profile, \
-    redact_profile, tech_support, telegram_auth
+    redact_profile, tech_support, telegram_auth, download_bot
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,5 +38,5 @@ urlpatterns = [
     path('redact_profile/<int:redact_profile_id>', redact_profile),
     path("tech_support/", tech_support),
     path("telegram_auth/", TemplateView.as_view(template_name='telegram_auth.html')),
-    path("download_bot/", TemplateView.as_view(template_name='download_bot.html')),
+    path("download_bot/", download_bot),
 ]
