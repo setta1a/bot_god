@@ -86,9 +86,9 @@ def create_bot(request):
                 data["token"] = request.POST['token']
                 json.dump(data, json_file)
             if request.POST['os'] == 'win':
-                os.system(f"pyinstaller --noconfirm --onefile --console --add-data '/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe' '/home/prom/PycharmProjects/bot_gad/BOT/BOT.py'")
+                os.system(f'pyinstaller --noconfirm --onefile --console --add-data "/home/setta1a/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe" "/home/setta1a/PycharmProjects/bot_gad/BOT/BOT.py"')
             else:
-                os.system(f"sudo pyinstaller --noconfirm --onefile --console --add-data '/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe' '/home/prom/PycharmProjects/bot_gad/BOT/BOT.py'")
+                os.system(f'sudo pyinstaller --noconfirm --onefile --console --add-data "/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe" "/home/prom/PycharmProjects/bot_gad/BOT/BOT.py"')
             return redirect(f"../download_bot/?os={request.POST['os']}")
     return render(request, "create_bot.html", context)
 
