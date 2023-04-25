@@ -27,8 +27,9 @@
                             <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                         </div>
-                        <div id="modal_content" class="modal-body col-6 offset-6">
-                            ...
+                        <div id="modal_content" style="display: inline-block;" class="modal-body">
+                            <img style="border: 2px solid white; border-radius: 10px;" src="../../staticroot/gifs/wiki.gif" class="col-5" alt="">
+                            <p id="modal_content_text" class="col-6 offset-6" style="margin-top: -20vh;"></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
@@ -122,7 +123,7 @@
         document.querySelector(`#${card_values.name.split(" ")[0]}_question`).addEventListener("click", () => {
             console.log(modal_content)
             modal_header.innerHTML = card_values.name
-            modal_content.innerHTML = card_values.descriprion
+            modal_content_text.innerHTML = card_values.descriprion
         })
         
 
