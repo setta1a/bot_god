@@ -29,13 +29,14 @@ def create_bot(request):
     context = {}
     print(f"{os.getcwd()}/static_root/bot_exe:bot_exe")
     if request.method == "POST":
-        if 'functions' in request.POST and 'os' in request.POST:
+        if 'functions' in request.POST and 'os' in request.POST and 'short_name' in request.POST:
             function_names = request.POST.getlist('functions')
-            print(function_names)
-            if os.path.exists(os.getcwd() + "/BOT"):
-                shutil.rmtree(os.getcwd() + "/BOT")
-            os.mkdir(os.getcwd() + "/BOT")
-            with open("BOT/BOT.py", "w") as bot:
+            short_name = request.POST['short_name']
+            file_dir = os.getcwd() + "/staticroot/BOT"
+            if os.path.exists(file_dir):
+                shutil.rmtree(file_dir)
+            os.mkdir(file_dir)
+            with open(f"staticroot/BOT/{short_name}.py", "w") as bot:
                 functions = []
                 for name in function_names:
                     functions.append(BotFunctions.objects.get(func_name=name))
@@ -50,11 +51,11 @@ def create_bot(request):
                         files = os.listdir(os.getcwd() + "/first/botTelegram/for stt")
                         for fname in files:
                             shutil.copy2(os.path.join("first/botTelegram/for stt", fname), "BOT/")
-                        if not os.path.exists(os.getcwd() + "/BOT/ready"):
-                            os.mkdir(os.getcwd() + "/BOT/ready")
-                        if not os.path.exists(os.getcwd() + "/BOT/voice"):
-                            os.mkdir(os.getcwd() + "/BOT/voice")
-                        with open(f'BOT/{func.file_name}', 'r') as file:
+                        if not os.path.exists(os.getcwd() + "staticroot/BOT/ready"):
+                            os.mkdir(os.getcwd() + "staticroot/BOT/ready")
+                        if not os.path.exists(os.getcwd() + "staticroot/BOT/voice"):
+                            os.mkdir(os.getcwd() + "staticroot/BOT/voice")
+                        with open(f'staticroot/BOT/{func.file_name}', 'r') as file:
                             code = file.read()
                             bot.write(code)
 
@@ -65,21 +66,26 @@ def create_bot(request):
                             if os.path.isdir("first/botTelegram/for tts/" + fname):
                                 copy_tree("first/botTelegram/for tts/" + fname, "BOT/models/")
                             else:
-                                shutil.copy2(os.path.join("first/botTelegram/for tts", fname), "BOT/")
-                        if not os.path.exists(os.getcwd() + "/BOT/ready"):
-                            os.mkdir(os.getcwd() + "/BOT/ready")
-                        if not os.path.exists(os.getcwd() + "/BOT/voice"):
-                            os.mkdir(os.getcwd() + "/BOT/voice")
-                        with open(f'BOT/{func.file_name}', 'r') as file:
+                                shutil.copy2(os.path.join("first/botTelegram/for tts", fname), "staticroot/BOT/")
+                        if not os.path.exists(os.getcwd() + "staticroot/BOT/ready"):
+                            os.mkdir(os.getcwd() + "staticroot/BOT/ready")
+                        if not os.path.exists(os.getcwd() + "staticroot/BOT/voice"):
+                            os.mkdir(os.getcwd() + "staticroot/BOT/voice")
+                        with open(f'staticroot/BOT/{func.file_name}', 'r') as file:
                             code = file.read()
                             bot.write(code)
                     else:
                         with open(f'first/botTelegram/{func.file_name}', 'r') as file:
                             code = file.read()
                             bot.write(code)
+                with open("first/botTelegram/middle_template.py", 'r') as end_file:
+                    bot.write(end_file.read())
+                if 'Скачать видео/плейлист с Ютуба' in function_names:
+                    with open("first/botTelegram/yt_text.py", 'r') as end_file:
+                        bot.write(end_file.read())
                 with open("first/botTelegram/end_template.py", 'r') as end_file:
                     bot.write(end_file.read())
-            with open('BOT/config.json', 'w') as json_file:
+            with open('staticroot/BOT/config.json', 'w') as json_file:
                 data = {}
                 data["name"] = request.POST['name']
                 data["username"] = request.POST['short_name']
