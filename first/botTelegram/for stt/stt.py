@@ -2,7 +2,6 @@ import uuid
 import speech_recognition as sr
 
 
-
 r = sr.Recognizer()
 language='ru_RU'
 

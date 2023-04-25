@@ -43,3 +43,6 @@ def mp42pm3(message):
         return
     bot.send_document(message.chat.id, open(mp3_src, 'rb'))
     delete_all_tmp_files()
+
+
+menu.append(telebot.types.BotCommand("/mp42mp3", "Перевод из mp4 в mp3 файл"))
