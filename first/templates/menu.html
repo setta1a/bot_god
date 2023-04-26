@@ -22,6 +22,7 @@
         </ul>
         <div class="position-absolute bottom-25 end-0">
             <ul class="navbar-nav flex-row-reverse">
+                <h4>{{request.user}}</h4>
                 {% if request.user.is_authenticated %}
                     <li class="nav-item=">
                         <a class="nav-link nav-hover text-light m-2  fs-5" href="/profile/{{request.user.id}}/">Профиль</a>
