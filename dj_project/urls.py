@@ -18,13 +18,9 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
-<<<<<<< HEAD
+
 from first.views import index, create_bot, profile, \
-    redact_profile, tech_support, telegram_auth
-=======
-from first.views import index, create_bot, payment, profile, \
-    redact_profile, tech_support, telegram_auth, download_bot
->>>>>>> main
+    redact_profile, tech_support, download_bot
 
 urlpatterns = [
     path('admin/', admin.site.urls),
