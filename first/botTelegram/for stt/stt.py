@@ -30,3 +30,11 @@ def voice_processing(message):
     bot.reply_to(message, text)
     os.remove(file_name_full)
     os.remove(file_name_full_converted)
+
+
+@bot.message_handler(commands=['stt'])
+def sttsd(message):
+    bot.send_message(message.chat.id, "Пришли мне голосовое сообщение и я тебе его напечатаю")
+
+
+menu.append(telebot.types.BotCommand("/stt", "Превратит голосовое сообщение в текст"))

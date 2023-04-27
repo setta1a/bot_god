@@ -34,3 +34,12 @@ def delete_all_music_in_directory():
                 os.remove(mp4_path)
         except Exception as _ex:
             writes_logs(_ex)
+
+
+@bot.message_handler(commands=['yt'])
+def wiki(message):
+    bot.send_message(message.chat.id, "Пришли мне ссылку на видео, если хочешь скачать видео")
+    bot.send_message(message.chat.id, "Пришли мне ссылку на плейлист, если хочешь скачать плейлист")
+
+
+menu.append(telebot.types.BotCommand("/yt", "Скачая из ютуба как видео так и плейлист"))
