@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 import shutil
@@ -43,9 +44,8 @@ def create_bot(request):
                 with open("first/botTelegram/start_template.py", 'r') as start_file:
                     bot.write(start_file.read())
                 for func in functions:
-                    print(func.file_name)
                     if request.user.is_authenticated:
-                        t = BotPreSets(file_name=func.file_name, user=request.user, bot_id=1)
+                        t = BotPreSets(file_name=func.file_name, user=request.user, bot_name=request.POST['short_name'], created_at = datetime.datetime.now())
                         t.save()
                     if func.file_name == "stt.py":
                         files = os.listdir(os.getcwd() + "/first/botTelegram/for stt")
@@ -114,12 +114,13 @@ def profile(request):
         :return: Объект с деталями HTTP-ответа
     """
     context = {}
-    try:
-        user_balance = UsersBalance.objects.get(user_id=request.user.id)
-        context['balance'] = user_balance.balance
-    except:
-        new_balance = UsersBalance(balance=0, user_id=request.user.id)
-        new_balance.save()
+    context['bots'] = BotPreSets.objects.filter(user = request.user)
+    # try:
+    #     user_balance = UsersBalance.objects.get(user_id=request.user.id)
+    #     context['balance'] = user_balance.balance
+    # except:
+    #     new_balance = UsersBalance(balance=0, user_id=request.user.id)
+    #     new_balance.save()
 
     return render(request, "profile.html", context)
 
