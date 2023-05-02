@@ -56,12 +56,14 @@
             </div>
             <div id="functions" class="offset-0">
             </div>
-            <input href="../payment/" class="btn btn-primary col-4 offset-4 p-3 fs-4" type="submit" value="Отправить">
+            <input href="" class="btn btn-primary col-4 offset-4 p-3 fs-4" type="submit" value="Отправить">
         </form>
     </div>
 </div>
 <script>
     'use strict';
+    
+    //создание класса карточки
 
     class Card{
         constructor(name, descriprion, photo, os, modal, syntaxis) {
@@ -74,6 +76,8 @@
 
         }
     }
+
+    //создание объектов карточек
 
     let cards = [new Card("Вики", "Данная функция обеспечивает возможность получения статьи с веб-ресурса 'Википедия' на основе заданного ключевого запроса прямо в мессенджере", "wiki.svg", [1,1,1], "wiki.gif", "wiki"),
     new Card("Анекдот", "Данная функция отправляет вам случайный анекдот", "smile.png", [1,1,1], "anekdot.gif", "anekdot"),
@@ -98,6 +102,8 @@
     new Card("STT", "Данная функция преобразовывает речь в текст, распознавая голос", "stt_logo.png", [1,1,1], "stt.gif", "stt"),]
 
 
+    //добавление карточкек в html
+
     for(let i = 0; i < cards.length; ++i){
         let card_values = cards[i]
         let template = `<div id="card" class="card mb-3" style="max-width: 900px; padding: 20px; background-color: #fff;">
@@ -119,19 +125,20 @@
                     </div>
                 </div>
                 </div>
-                `
-        
-        let result = new DOMParser().parseFromString(template, "text/html").getElementsByTagName("div")[0]
 
-        functions.appendChild(result)
+        let result = new DOMParser().parseFromString(template, "text/html").getElementsByTagName("div")[0] //парсинг строки в html код
+
+        functions.appendChild(result)//добавление карточки на страницу
+
+        //изменение контента модалки
         document.querySelector(`#${card_values.name.split(" ")[0]}_question`).addEventListener("click", () => {
-            console.log(modal_content)
             modal_header.innerHTML = card_values.name
             modal_content_text.innerHTML = card_values.descriprion
             modal_syntaxis.innerHTML = "/" + card_values.syntaxis
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
         })
         
+        //поиск по ОС
 
         let os = [0,0,0]
 
@@ -152,6 +159,8 @@
             }
         }
 
+        //изменение ОС в зависимости от радиобатона
+
         win.addEventListener("input", () => {
             search_os_function([1,0,0])
         })
@@ -162,6 +171,8 @@
             search_os_function([0,0,1])
         })
 
+
+        //поиск по названию и описанию карточек
 
         search.addEventListener("input", () => {
             for (let i = 0; i < cards.length; ++i) {
