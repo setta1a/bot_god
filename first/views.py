@@ -99,9 +99,9 @@ def create_bot(request):
                     bot.write(end_file.read())
 
             if request.POST['os'] == 'win':
-                os.system(f"pyinstaller --noconfirm --onefile --console --add-data '/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe' '/home/prom/PycharmProjects/bot_gad/BOT/BOT.py'")
+                os.system(f"pyinstaller --noconfirm --onefile --console --distpath '/home/setta1a/PycharmProjects/bot_gad/staticroot' '/home/setta1a/PycharmProjects/bot_gad/staticroot/BOT/{short_name}.py'")
             else:
-                os.system(f"sudo pyinstaller --noconfirm --onefile --console --add-data '/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe' '/home/prom/PycharmProjects/bot_gad/BOT/BOT.py'")
+                os.system(f"sudo pyinstaller --noconfirm --onefile --console --distpath '/home/setta1a/PycharmProjects/bot_gad/staticroot' '/home/setta1a/PycharmProjects/bot_gad/staticroot/BOT/{short_name}.py'")
             return redirect(f"../download_bot/?os={request.POST['os']}&file={short_name}.py")
     return render(request, "create_bot.html", context)
 

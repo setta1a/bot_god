@@ -1,6 +1,8 @@
-
+from sys import platform
 
 import pyautogui as pyautogui
+import telebot
+
 
 @bot.message_handler(commands=["capture"])
 if platform.system() == "Windows":
