@@ -1,3 +1,5 @@
+
+
 from pdf2image import convert_from_path
 
 
@@ -33,3 +35,4 @@ def pdf2jpg(message):
     delete_all_tmp_files()
 
 menu.append(telebot.types.BotCommand("/pdf2jpg", "Перевод из pdf в jpg файл"))
+

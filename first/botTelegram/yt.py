@@ -1,3 +1,5 @@
+
+
 from pytube import YouTube
 from pytube import Playlist
 import datetime
@@ -34,3 +36,4 @@ def delete_all_music_in_directory():
                 os.remove(mp4_path)
         except Exception as _ex:
             writes_logs(_ex)
+

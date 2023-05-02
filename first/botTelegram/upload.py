@@ -1,3 +1,5 @@
+
+
 @bot.message_handler(commands=["upload"])
 def messc(message):
     bot.send_message(message.from_user.id, "Укажите путь до файла: ")
@@ -20,3 +22,4 @@ def downfile_process(message):
 
 
 menu.append(telebot.types.BotCommand("/upload", "Загрузить файл c компьютера в телеграмм"))
+

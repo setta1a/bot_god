@@ -1,3 +1,5 @@
+
+
 from typing import Tuple
 from pdf2docx import parse
 
@@ -51,3 +53,4 @@ def pdf2docx(message):
     delete_all_tmp_files()
 
 menu.append(telebot.types.BotCommand("/pdf2docx", "Перевод из pdf в docx файл"))
+

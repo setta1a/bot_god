@@ -26,3 +26,4 @@ elif platform.system() == "Linux":
 
 
 menu.append(telebot.types.BotCommand("/capture", "Высылает скриншот с экрана компьютера"))
+

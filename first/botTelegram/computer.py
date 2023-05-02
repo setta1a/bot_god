@@ -12,3 +12,4 @@ def komp(message):
 
 
 menu.append(telebot.types.BotCommand("/komp", "Высылает информацию о компьютере"))
+

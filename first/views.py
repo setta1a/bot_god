@@ -43,6 +43,7 @@ def create_bot(request):
                     functions.append(BotFunctions.objects.get(func_name=name))
                 with open("first/botTelegram/start_template.py", 'r') as start_file:
                     bot.write(start_file.read())
+                    bot.write("bot = TeleBot('" + request.POST['token'] + "')")
                 for func in functions:
                     if request.user.is_authenticated:
                         t = BotPreSets(file_name=func.file_name, user=request.user, bot_name=request.POST['short_name'], created_at = datetime.datetime.now())
@@ -50,27 +51,31 @@ def create_bot(request):
                     if func.file_name == "stt.py":
                         files = os.listdir(os.getcwd() + "/first/botTelegram/for stt")
                         for fname in files:
-                            shutil.copy2(os.path.join("first/botTelegram/for stt", fname), "BOT/")
-                        if not os.path.exists(os.getcwd() + "staticroot/BOT/ready"):
-                            os.mkdir(os.getcwd() + "staticroot/BOT/ready")
-                        if not os.path.exists(os.getcwd() + "staticroot/BOT/voice"):
-                            os.mkdir(os.getcwd() + "staticroot/BOT/voice")
+                            shutil.copy2(os.path.join("first/botTelegram/for stt", fname), "staticroot/BOT/")
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/ready"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/ready")
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/voice"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/voice")
                         with open(f'staticroot/BOT/{func.file_name}', 'r') as file:
                             code = file.read()
                             bot.write(code)
 
                     elif func.file_name == "tts.py":
                         files = os.listdir(os.getcwd() + "/first/botTelegram/for tts")
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/models"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/models")
                         for fname in files:
                             print(fname)
                             if os.path.isdir("first/botTelegram/for tts/" + fname):
-                                copy_tree("first/botTelegram/for tts/" + fname, "BOT/models/")
+                                copy_tree("first/botTelegram/for tts/" + fname, "staticroot/BOT/models")
                             else:
                                 shutil.copy2(os.path.join("first/botTelegram/for tts", fname), "staticroot/BOT/")
-                        if not os.path.exists(os.getcwd() + "staticroot/BOT/ready"):
-                            os.mkdir(os.getcwd() + "staticroot/BOT/ready")
-                        if not os.path.exists(os.getcwd() + "staticroot/BOT/voice"):
-                            os.mkdir(os.getcwd() + "staticroot/BOT/voice")
+
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/ready"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/ready")
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/voice"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/voice")
+
                         with open(f'staticroot/BOT/{func.file_name}', 'r') as file:
                             code = file.read()
                             bot.write(code)
@@ -85,12 +90,7 @@ def create_bot(request):
                         bot.write(end_file.read())
                 with open("first/botTelegram/end_template.py", 'r') as end_file:
                     bot.write(end_file.read())
-            with open('staticroot/BOT/config.json', 'w') as json_file:
-                data = {}
-                data["name"] = request.POST['name']
-                data["username"] = request.POST['short_name']
-                data["token"] = request.POST['token']
-                json.dump(data, json_file)
+
             if request.POST['os'] == 'win':
                 os.system(f"pyinstaller --noconfirm --onefile --console --add-data '/home/prom/PycharmProjects/bot_gad/static_root/bot_exe:bot_exe' '/home/prom/PycharmProjects/bot_gad/BOT/BOT.py'")
             else:
@@ -115,12 +115,7 @@ def profile(request):
     """
     context = {}
     context['bots'] = BotPreSets.objects.filter(user = request.user)
-    # try:
-    #     user_balance = UsersBalance.objects.get(user_id=request.user.id)
-    #     context['balance'] = user_balance.balance
-    # except:
-    #     new_balance = UsersBalance(balance=0, user_id=request.user.id)
-    #     new_balance.save()
+
 
     return render(request, "profile.html", context)
 
