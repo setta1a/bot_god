@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 
-from first.models import BotFunctions, BotPreSets
+from first.models import BotFunctions, BotPreSets, FuncForPresets
 
 
 def index(request):
@@ -37,17 +37,25 @@ def create_bot(request):
             if os.path.exists(file_dir):
                 shutil.rmtree(file_dir)
             os.mkdir(file_dir)
+
+            functions = []
+            for name in function_names:
+                functions.append(BotFunctions.objects.get(func_name=name))
+
+            if request.user.is_authenticated:
+                t = BotPreSets(user=request.user, bot_name=request.POST['short_name'],
+                               created_at=datetime.datetime.now())
+                t.save()
+
+                for function in functions:
+                    f = FuncForPresets(func=function, bot = t)
+                    f.save()
+
             with open(f"staticroot/BOT/{short_name}.py", "w") as bot:
-                functions = []
-                for name in function_names:
-                    functions.append(BotFunctions.objects.get(func_name=name))
                 with open("first/botTelegram/start_template.py", 'r') as start_file:
                     bot.write(start_file.read())
                     bot.write("bot = TeleBot('" + request.POST['token'] + "')")
                 for func in functions:
-                    if request.user.is_authenticated:
-                        t = BotPreSets(file_name=func.file_name, user=request.user, bot_name=request.POST['short_name'], created_at = datetime.datetime.now())
-                        t.save()
                     if func.file_name == "stt.py":
                         files = os.listdir(os.getcwd() + "/first/botTelegram/for stt")
                         for fname in files:
@@ -65,7 +73,6 @@ def create_bot(request):
                         if not os.path.exists(os.getcwd() + "/staticroot/BOT/models"):
                             os.mkdir(os.getcwd() + "/staticroot/BOT/models")
                         for fname in files:
-                            print(fname)
                             if os.path.isdir("first/botTelegram/for tts/" + fname):
                                 copy_tree("first/botTelegram/for tts/" + fname, "staticroot/BOT/models")
                             else:

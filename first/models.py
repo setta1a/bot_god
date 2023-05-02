@@ -6,8 +6,11 @@ class BotFunctions(models.Model):
     file_name = models.CharField(max_length=64)
 
 class BotPreSets(models.Model):
-    file_name = models.CharField(max_length=64)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     bot_name = models.CharField(max_length=32)
     created_at = models.DateTimeField()
+
+class FuncForPresets(models.Model):
+    func = models.ForeignKey(to=BotFunctions, on_delete=models.CASCADE)
+    bot = models.ForeignKey(to=BotPreSets, on_delete=models.CASCADE)
 

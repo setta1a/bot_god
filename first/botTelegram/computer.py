@@ -1,3 +1,5 @@
+
+
 @bot.message_handler(commands=["komp"])
 def komp(message):
     req = requests.get('http://ip.42.pl/raw')

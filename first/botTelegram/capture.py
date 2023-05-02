@@ -1,3 +1,5 @@
+
+
 import pyautogui as pyautogui
 
 @bot.message_handler(commands=["capture"])
