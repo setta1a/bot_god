@@ -3,7 +3,6 @@
 import json
 apis = []
 
-
 def load_api():
     if os.path.isfile('api.json') == False:
         tmp = open("api.json", "w+")
