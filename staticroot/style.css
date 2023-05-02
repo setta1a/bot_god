@@ -50,6 +50,8 @@ a.nav-hover:hover{
 	line-height: 28px;  
 	margin-right: 10px;      
 	position: relative;
+	left: 1px;
+	top: 0px;
 	vertical-align: middle;
 	font-size: 14px;
 	user-select: none;	
