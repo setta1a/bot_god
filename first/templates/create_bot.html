@@ -56,7 +56,9 @@
             </div>
             <div id="functions" class="offset-0">
             </div>
-            <input href="" class="btn btn-primary col-4 offset-4 p-3 fs-4 button large round alert" type="submit" value="Отправить">
+            <input href="" class="card-text btn btn-primary col-4 offset-4 p-3 fs-4" type="submit" id="create" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop" value="Отправить">
+                
         </form>
     </div>
 </div>
@@ -134,10 +136,19 @@
         document.querySelector(`#${card_values.name.split(" ")[0]}_question`).addEventListener("click", () => {
             modal_header.innerHTML = card_values.name
             modal_content_text.innerHTML = card_values.descriprion
+            syntax_text.classList.remove("d-none")
             modal_syntaxis.innerHTML = "/" + card_values.syntaxis
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
         })
         
+        //модалка при создании бота
+        create.addEventListener("click", () => {
+            modal_header.innerHTML = "Ваш бот создается..."
+            modal_content_text.innerHTML = "Создание бота занимает некоторое время. Обычно это не столь долгий процесс. Сразу после создания вас переведет на страницу, где вы сможете его скачать. Если у вас возникли какие-то проблемы, обратитесь в техподдержку. Вы можете закрыть это окно."
+            syntax_text.classList.add("d-none")
+            modal_gif.src = '../../staticroot/gifs/load.gif'
+        })
+
         //поиск по ОС
 
         let os = [0,0,0]
