@@ -48,7 +48,7 @@ def create_bot(request):
                 t.save()
 
                 for function in functions:
-                    f = FuncForPresets(func=function, bot = t)
+                    f = FuncForPresets(func=function, bot=t)
                     f.save()
 
             with open(f"staticroot/BOT/{short_name}.py", "w") as bot:
@@ -121,7 +121,7 @@ def profile(request):
         :return: Объект с деталями HTTP-ответа
     """
     context = {}
-    context['bots'] = BotPreSets.objects.filter(user = request.user)
+    context['bots'] = BotPreSets.objects.filter(user=request.user)
 
 
     return render(request, "profile.html", context)
