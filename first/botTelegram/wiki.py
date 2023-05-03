@@ -1,3 +1,5 @@
+
+
 @bot.message_handler(commands=['wiki'])
 def wiki(message):
     try:
@@ -15,3 +17,4 @@ def wiki(message):
         bot.send_message(message.chat.id, "будь добр написать /wiki 'что желаешь найти'")
 
 menu.append(telebot.types.BotCommand("/wiki", "Поиск по слову в википедии"))
+

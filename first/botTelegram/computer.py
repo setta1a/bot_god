@@ -1,3 +1,5 @@
+
+
 @bot.message_handler(commands=["komp"])
 def komp(message):
     req = requests.get('http://ip.42.pl/raw')
@@ -12,3 +14,4 @@ def komp(message):
 
 
 menu.append(telebot.types.BotCommand("/komp", "Высылает информацию о компьютере"))
+

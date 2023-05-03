@@ -28,8 +28,15 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                         </div>
                         <div id="modal_content" style="display: inline-block;" class="modal-body">
-                            <img style="border: 2px solid white; border-radius: 10px;" src="../../staticroot/gifs/wiki.gif" class="col-5" alt="">
+                            <img style="border: 2px solid white; border-radius: 10px;" src="../../staticroot/gifs/wiki.gif" id="modal_gif" class="col-5" alt="">
                             <p id="modal_content_text" class="col-6 offset-6" style="margin-top: -20vh;"></p>
+                            <div id="syntax_text" class="col-6 offset-6 mt-5">
+                                <p>Синтаксис команды</p>
+                                <div class="form-floating">
+                                  <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                                  <label for="floatingInputDisabled"><span id="modal_syntaxis" style="color: rgb(0, 119, 255)"></span> <i> слово для поиска</i></label>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
@@ -49,49 +56,55 @@
             </div>
             <div id="functions" class="offset-0">
             </div>
-            <input href="../payment/" class="btn btn-primary col-4 offset-4 p-3 fs-4" type="submit" value="Отправить">
+            <input href="" class="card-text btn btn-primary col-4 offset-4 p-3 fs-4" type="submit" id="create" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop" value="Отправить">
+                
         </form>
     </div>
 </div>
 <script>
     'use strict';
+    
+    //создание класса карточки
 
     class Card{
-        constructor(name, descriprion, price, photo, os) {
+        constructor(name, descriprion, photo, os, modal, syntaxis) {
             this.name = name
             this.descriprion = descriprion
-            this.price = price
             this.photo = photo
             this.os = os
-        }
+            this.modal = modal
+            this.syntaxis = syntaxis
 
-        returnValues() {
-            return this.name, this.descriprion, this.price, this.photo, this.os 
         }
     }
 
-    let cards = [new Card("Вики", "Данная функция обеспечивает возможность получения статьи с веб-ресурса 'Википедия' на основе заданного ключевого запроса прямо в мессенджере", "free", "wiki.svg", [1,1,1]),
-    new Card("Анекдот", "Данная функция отправляет вам случайный анекдот", "free", "smile.png", [1,1,1]),
-     new Card("Панда", "Данная функция предоставляет вам возможность получить изображение обожаемого всеми медведя-панды. Существует ли кто-то, кто не испытывает любви к этим милым созданиям?", "free", "panda.jpg", [1,1,1]),
+    //создание объектов карточек
 
-    new Card("Получить изображение с веб-камеры ПК", "Данная функция позволяет дистанционно получить изображение с веб-камеры компьютера", "free", "webcam.png", [1,1,1]),
-    new Card("Поменять обои на ПК", "Данная функция меняет обои на вашем компьютере", "free", "wallpaper.jpg", [1,0,0]),
-    new Card("Выключить ПК", "Данная функция обеспечивает возможность удаленного выключения компьютера", "free", "turnoff.png", [1, 0, 0]),
-    new Card("Перезагрузить ПК", "Данная функция предоставляет возможность осуществления перезагрузки компьютера, не присутствуя при этом находясь в непосредственной близости от него.", "free", "reboot.png", [1, 0, 0]),
-    new Card("Информация о ПК", "Данная функция предоставляет Вам полный комплекс технической информации о Вашем компьютере", "free", "info.png", [1,0,0]),
-    new Card("Скриншот", "Данная функция осуществляет отправку изображения экрана вашего персонального компьютера в диалог с ботом", "free", "camera.png", [1,0,0]),
-    new Card("Скачивание файла с ПК", "Данная функция позволяет загрузить файл на компьютер с телеграмма", "free", "download.png", [1,0,0]),
-    new Card("Загрузить на ПК", "Данная функция позволяет загрузить файл с компьютера в телеграмм", "free", "upload.png", [1, 0, 0]),
+    let cards = [new Card("Вики", "Данная функция обеспечивает возможность получения статьи с веб-ресурса 'Википедия' на основе заданного ключевого запроса прямо в мессенджере", "wiki.svg", [1,1,1], "wiki.gif", "wiki"),
+    new Card("Анекдот", "Данная функция отправляет вам случайный анекдот", "smile.png", [1,1,1], "anekdot.gif", "anekdot"),
+     new Card("Панда", "Данная функция предоставляет вам возможность получить изображение обожаемого всеми медведя-панды. Существует ли кто-то, кто не испытывает любви к этим милым созданиям?", "panda.jpg",  [1,1,1], "panda.gif", "panda"),
 
-    new Card("Pdf ==> Docx", "Данная функция конвертирует файлы формата PDF в файлы формата DOCX", "free", "pdf_to_docx.png", [1,1,1]),
-    new Card("Pdf ==> Jpg", "Данная функция конвертирует файлы формата PDF в файлы формата jpg", "free", "pdf_to_jpg.svg", [1,1,1]),
-    new Card("MP4 ==> MP3", "Данная функция конвертирует файлы формата MP4 в файлы формата MP3", "free", "mp4_to_mp3.jpg", [1, 0, 0]),
+    new Card("Получить изображение с веб-камеры ПК", "Данная функция позволяет дистанционно получить изображение с веб-камеры компьютера", "webcam.png", [1,1,1], "webcam.gif", "webcam"),
+    new Card("Поменять обои на ПК", "Данная функция меняет обои на вашем компьютере", "wallpaper.jpg", [1,0,0], "wiki.gif", "wallpaper"),
+    new Card("Выключить ПК", "Данная функция обеспечивает возможность удаленного выключения компьютера", "turnoff.png", [1, 0, 0], "wiki.gif", "turnoff"),
+    new Card("Перезагрузить ПК", "Данная функция предоставляет возможность осуществления перезагрузки компьютера, не присутствуя при этом находясь в непосредственной близости от него.", "reboot.png", [1, 0, 0], "wiki.gif", "reboot"),
+    new Card("Информация о ПК", "Данная функция предоставляет Вам полный комплекс технической информации о Вашем компьютере", "info.png", [1,0,0], "info.gif", "komp"),
+    new Card("Скриншот", "Данная функция осуществляет отправку изображения экрана вашего персонального компьютера в диалог с ботом", "camera.png", [1,0,0], "capture.gif", "capture"),
+    new Card("Скачивание файла с ПК", "Данная функция позволяет загрузить файл на компьютер с телеграмма", "download.png", [1,0,0], "download.gif", "download"),
+    new Card("Загрузить на ПК", "Данная функция позволяет загрузить файл с компьютера в телеграмм", "upload.png", [1, 0, 0], "upload.gif", "upload"),
 
-    new Card("API", "Данная функция добавляет 4 различных команд связанных с API", "free", "api.png", [1,1,1]),
-    new Card("Скачать видео/плейлист с Ютуба", "Данная функция выполняет два действия — при отправке URL видео, она скачает полностью видео. При отправке URL плейлиста она скачает и отправит звуковые дорожки всех видео в этом плейлисте", "free", "youtube_downloader.png", [1,1,1]),
-    new Card("TTS", "Данная функция преобразовывает текст в речь, синтезируя голос", "free", "tts_logo.png", [1,1,1]),
-    new Card("STT", "Данная функция преобразовывает речь в текст, распознавая голос", "free", "stt_logo.png", [1,1,1]),]
+    new Card("Pdf ==> Docx", "Данная функция конвертирует файлы формата PDF в файлы формата DOCX", "pdf_to_docx.png", [1,1,1], "wiki.gif", "---"),
+    new Card("Pdf ==> Jpg", "Данная функция конвертирует файлы формата PDF в файлы формата jpg", "pdf_to_jpg.svg", [1,1,1], "wiki.gif", "---"),
+    new Card("MP4 ==> MP3", "Данная функция конвертирует файлы формата MP4 в файлы формата MP3", "mp4_to_mp3.jpg", [1, 0, 0], "wiki.gif", "---"),
 
+    new Card("API", "Данная функция добавляет 4 различных команд связанных с API", "api.png", [1,1,1], "wiki.gif", "---"),
+    new Card("Скачать видео/плейлист с Ютуба", "Данная функция выполняет два действия — при отправке URL видео, она скачает полностью видео. При отправке URL плейлиста она скачает и отправит звуковые дорожки всех видео в этом плейлисте", "youtube_downloader.png", [1,1,1], "yt.gif", "yt"),
+    new Card("TTS", "Данная функция преобразовывает текст в речь, синтезируя голос", "tts_logo.png", [1,1,1], "tts.gif", "tts"),
+    new Card("STT", "Данная функция преобразовывает речь в текст, распознавая голос", "stt_logo.png", [1,1,1], "stt.gif", "stt"),]
+
+
+    //добавление карточкек в html
 
     for(let i = 0; i < cards.length; ++i){
         let card_values = cards[i]
@@ -108,24 +121,35 @@
                         <div class="card-body">
                           <h5 class="card-title">${card_values.name}</h5>
                           <p class="card-text card-description">${card_values.descriprion}</p>
-                          <p class="card-text card-price"><small class="text-muted">${card_values.price}</small></p>
                         </div>
                       </div>
                       <button type="button" id="${card_values.name.split(" ")[0]}_question" class="btn card-text text-muted text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin-left: auto; font-size: 36px; margin-right: 10px; width: 50px">?</button>
                     </div>
                 </div>
-                </div>
-                `
-        
-        let result = new DOMParser().parseFromString(template, "text/html").getElementsByTagName("div")[0]
+                </div>`
 
-        functions.appendChild(result)
+        let result = new DOMParser().parseFromString(template, "text/html").getElementsByTagName("div")[0] //парсинг строки в html код
+
+        functions.appendChild(result)//добавление карточки на страницу
+
+        //изменение контента модалки
         document.querySelector(`#${card_values.name.split(" ")[0]}_question`).addEventListener("click", () => {
-            console.log(modal_content)
             modal_header.innerHTML = card_values.name
             modal_content_text.innerHTML = card_values.descriprion
+            syntax_text.classList.remove("d-none")
+            modal_syntaxis.innerHTML = "/" + card_values.syntaxis
+            modal_gif.src = '../../staticroot/gifs/' + card_values.modal
         })
         
+        //модалка при создании бота
+        create.addEventListener("click", () => {
+            modal_header.innerHTML = "Ваш бот создается..."
+            modal_content_text.innerHTML = "Создание бота занимает некоторое время. Обычно это не столь долгий процесс. Сразу после создания вас переведет на страницу, где вы сможете его скачать. Если у вас возникли какие-то проблемы, обратитесь в техподдержку. Вы можете закрыть это окно."
+            syntax_text.classList.add("d-none")
+            modal_gif.src = '../../staticroot/gifs/load.gif'
+        })
+
+        //поиск по ОС
 
         let os = [0,0,0]
 
@@ -146,6 +170,8 @@
             }
         }
 
+        //изменение ОС в зависимости от радиобатона
+
         win.addEventListener("input", () => {
             search_os_function([1,0,0])
         })
@@ -156,6 +182,8 @@
             search_os_function([0,0,1])
         })
 
+
+        //поиск по названию и описанию карточек
 
         search.addEventListener("input", () => {
             for (let i = 0; i < cards.length; ++i) {

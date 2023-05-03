@@ -1,3 +1,5 @@
+
+
 from telebot import types
 
 
@@ -19,3 +21,4 @@ def f(message):
 
 
 menu.append(telebot.types.BotCommand("/reload", "Перезгрузка компьютера"))
+

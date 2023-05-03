@@ -1,3 +1,5 @@
+
+
 from bs4 import BeautifulSoup
 
 
@@ -13,3 +15,4 @@ def anekdotes(message):
     bot.send_message(message.from_user.id, getanekdot())
 
 menu.append(telebot.types.BotCommand("/anekdot", "Высылает анекдот"))
+

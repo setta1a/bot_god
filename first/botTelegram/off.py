@@ -1,3 +1,5 @@
+
+
 from telebot import types
 
 
@@ -19,3 +21,4 @@ def off(message):
     elif platform.system()=="Linux":
         subprocess.Popen(['shutdown', '-h', 'now'])
 menu.append(telebot.types.BotCommand("/off", "Выключает компьютер"))
+
