@@ -508,7 +508,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$390000$U2ObZxNhCsPal9f3J1DABI$QcdJpZC97ECt5QjrqgaMutFJHU5/VLA/sPNPY6y1qFM=",
-    "last_login": null,
+    "last_login": "2023-05-04T12:43:37.303Z",
     "is_superuser": true,
     "username": "vasya",
     "first_name": "",
@@ -631,6 +631,14 @@
   "fields": {
     "app_label": "social_django",
     "model": "partial"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yvw7gwrgq6ardqtafdw6ybutqscezgbq",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllssusPJX3OEK3tDQ4gW4qTCnF3iJQC2jcz76VG3tY8bk2WcU7qokCdfrfA8SFlB-nO5VZ1rGVd5qB3RR-06aEmeV4P9-8gc8vfWpgMGwKcbEAih9RF8cKCHYrpkyUG8CABkNPZR8fO9jxZFyA6R6jeH95fN60:1puYJ7:o7I7pKVxZzj35txhnzzRzgxLw0eMyJOhymGrVVeF1EM",
+    "expire_date": "2023-05-18T12:43:37.314Z"
   }
 },
 {
@@ -775,6 +783,76 @@
   "fields": {
     "func_name": "STT",
     "file_name": "stt.py"
+  }
+},
+{
+  "model": "first.botpresets",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "bot_name": "bot_god",
+    "created_at": "2023-05-04T12:45:02.021Z",
+    "token": "6126747598:AAFfM1GS1CC96FPc4hUHLlGYoiszU6ck-zU",
+    "os": "linux"
+  }
+},
+{
+  "model": "first.botpresets",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "bot_name": "bot_god_test",
+    "created_at": "2023-05-04T13:25:06.157Z",
+    "token": "6126747598:AAFfM1GS1CC96FPc4hUHLlGYoiszU6ck-zU",
+    "os": "linux"
+  }
+},
+{
+  "model": "first.funcforpresets",
+  "pk": 1,
+  "fields": {
+    "func": 1,
+    "bot": 1
+  }
+},
+{
+  "model": "first.funcforpresets",
+  "pk": 2,
+  "fields": {
+    "func": 2,
+    "bot": 1
+  }
+},
+{
+  "model": "first.funcforpresets",
+  "pk": 3,
+  "fields": {
+    "func": 3,
+    "bot": 1
+  }
+},
+{
+  "model": "first.funcforpresets",
+  "pk": 4,
+  "fields": {
+    "func": 1,
+    "bot": 2
+  }
+},
+{
+  "model": "first.funcforpresets",
+  "pk": 5,
+  "fields": {
+    "func": 2,
+    "bot": 2
+  }
+},
+{
+  "model": "first.funcforpresets",
+  "pk": 6,
+  "fields": {
+    "func": 4,
+    "bot": 2
   }
 }
 ]
