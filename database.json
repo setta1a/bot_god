@@ -255,216 +255,270 @@
   "model": "auth.permission",
   "pk": 29,
   "fields": {
-    "name": "Can add users balance",
+    "name": "Can add bot pre sets",
     "content_type": 8,
-    "codename": "add_usersbalance"
+    "codename": "add_botpresets"
   }
 },
 {
   "model": "auth.permission",
   "pk": 30,
   "fields": {
-    "name": "Can change users balance",
+    "name": "Can change bot pre sets",
     "content_type": 8,
-    "codename": "change_usersbalance"
+    "codename": "change_botpresets"
   }
 },
 {
   "model": "auth.permission",
   "pk": 31,
   "fields": {
-    "name": "Can delete users balance",
+    "name": "Can delete bot pre sets",
     "content_type": 8,
-    "codename": "delete_usersbalance"
+    "codename": "delete_botpresets"
   }
 },
 {
   "model": "auth.permission",
   "pk": 32,
   "fields": {
-    "name": "Can view users balance",
+    "name": "Can view bot pre sets",
     "content_type": 8,
-    "codename": "view_usersbalance"
+    "codename": "view_botpresets"
   }
 },
 {
   "model": "auth.permission",
   "pk": 33,
   "fields": {
-    "name": "Can add association",
+    "name": "Can add func for presets",
     "content_type": 9,
-    "codename": "add_association"
+    "codename": "add_funcforpresets"
   }
 },
 {
   "model": "auth.permission",
   "pk": 34,
   "fields": {
-    "name": "Can change association",
+    "name": "Can change func for presets",
     "content_type": 9,
-    "codename": "change_association"
+    "codename": "change_funcforpresets"
   }
 },
 {
   "model": "auth.permission",
   "pk": 35,
   "fields": {
-    "name": "Can delete association",
+    "name": "Can delete func for presets",
     "content_type": 9,
-    "codename": "delete_association"
+    "codename": "delete_funcforpresets"
   }
 },
 {
   "model": "auth.permission",
   "pk": 36,
   "fields": {
-    "name": "Can view association",
+    "name": "Can view func for presets",
     "content_type": 9,
-    "codename": "view_association"
+    "codename": "view_funcforpresets"
   }
 },
 {
   "model": "auth.permission",
   "pk": 37,
   "fields": {
-    "name": "Can add code",
+    "name": "Can add association",
     "content_type": 10,
-    "codename": "add_code"
+    "codename": "add_association"
   }
 },
 {
   "model": "auth.permission",
   "pk": 38,
   "fields": {
-    "name": "Can change code",
+    "name": "Can change association",
     "content_type": 10,
-    "codename": "change_code"
+    "codename": "change_association"
   }
 },
 {
   "model": "auth.permission",
   "pk": 39,
   "fields": {
-    "name": "Can delete code",
+    "name": "Can delete association",
     "content_type": 10,
-    "codename": "delete_code"
+    "codename": "delete_association"
   }
 },
 {
   "model": "auth.permission",
   "pk": 40,
   "fields": {
-    "name": "Can view code",
+    "name": "Can view association",
     "content_type": 10,
-    "codename": "view_code"
+    "codename": "view_association"
   }
 },
 {
   "model": "auth.permission",
   "pk": 41,
   "fields": {
-    "name": "Can add nonce",
+    "name": "Can add code",
     "content_type": 11,
-    "codename": "add_nonce"
+    "codename": "add_code"
   }
 },
 {
   "model": "auth.permission",
   "pk": 42,
   "fields": {
-    "name": "Can change nonce",
+    "name": "Can change code",
     "content_type": 11,
-    "codename": "change_nonce"
+    "codename": "change_code"
   }
 },
 {
   "model": "auth.permission",
   "pk": 43,
   "fields": {
-    "name": "Can delete nonce",
+    "name": "Can delete code",
     "content_type": 11,
-    "codename": "delete_nonce"
+    "codename": "delete_code"
   }
 },
 {
   "model": "auth.permission",
   "pk": 44,
   "fields": {
-    "name": "Can view nonce",
+    "name": "Can view code",
     "content_type": 11,
-    "codename": "view_nonce"
+    "codename": "view_code"
   }
 },
 {
   "model": "auth.permission",
   "pk": 45,
   "fields": {
-    "name": "Can add user social auth",
+    "name": "Can add nonce",
     "content_type": 12,
-    "codename": "add_usersocialauth"
+    "codename": "add_nonce"
   }
 },
 {
   "model": "auth.permission",
   "pk": 46,
   "fields": {
-    "name": "Can change user social auth",
+    "name": "Can change nonce",
     "content_type": 12,
-    "codename": "change_usersocialauth"
+    "codename": "change_nonce"
   }
 },
 {
   "model": "auth.permission",
   "pk": 47,
   "fields": {
-    "name": "Can delete user social auth",
+    "name": "Can delete nonce",
     "content_type": 12,
-    "codename": "delete_usersocialauth"
+    "codename": "delete_nonce"
   }
 },
 {
   "model": "auth.permission",
   "pk": 48,
   "fields": {
-    "name": "Can view user social auth",
+    "name": "Can view nonce",
     "content_type": 12,
-    "codename": "view_usersocialauth"
+    "codename": "view_nonce"
   }
 },
 {
   "model": "auth.permission",
   "pk": 49,
   "fields": {
-    "name": "Can add partial",
+    "name": "Can add user social auth",
     "content_type": 13,
-    "codename": "add_partial"
+    "codename": "add_usersocialauth"
   }
 },
 {
   "model": "auth.permission",
   "pk": 50,
   "fields": {
-    "name": "Can change partial",
+    "name": "Can change user social auth",
     "content_type": 13,
-    "codename": "change_partial"
+    "codename": "change_usersocialauth"
   }
 },
 {
   "model": "auth.permission",
   "pk": 51,
   "fields": {
-    "name": "Can delete partial",
+    "name": "Can delete user social auth",
     "content_type": 13,
-    "codename": "delete_partial"
+    "codename": "delete_usersocialauth"
   }
 },
 {
   "model": "auth.permission",
   "pk": 52,
   "fields": {
-    "name": "Can view partial",
+    "name": "Can view user social auth",
     "content_type": 13,
+    "codename": "view_usersocialauth"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add partial",
+    "content_type": 14,
+    "codename": "add_partial"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change partial",
+    "content_type": 14,
+    "codename": "change_partial"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete partial",
+    "content_type": 14,
+    "codename": "delete_partial"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view partial",
+    "content_type": 14,
     "codename": "view_partial"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$U2ObZxNhCsPal9f3J1DABI$QcdJpZC97ECt5QjrqgaMutFJHU5/VLA/sPNPY6y1qFM=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "vasya",
+    "first_name": "",
+    "last_name": "",
+    "email": "abc@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-05-04T12:31:59.755Z",
+    "groups": [],
+    "user_permissions": []
   }
 },
 {
@@ -528,15 +582,15 @@
   "pk": 8,
   "fields": {
     "app_label": "first",
-    "model": "usersbalance"
+    "model": "botpresets"
   }
 },
 {
   "model": "contenttypes.contenttype",
   "pk": 9,
   "fields": {
-    "app_label": "social_django",
-    "model": "association"
+    "app_label": "first",
+    "model": "funcforpresets"
   }
 },
 {
@@ -544,7 +598,7 @@
   "pk": 10,
   "fields": {
     "app_label": "social_django",
-    "model": "code"
+    "model": "association"
   }
 },
 {
@@ -552,7 +606,7 @@
   "pk": 11,
   "fields": {
     "app_label": "social_django",
-    "model": "nonce"
+    "model": "code"
   }
 },
 {
@@ -560,12 +614,20 @@
   "pk": 12,
   "fields": {
     "app_label": "social_django",
-    "model": "usersocialauth"
+    "model": "nonce"
   }
 },
 {
   "model": "contenttypes.contenttype",
   "pk": 13,
+  "fields": {
+    "app_label": "social_django",
+    "model": "usersocialauth"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
   "fields": {
     "app_label": "social_django",
     "model": "partial"
