@@ -9,6 +9,8 @@ class BotPreSets(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     bot_name = models.CharField(max_length=32)
     created_at = models.DateTimeField()
+    token = models.CharField(max_length=64)
+    os = models.CharField(max_length=4)
 
 class FuncForPresets(models.Model):
     func = models.ForeignKey(to=BotFunctions, on_delete=models.CASCADE)

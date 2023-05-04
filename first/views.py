@@ -44,7 +44,7 @@ def create_bot(request):
 
             if request.user.is_authenticated:
                 t = BotPreSets(user=request.user, bot_name=request.POST['short_name'],
-                               created_at=datetime.datetime.now())
+                               created_at=datetime.datetime.now(), token=request.POST['token'], os=request.POST['os'])
                 t.save()
 
                 for function in functions:
@@ -108,8 +108,70 @@ def create_bot(request):
 def download_bot(request):
     context = {}
     if request.method == "GET":
-        context['os'] = request.GET['os']
-        context['file'] = request.GET['file']
+        if "file" in request.GET and 'os' in request.GET:
+            context['os'] = request.GET['os']
+            context['file'] = request.GET['file']
+        else:
+            context['os'] = request.GET['os']
+            bot_name = request.GET['preset']
+            botpreset = BotPreSets.objects.get(bot_name=bot_name)
+            functions = FuncForPresets.objects.filter(bot=botpreset)
+            function_names = []
+            for function in functions:
+                function_names.append(function.func)
+            context['file'] = bot_name
+            with open(f"staticroot/BOT/{bot_name}.py", "w") as bot:
+                with open("first/botTelegram/start_template.py", 'r') as start_file:
+                    bot.write(start_file.read())
+                    bot.write("bot = TeleBot('" + botpreset.token + "')")
+                for function in functions:
+                    if function.func.file_name == "stt.py":
+                        files = os.listdir(os.getcwd() + "/first/botTelegram/for stt")
+                        for fname in files:
+                            shutil.copy2(os.path.join("first/botTelegram/for stt", fname), "staticroot/BOT/")
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/ready"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/ready")
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/voice"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/voice")
+                        with open(f'staticroot/BOT/{function.func.file_name}', 'r') as file:
+                            code = file.read()
+                            bot.write(code)
+
+                    elif function.func.file_name == "tts.py":
+                        files = os.listdir(os.getcwd() + "/first/botTelegram/for tts")
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/models"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/models")
+                        for fname in files:
+                            if os.path.isdir("first/botTelegram/for tts/" + fname):
+                                copy_tree("first/botTelegram/for tts/" + fname, "staticroot/BOT/models")
+                            else:
+                                shutil.copy2(os.path.join("first/botTelegram/for tts", fname), "staticroot/BOT/")
+
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/ready"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/ready")
+                        if not os.path.exists(os.getcwd() + "/staticroot/BOT/voice"):
+                            os.mkdir(os.getcwd() + "/staticroot/BOT/voice")
+
+                        with open(f'staticroot/BOT/{function.func.file_name}', 'r') as file:
+                            code = file.read()
+                            bot.write(code)
+                    else:
+                        with open(f'first/botTelegram/{function.func.file_name}', 'r') as file:
+                            code = file.read()
+                            bot.write(code)
+                with open("first/botTelegram/middle_template.py", 'r') as end_file:
+                    bot.write(end_file.read())
+                if 'Скачать видео/плейлист с Ютуба' in function_names:
+                    with open("first/botTelegram/yt_text.py", 'r') as end_file:
+                        bot.write(end_file.read())
+                with open("first/botTelegram/end_template.py", 'r') as end_file:
+                    bot.write(end_file.read())
+
+            if context['os'] == 'win':
+                os.system(f"pyinstaller --noconfirm --onefile --console --distpath '{os.getcwd()}/staticroot/BOT' '{os.getcwd()}/staticroot/BOT/{bot_name}.py'")
+            else:
+                os.system(f"sudo pyinstaller --noconfirm --onefile --console --distpath '{os.getcwd()}/staticroot/BOT' '{os.getcwd()}/staticroot/BOT/{bot_name}.py'")
+
     return render(request, "download_bot.html", context)
 
 @login_required(login_url='/telegram_auth/')
