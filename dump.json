@@ -1,0 +1,88 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "!wziENIlNyt227IITiZSyh7t85lG3HJFzjpgBJKLu",
+    "last_login": "2023-04-25T05:52:20.499Z",
+    "is_superuser": false,
+    "username": "setta1a",
+    "first_name": "Andrey",
+    "last_name": "Sitalo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-04-18T19:19:02.314Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "!KrRHzRuSKe6A2MID5N0nSBc1fI4Gyjd7SJ2xlZPK",
+    "last_login": "2023-04-19T17:54:38.285Z",
+    "is_superuser": false,
+    "username": "simon_anikin",
+    "first_name": "Семен",
+    "last_name": "Аникин",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-04-19T17:54:38.243Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "0ejsut4i3ryiruqx26canqa4ictxfgpb",
+  "fields": {
+    "session_data": ".eJxVjssKwyAURP_FdRHFV9Jd_6F7ueptlNoImqxC_72mpJDuhjPMYTZiYV2iXRtWmwK5Ek4uZ-bAP3Hei1Z8gmx9qUgP2uiCGacKL3o_wq0v_w0RWuzzARnjRnOlJEpj9KgFSGZ2qljgKL3wKozaaRWUNBAGePQOhNHgnMcuPR581RnaYnOZ0ny6-HtD3h8cI0hn:1poqr0:JtBsiLDdL97xPMgCn9qY8Kq7220RPEqpcsJnsSflBrQ",
+    "expire_date": "2023-05-02T19:19:02.357Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "cweb18gprc2sgp26zgyck9nx1ym02zaa",
+  "fields": {
+    "session_data": ".eJxVjsEKgzAQRP8l5yLJmhjTW__Be1g3G5WmComeSv-9tliwt2GGebyn8Lito98KZz8FcRUgLueuR7rz_BnKQhMmT0vm6mhLtXLiIeOj6o5w25__hBHLuN-dbTVEGSy0jZOyBxNBUa_JmhCdrTGACeBkE5lIK8VtTXUENFpzI1XYoYfBF52wrD4twzSfFH824vUGSC5IqA:1ppC0s:0h3h7Qs396B9UJBVrHuuy9xAocygefUbZ6GpDWV9Cx8",
+    "expire_date": "2023-05-03T17:54:38.293Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zoz11qv2leboj4i1ze52b8zl79raaome",
+  "fields": {
+    "session_data": ".eJxVjssKwyAURP_FdRHFV9Jd_6F7ueptlNoImqxC_72mpJDuhjPMYTZiYV2iXRtWmwK5Ek4uZ-bAP3Hei1Z8gmx9qUgP2uiCGacKL3o_wq0v_w0RWuzzARnjRnOlJEpj9KgFSGZ2qljgKL3wKozaaRWUNBAGePQOhNHgnMcuPR581RnaYnOZ0ny6-HtD3h8cI0hn:1prBbA:21DxsRKx0Nc3ozHl1E5MbgWlo_oGqTWlA13-zzlfaM0",
+    "expire_date": "2023-05-09T05:52:20.506Z"
+  }
+},
+{
+  "model": "social_django.usersocialauth",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "setta1a"
+    ],
+    "provider": "telegram",
+    "uid": "933403584",
+    "extra_data": "{\"id\": [\"933403584\"], \"first_name\": [\"Andrey\"], \"last_name\": [\"Sitalo\"], \"username\": [\"setta1a\"], \"photo_url\": [\"https://t.me/i/userpic/320/Lp6c03i3aYHMrmcvMPuK14KXQsPs_8kk3X1qG7lgXMg.jpg\"], \"auth_date\": [\"1682401939\"], \"hash\": [\"051f65646f1aa0218932a5315dcf6a697f32e69df1045a7d1212c4e530646e6d\"]}",
+    "created": "2023-04-18T19:19:02.322Z",
+    "modified": "2023-04-25T05:52:20.481Z"
+  }
+},
+{
+  "model": "social_django.usersocialauth",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "simon_anikin"
+    ],
+    "provider": "telegram",
+    "uid": "1050682049",
+    "extra_data": "{\"id\": [\"1050682049\"], \"first_name\": [\"\\u0421\\u0435\\u043c\\u0435\\u043d\"], \"last_name\": [\"\\u0410\\u043d\\u0438\\u043a\\u0438\\u043d\"], \"username\": [\"simon_anikin\"], \"auth_date\": [\"1681933126\"], \"hash\": [\"e2d8afa26cb06f2d5f6867edecab1f1b2f46a8822daa497f1221dcc287fea89d\"]}",
+    "created": "2023-04-19T17:54:38.251Z",
+    "modified": "2023-04-19T19:38:46.954Z"
+  }
+}
+]
