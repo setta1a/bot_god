@@ -232,16 +232,36 @@ def tech_support(request):
 
             server = smtplib.SMTP("smtp.gmail.com", 587)
             server.starttls()
-            message += f"\n Почта пользователя: {user_email}"
+            result_message = f"Пользователь {user_email} отправил сообщение с текстом: {message} \n Ответьте ему как можно быстрее!"
             try:
                 print(1)
                 server.login(sender, password)
-                msg = MIMEText(message)
+                msg = MIMEText(result_message)
                 msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
                 server.sendmail(sender, "andreysitalo09@gmail.com", msg.as_string())
 
-                message = "Ваша жалоба отправлена и ожидает рассмотрения"
-                msg = MIMEText(message)
+                message = '''<!DOCTYPE html>
+                                <html lang="en" style="font-size: 18px; margin: 0; padding: 0;">
+                                <head>
+                                    <meta charset="UTF-8">
+                                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                    <title>Message</title>
+                                </head>
+                                <body style="margin: 0; padding: 0;">
+                                    <header style="padding: 1%; margin: 0; color: white; background-color: #023653; margin-bottom: 5%;">
+                                        <h1 style="margin: auto; text-align: center;">BOTGOD</h1>
+                                    </header>
+                                    <main style="width: 70%; margin: 0 auto; border: 2px solid #023653; border-radius: 30px; padding: 1%;">
+                                        <article>Ваше сообщение очень важно для нас. Оно будет рассмотрено в ближайшее время и на вашу почту будет направлен ответ. С уважением, команда BotGod.</article>
+                                    </main>
+                                    <footer>
+                                
+                                    </footer>
+                                </body>
+                                </html>
+'''
+                msg = MIMEText(message, 'html')
                 msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
                 server.sendmail(sender, user_email, msg.as_string())
 
