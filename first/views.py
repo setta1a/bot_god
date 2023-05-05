@@ -171,7 +171,17 @@ def tech_support(request):
                 msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
                 server.sendmail(sender, "andreysitalo09@gmail.com", msg.as_string())
 
-                message = "Ваша жалоба отправлена и ожидает рассмотрения"
+                message = '''<body style="margin: 0; padding: 0;">
+                                <header style="padding: 1%; margin: 0; color: white; background-color: #023653; margin-bottom: 5%;">
+                                    <h1 style="margin: auto; text-align: center;">BOTGOD</h1>
+                                </header>
+                                <main style="width: 70%; margin: 0 auto; border: 2px solid #023653; border-radius: 30px; padding: 1%;">
+                                    <p>Ваше сообщение очень важно для нас. Оно будет рассмотрено в ближайшее время и на вашу почту будет направлен ответ. С уважением, команда BotGod.</p>
+                                </main>
+                                <footer>
+                            
+                                </footer>
+                            </body>'''
                 msg = MIMEText(message)
                 msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
                 server.sendmail(sender, user_email, msg.as_string())
