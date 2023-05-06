@@ -92,6 +92,7 @@
   console.log(tg_data.length)
 
   for(let i = 0; i < tg_data.length - 9; ++i) {
+    console.log(tg_data.slice(i, i + 10))
     if (tg_data.slice(i, i + 10)  == "photo_url") {
       index = i + 15
       console.log(index)
