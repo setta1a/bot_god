@@ -9,11 +9,8 @@
           <div class="card-body text-center">
             <img src="{{ user.photo_url }}" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
-              <h5>{{user.photo_url}}</h5>
+              <h5>{{user}}</h5>
             <h5 class="my-3">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
-            <div class="d-flex justify-content-center mb-2 mt-4">
-                <a style="display: block;" href=""><input class="btn btn-primary" type="button" value="Пополнить"></a>
-            </div>
           </div>
         </div>
       </div>
@@ -62,7 +59,7 @@
                             <p class="text-muted mb-0">{{ bot.created_at }}</p>
                         </div>
                         <div class="col-sm-3">
-                            <a class="btn btn-primary" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
+                            <a class="btn btn-primary offset-2" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
                                 Скачать бота
                             </a>
                         </div>
