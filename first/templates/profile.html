@@ -10,7 +10,7 @@
             <img src="{{ user.photo_url }}" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
               {% for associated in backends.associated %}
-                  <li>{{ associated.extra_data}}</li>
+                  <li id="tg_data" style="display: none;">{{ associated.extra_data}}</li>
               {% endfor %}
             <h5 class="my-3">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
           </div>
@@ -60,8 +60,8 @@
                         <div class="col-sm-3">
                             <p class="text-muted mb-0">{{ bot.created_at }}</p>
                         </div>
-                        <div class="col-sm-6 offset-3">
-                            <a class="btn btn-primary col-3" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
+                        <div class="col-sm-3">
+                            <a class="btn btn-primary" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
                                 Скачать бота
                             </a>
                         </div>
@@ -76,4 +76,27 @@
     </div>
   </div>
 </section>
+<script>
+  //{'id': ['933403584'], 
+  //'first_name': ['Andrey'], 
+  //'last_name': ['Sitalo'],
+  // 'username': ['setta1a'],
+  // 'photo_url': ['https://t.me/i/userpic/320/Lp6c03i3aYHMrmcvMPuK14KXQsPs_8kk3X1qG7lgXMg.jpg'], 
+  //'auth_date': ['1682535097'], 
+  //'hash': ['e258c0fcd556be776d66e58c6cc1664b3619e89f65c783fe7d18e4589250a343']}
+  let tg_data = tg_data.innerHTML
+  parsed_data = json.loads(tg_data.replace("'",'"'))
+  console.log(parsed_data)
+  let index = 0
+  let rindex = 0
+
+  for(let i = 0; i < tg_data.lenght - 9; ++i) {
+    if (tg_data.slice(i, i + 10)  == "photo_url") {
+      index = i + 15
+      rindex = tg_data
+    }
+  }
+
+  let photo_path = ""
+</script>
 {% endblock %}
