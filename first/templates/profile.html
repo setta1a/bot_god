@@ -53,6 +53,7 @@
               <div class="card-body">
                 <p class="mb-4">Ваши боты</p>
                 {% for bot in bots %}
+                  <hr>
                     <div class="row">
                         <div class="col-sm-3">
                             <p class="mb-0">{{ bot.bot_name }}</p>
@@ -66,7 +67,6 @@
                             </a>
                         </div>
                     </div>
-                    <hr>
                 {% endfor %}
               </div>
             </div>
@@ -85,24 +85,18 @@
   //'auth_date': ['1682535097'], 
   //'hash': ['e258c0fcd556be776d66e58c6cc1664b3619e89f65c783fe7d18e4589250a343']}
   let tg_data = tg_response.innerHTML
-  console.log(tg_data)
   let index = 0
   let rindex = 0
-
-  console.log(tg_data.length)
 
   for(let i = 0; i < tg_data.length - 9; ++i) {
     console.log(tg_data.slice(i, i + 9))
     if (tg_data.slice(i, i + 9)  == "photo_url") {
       index = i + 15
-      console.log(index)
       rindex = tg_data.indexOf("'", index)
-      console.log(rindex)
     }
   }
 
   let photo_path = tg_data.slice(index - 1, rindex)
   photo.src = photo_path
-  console.log(photo_path)
 </script>
 {% endblock %}
