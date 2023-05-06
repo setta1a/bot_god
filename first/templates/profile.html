@@ -10,9 +10,7 @@
             <img src="{{ user.photo_url }}" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
               {% for associated in backends.associated %}
-                  <li>ID: {{ associated.uid }}</li>
-                  <li>Provider: {{ associated.provider }}</li>
-                  <li>Extra: {{ associated.extra_data }}</li>
+                  <li>Extra: {{ associated.extra_data[photo_url] }}</li>
               {% endfor %}
             <h5 class="my-3">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
           </div>
