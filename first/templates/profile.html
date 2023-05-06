@@ -85,7 +85,7 @@
   //'auth_date': ['1682535097'], 
   //'hash': ['e258c0fcd556be776d66e58c6cc1664b3619e89f65c783fe7d18e4589250a343']}
   let tg_data = tg_response.innerHTML
-  parsed_data = json.loads(tg_data.replace("'",'"'))
+  parsed_data = JSON.parse(tg_data)
   console.log(parsed_data)
   let index = 0
   let rindex = 0
