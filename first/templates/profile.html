@@ -8,7 +8,7 @@
         <div class="card mb-4">
           <div class="card-body text-center">
             <img src="{{ user.photo_url }}" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
+              class="rounded-circle img-fluid" style="width: 150px;" id="photo">
               {% for associate in  backends.associated%}
                 <li id="tg_response" style="display: none;">{{ associate.extra_data}}</li>
               {% endfor %}
@@ -101,7 +101,8 @@
     }
   }
 
-  let photo_path = tg_data.slice(index, rindex)
+  let photo_path = tg_data.slice(index - 1, rindex)
+  photo.src = photo_path
   console.log(photo_path)
 </script>
 {% endblock %}
