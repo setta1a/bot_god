@@ -96,7 +96,7 @@
     if (tg_data.slice(i, i + 9)  == "photo_url") {
       index = i + 15
       console.log(index)
-      rindex = tg_data.index("'", index)
+      rindex = tg_data.indexOf("'", index)
       console.log(rindex)
     }
   }
