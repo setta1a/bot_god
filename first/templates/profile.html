@@ -9,7 +9,11 @@
           <div class="card-body text-center">
             <img src="{{ user.photo_url }}" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
-              <h5>{{backends.associated}}</h5>
+              {% for associated in backends.associated %}
+                  <li>ID: {{ associated.uid }}</li>
+                  <li>Provider: {{ associated.provider }}</li>
+                  <li>Extra: {{ associated.extra_data }}</li>
+              {% endfor %}
             <h5 class="my-3">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
           </div>
         </div>
@@ -58,8 +62,8 @@
                         <div class="col-sm-3">
                             <p class="text-muted mb-0">{{ bot.created_at }}</p>
                         </div>
-                        <div class="col-sm-3">
-                            <a class="btn btn-primary col-3 offset-6" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
+                        <div class="col-sm-3 offset-3">
+                            <a class="btn btn-primary col-3" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
                                 Скачать бота
                             </a>
                         </div>
