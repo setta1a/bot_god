@@ -811,7 +811,7 @@
   "model": "first.funcforpresets",
   "pk": 1,
   "fields": {
-    "func": 1,
+    "func_name": 1,
     "bot": 1
   }
 },
@@ -819,7 +819,7 @@
   "model": "first.funcforpresets",
   "pk": 2,
   "fields": {
-    "func": 2,
+    "func_name": 2,
     "bot": 1
   }
 },
@@ -827,7 +827,7 @@
   "model": "first.funcforpresets",
   "pk": 3,
   "fields": {
-    "func": 3,
+    "func_name": 3,
     "bot": 1
   }
 },
@@ -835,7 +835,7 @@
   "model": "first.funcforpresets",
   "pk": 4,
   "fields": {
-    "func": 1,
+    "func_name": 1,
     "bot": 2
   }
 },
@@ -843,7 +843,7 @@
   "model": "first.funcforpresets",
   "pk": 5,
   "fields": {
-    "func": 2,
+    "func_name": 2,
     "bot": 2
   }
 },
@@ -851,7 +851,7 @@
   "model": "first.funcforpresets",
   "pk": 6,
   "fields": {
-    "func": 4,
+    "func_name": 4,
     "bot": 2
   }
 }

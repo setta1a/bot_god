@@ -13,6 +13,6 @@ class BotPreSets(models.Model):
     os = models.CharField(max_length=4)
 
 class FuncForPresets(models.Model):
-    func = models.ForeignKey(to=BotFunctions, on_delete=models.CASCADE)
+    func_name = models.ForeignKey(to=BotFunctions, on_delete=models.CASCADE)
     bot = models.ForeignKey(to=BotPreSets, on_delete=models.CASCADE)
 
