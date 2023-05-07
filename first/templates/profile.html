@@ -12,7 +12,7 @@
               {% for associate in  backends.associated%}
                 <li id="tg_response" style="display: none;">{{ associate.extra_data}}</li>
               {% endfor %}
-            <h5 class="my-3">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
+            <h5 class="my-3">{{ request.user.username }}</h5>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
                 <p class="mb-0">Имя</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ request.user.username }}</p>
+                <p class="text-muted mb-0">{{ request.user.first_name }} {{ request.user.last_name }}</p>
               </div>
             </div>
             <hr>
@@ -66,6 +66,13 @@
                                 Скачать бота
                             </a>
                         </div>
+                        <form action="" method="post">
+                        <div class="col-sm-3">
+                          <input type="submit" name="delete_bot" class="btn btn-danger">
+                              Удалить бота
+                        </input>
+                      </div>
+                    </form>
                     </div>
                 {% endfor %}
               </div>
