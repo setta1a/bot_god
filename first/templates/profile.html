@@ -39,19 +39,19 @@
                   {% for bot in bots %}
                     <hr>
                       <div class="row">
-                          <div class="col-3">
+                          <div class="col-2">
                               <p class="mb-0">@{{ bot.bot_name }}</p>
                           </div>
-                          <div class="col-3">
+                          <div class="col-2">
                               <p class="text-muted mb-0">{{ bot.created_at }}</p>
                           </div>
-                          <div class="col-2">
+                          <div class="col-3">
                               <a class="btn btn-primary" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
                                   Скачать бота
                               </a>
                           </div>
                           <form action="" method="post">
-                          <div class="col-2">
+                          <div class="col-3">
                             <input type="submit" name="delete_bot" class="btn btn-danger" value="Удалить бота">
                         </div>
                       </form>
