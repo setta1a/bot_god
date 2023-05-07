@@ -28,23 +28,6 @@
               </div>
             </div>
             <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Email</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">example@example.com</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Телефон</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">(097) 234-5678</p>
-              </div>
-            </div>
           </div>
         </div>
         <div class="row">
@@ -52,27 +35,38 @@
             <div class="card mb-4 mb-md-0">
               <div class="card-body">
                 <p class="mb-4">Ваши боты</p>
-                {% for bot in bots %}
-                  <hr>
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="mb-0">{{ bot.bot_name }}</p>
+                {% if bots %}
+                  {% for bot in bots %}
+                    <hr>
+                      <div class="row">
+                          <div class="col-3">
+                              <p class="mb-0">@{{ bot.bot_name }}</p>
+                          </div>
+                          <div class="col-3">
+                              <p class="text-muted mb-0">{{ bot.created_at }}</p>
+                          </div>
+                          <div class="col-2">
+                              <a class="btn btn-primary" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
+                                  Скачать бота
+                              </a>
+                          </div>
+                          <form action="" method="post">
+                          <div class="col-2">
+                            <input type="submit" name="delete_bot" class="btn btn-danger" value="Удалить бота">
                         </div>
-                        <div class="col-3">
-                            <p class="text-muted mb-0">{{ bot.created_at }}</p>
-                        </div>
-                        <div class="col-2">
-                            <a class="btn btn-primary" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
-                                Скачать бота
-                            </a>
-                        </div>
-                        <form action="" method="post">
-                        <div class="col-2">
-                          <input type="submit" name="delete_bot" class="btn btn-danger" value="Удалить бота">
+                      </form>
                       </div>
-                    </form>
-                    </div>
-                {% endfor %}
+                  {% endfor %}
+                {% else %}
+                      <hr>
+                      <div class="row">
+                        <div class="col-8 offset-2">
+                          <h2>Вы пока не создали ни одного бота. <a href="../create_bot/">Сделайте это прямо сейчас!</a></h2>
+                        </div>
+                      </div>
+                      <hr>
+                {% endif %}
+                
               </div>
             </div>
           </div>

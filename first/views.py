@@ -30,7 +30,7 @@ def create_bot(request):
     context = {}
     print(f"{os.getcwd()}/static_root/bot_exe:bot_exe")
     if request.method == "POST":
-        if 'functions' in request.POST and 'os' in request.POST and 'short_name' in request.POST:
+        if 'functions' in request.POST and 'os' in request.POST and 'short_name' in request.POST and 'token' in request.POST and 'name' in request.POST:
             function_names = request.POST.getlist('functions')
             short_name = request.POST['short_name']
             file_dir = os.getcwd() + "/staticroot/BOT"
