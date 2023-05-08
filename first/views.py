@@ -79,7 +79,6 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
         cmd = "sudo " + cmd
     os.system(cmd)
 
-
 def index(request):
     context = {}
     if request.method == "GET":
@@ -157,6 +156,12 @@ def profile(request):
         :return: Объект с деталями HTTP-ответа
     """
     context = {}
+    if request.method == "POST":
+        if "delete_bot" in request.POST:
+            bot_id = int(request.POST['delete_bot'].split()[2])
+            bot_delete = BotPreSets.objects.get(id=bot_id)
+            bot_delete.delete()
+
     context['bots'] = BotPreSets.objects.filter(user=request.user)
     return render(request, "profile.html", context)
 
