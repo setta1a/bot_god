@@ -100,9 +100,13 @@ WSGI_APPLICATION = 'dj_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+     'ENGINE': 'django.db.backends.mysql',
+     'NAME': 'bot_god_db',
+     'USER': 'vasya',
+     'PASSWORD': 'promprog',
+     'HOST': 'localhost',
+     'PORT': '3306',
+     }
 }
 
 
