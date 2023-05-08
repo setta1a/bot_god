@@ -157,10 +157,12 @@ def profile(request):
     """
     context = {}
     if request.method == "POST":
-        if "delete_bot" in request.POST:
-            bot_id = int(request.POST['delete_bot'].split()[2])
-            bot_delete = BotPreSets.objects.get(id=bot_id)
-            bot_delete.delete()
+        for name in request.POST:
+            res = name.split()
+            if res[0] == "delete_bot":
+                bot_id = int(res[1])
+                bot_delete = BotPreSets.objects.get(id=bot_id)
+                bot_delete.delete()
 
     context['bots'] = BotPreSets.objects.filter(user=request.user)
     return render(request, "profile.html", context)
