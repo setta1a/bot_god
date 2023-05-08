@@ -36,7 +36,20 @@
               <div class="card-body">
                 <p class="mb-4">Ваши боты</p>
                 {% if bots %}
-                  {% for bot in bots %}
+                {% for bot in bots %}
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">{{ bot.bot_name }}</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="text-muted mb-0">{{ bot.created_at }}</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <a class="btn btn-primary" href="/download_bot/?preset={{bot.bot_name}}">
+                                Скачать бота
+                            </a>
+                        </div>
+                    </div>
                     <hr>
                       <div class="row">
                           <div class="">
