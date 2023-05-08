@@ -49,6 +49,7 @@
                               </a>
                           </div>
                           <form action="" method="post">
+                              {% csrf_token %}
                             <div class="offset-1">
                               <input type="submit" name="delete_bot" class="btn btn-danger" value="Удалить бота {{ bot.id }}">
                             </div>
