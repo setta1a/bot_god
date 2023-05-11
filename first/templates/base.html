@@ -15,9 +15,10 @@
 <header>
     {% include 'menu.html' %}
 </header>
-<h1 class="title">{{ pageheader }}</h1>
+<main>
 {% block content %}
 {% endblock %}
+</main>
 
 {% include 'footer.html' %}
 <script src="{% static 'bootstrap.bundle.min.js' %}"

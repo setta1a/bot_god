@@ -14,9 +14,13 @@ a, p, span{
 }
 
 body{
-  min-height: 80vh;
+  
   display: grid;
   grid-template-rows: auto 1fr auto;
+  
+}
+main{
+  min-height: 80vh;
   background-color: #eee;
 }
 
