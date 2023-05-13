@@ -33,7 +33,7 @@
                             <div id="syntax_text" class="col-6 offset-6 mt-5">
                                 <p>Синтаксис команды</p>
                                 <div class="form-floating">
-                                  <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                                  <textarea type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
                                   <label for="floatingInputDisabled"><span id="modal_syntaxis" style="color: rgb(0, 119, 255)"></span> <i id="modal_graytext"></i></label>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
     //создание объектов карточек
 
     let cards = [new Card("Вики", "Данная функция обеспечивает возможность получения статьи с веб-ресурса 'Википедия' на основе заданного ключевого запроса прямо в мессенджере", "wiki.svg", [1,1,1], "wiki.gif", "wiki", "слово_для_поиска"),
-    new Card("Анекдот", "Данная функция отправляет вам случайный анекдот", "smile.png", [1,1,1], "anekdot.gif", "anekdot", "Высылает анекдот"),
+    new Card("Анекдот", "Данная функция отправляет вам случайный анекдот", "smile.png", [1,1,1], "anekdot.gif", "anekdot", ""),
      new Card("Панда", "Данная функция предоставляет вам возможность получить изображение обожаемого всеми медведя-панды. Существует ли кто-то, кто не испытывает любви к этим милым созданиям?", "panda.jpg",  [1,1,1], "panda.gif", "panda", ""),
 
     new Card("Получить изображение с веб-камеры ПК", "Данная функция позволяет дистанционно получить изображение с веб-камеры компьютера", "webcam.png", [1,1,1], "webcam.gif", "webcam", ""),
@@ -95,7 +95,7 @@
     new Card("Скачивание файла с ПК", "Данная функция позволяет загрузить файл на компьютер с телеграмма", "download.png", [1, 0, 0], "upload.gif", "upload", "\n-Путь_до_файла"),
     
     new Card("Pdf ==> Docx", "Данная функция конвертирует файлы формата PDF в файлы формата DOCX", "pdf_to_docx.png", [1,1,1], "wiki.gif", "pdf2docx", "\n-pdf_файл"),
-    new Card("Pdf ==> Jpg", "Данная функция конвертирует файлы формата PDF в файлы формата jpg", "pdf_to_jpg.svg", [1,1,1], "wiki.gif", "pdf2озп", "\n-pdf_файл"),
+    new Card("Pdf ==> Jpg", "Данная функция конвертирует файлы формата PDF в файлы формата jpg", "pdf_to_jpg.svg", [1,1,1], "wiki.gif", "pdf2jpg", "\n-pdf_файл"),
     new Card("MP4 ==> MP3", "Данная функция конвертирует файлы формата MP4 в файлы формата MP3", "mp4_to_mp3.jpg", [1, 0, 0], "wiki.gif", "mp42mp3", "\n-mp4_файл"),
 
     new Card("API", "Данная функция добавляет 4 различных команд связанных с API", "api.png", [1,1,1], "wiki.gif", "add_api\n/run_api\n/list_api\n/delete_api", "\n-pdf_файл\n-pdf_файл\n-pdf_файл\n-pdf_файл"),
@@ -138,6 +138,7 @@
             modal_content_text.innerHTML = card_values.descriprion
             syntax_text.classList.remove("d-none")
             modal_syntaxis.innerHTML = "/" + card_values.syntaxis
+            console.log(card_values.syntaxis)
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
             modal_graytext.innerHTML = card_values.graytext
         })
