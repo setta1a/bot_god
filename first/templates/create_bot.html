@@ -139,14 +139,17 @@
             modal_content_text.innerHTML = card_values.descriprion
             syntax_text.classList.remove("d-none")
             modal_syntaxis.innerHTML = "/" + card_values.syntaxis
-            if (modal_syntaxis.innerHTML.split("/").length - 1 >= 2) {
-                floatingTextarea2Disabled.style.height = "14vh"
-                floatingTextarea2Disabled.style.maxheight = "14vh"
+            if (modal_syntaxis.innerHTML.split("<br>").length - 1 >= 2) {
+                floatingTextarea2Disabled.style.height = "9vh"
+                floatingTextarea2Disabled.style.maxheight = "9vh"
+            } else if (modal_syntaxis.innerHTML.split("<br>").length - 1 >= 3) {
+                floatingTextarea2Disabled.style.height = "6vh"
+                floatingTextarea2Disabled.style.maxheight = "6vh"
             } else {
                 floatingTextarea2Disabled.style.height = "6vh"
                 floatingTextarea2Disabled.style.maxheight = "6vh"
             }
-            console.log(card_values.syntaxis)
+            console.log(modal_syntaxis.innerHTML.split("<br>").length - 1, modal_syntaxis.innerHTML)
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
             modal_graytext.innerHTML = card_values.graytext
         })
