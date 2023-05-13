@@ -140,12 +140,12 @@
             syntax_text.classList.remove("d-none")
             modal_syntaxis.innerHTML = "/" + card_values.syntaxis
             let len = modal_graytext.innerHTML.split("<br>").length + modal_syntaxis.innerHTML.split("<br>").length - 2
-            if (len >= 2) {
+            if (len == 2 || len == 1) {
                 floatingTextarea2Disabled.style.height = "9vh"
                 floatingTextarea2Disabled.style.maxHeight = "9vh"
             } else if (len >= 3) {
-                floatingTextarea2Disabled.style.height = "6vh"
-                floatingTextarea2Disabled.style.maxHeight = "6vh"
+                floatingTextarea2Disabled.style.height = "14vh"
+                floatingTextarea2Disabled.style.maxHeight = "14vh"
             } else {
                 floatingTextarea2Disabled.style.height = "6vh"
                 floatingTextarea2Disabled.style.maxHeight = "6vh"
