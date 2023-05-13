@@ -34,7 +34,7 @@
                             <div id="syntax_text" class="col-6 offset-6 mt-5">
                                 <p>Синтаксис команды</p>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2Disabled" style="height: 7vh; max-height: 14vh;" disabled></textarea>
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2Disabled" style="height: 6vh; max-height: 6vh;" disabled></textarea>
                                     <label for="floatingTextarea2Disabled"><span id="modal_syntaxis" style="color: rgb(0, 119, 255)"></span> <i id="modal_graytext"></i></label>
                                 </div>
                             </div>
@@ -139,10 +139,12 @@
             modal_content_text.innerHTML = card_values.descriprion
             syntax_text.classList.remove("d-none")
             modal_syntaxis.innerHTML = "/" + card_values.syntaxis
-            if (modal_syntaxis.split("/").length - 1 >= 2) {
+            if (modal_syntaxis.innerHTML.split("/").length - 1 >= 2) {
                 floatingTextarea2Disabled.style.height = "14vh"
+                floatingTextarea2Disabled.style.maxheight = "14vh"
             } else {
-                floatingTextarea2Disabled.style.height = "7vh"
+                floatingTextarea2Disabled.style.height = "6vh"
+                floatingTextarea2Disabled.style.maxheight = "6vh"
             }
             console.log(card_values.syntaxis)
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
