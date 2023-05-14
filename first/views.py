@@ -79,7 +79,11 @@ def download_bot(request):
 
             context['file'] = bot_name
             context['os'] = bot_preset.os
-            _ = generate_bot.delay(bot_name, function_names, file_names, bot_preset.token, bot_preset.os)
+            context['bot_status'] = ""
+            result = generate_bot.delay(bot_name, function_names, file_names, bot_preset.token, bot_preset.os)
+            while (result.state != "SUCCESS"):
+                return render(request, "download_bot.html", context)
+            context['bot_status'] = "SUCCESS"
 
     return render(request, "download_bot.html", context)
 
