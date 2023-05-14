@@ -82,7 +82,7 @@ def download_bot(request):
             context['bot_status'] = ""
             result = generate_bot.delay(bot_name, function_names, file_names, bot_preset.token, bot_preset.os)
             context['bot_status'] = str(result.state)
-            while (str(result.state) != "SUCCESS"):
+            if (str(result.state) != "SUCCESS"):
                 context['bot_status'] = ""
             else:
                 context['bot_status'] = "SUCCESS"
