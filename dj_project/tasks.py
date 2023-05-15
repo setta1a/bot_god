@@ -1,6 +1,9 @@
+import json
 import os
 import shutil
+import smtplib
 from distutils.dir_util import copy_tree
+from email.mime.text import MIMEText
 
 from .celerys import app
 
@@ -69,3 +72,50 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
     if bot_os != 'win':
         cmd = "sudo " + cmd
     os.system(cmd)
+
+@app.task
+def send_email(message, user_email):
+    sender = "botgod.sp@gmail.com"
+    try:
+        with open('first/email_password.json') as file:
+            password = json.load(file)["email_password"]
+    except:
+        password = "lmmbglxjbfvmzkzg"
+
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    result_message = f"Пользователь {user_email} отправил сообщение с текстом: {message} \n Ответьте ему как можно быстрее!"
+    try:
+        print(1)
+        server.login(sender, password)
+        msg = MIMEText(result_message)
+        msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
+        server.sendmail(sender, "andreysitalo09@gmail.com", msg.as_string())
+
+        message = '''<!DOCTYPE html>
+                                    <html lang="en" style="font-size: 18px; margin: 0; padding: 0;">
+                                    <head>
+                                        <meta charset="UTF-8">
+                                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                        <title>Message</title>
+                                    </head>
+                                    <body style="margin: 0; padding: 0;">
+                                        <header style="padding: 1%; margin: 0; color: white; background-color: #023653; margin-bottom: 5%;">
+                                            <h1 style="margin: auto; text-align: center;">BOTGOD</h1>
+                                        </header>
+                                        <main style="width: 70%; margin: 0 auto; border: 2px solid #023653; border-radius: 30px; padding: 1%;">
+                                            <article>Ваше сообщение очень важно для нас. Оно будет рассмотрено в ближайшее время и на вашу почту будет направлен ответ. С уважением, команда BotGod.</article>
+                                        </main>
+                                        <footer>
+
+                                        </footer>
+                                    </body>
+                                    </html>
+    '''
+        msg = MIMEText(message, 'html')
+        msg["Subject"] = "ЖАЛОБА ОТ ПОЛЬЗОВАТЕЛЯ"
+        server.sendmail(sender, user_email, msg.as_string())
+
+    except Exception as _ex:
+        print(f"{_ex}\nCheck your login or password please!")
