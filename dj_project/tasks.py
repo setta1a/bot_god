@@ -80,7 +80,7 @@ def send_email(message, user_email):
         with open('first/email_password.json') as file:
             password = json.load(file)["email_password"]
     except:
-        password = "lmmbglxjbfvmzkzg"
+        return
 
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
