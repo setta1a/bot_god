@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-7un*8t0g_h@fh!vznc=2fy0(a(k9$7@4t#y90ss_##%#m5q#*+
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['127.0.0.1', "62.84.98.50", "0.0.0.0"]
+ALLOWED_HOSTS = ['127.0.0.1', "62.84.98.50", "0.0.0.0", "botgod.site"]
 
 # Основной url для управления медиафайлами
 MEDIA_URL = '/media/'
