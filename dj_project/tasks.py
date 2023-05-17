@@ -77,7 +77,7 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
 def send_email(message, user_email):
     sender = "botgod.sp@gmail.com"
     try:
-        with open('first/email_password.json') as file:
+        with open('../first/email_password.json') as file:
             password = json.load(file)["email_password"]
     except:
         return
