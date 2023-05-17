@@ -37,20 +37,20 @@
                 {% if bots %}
                   {% for bot in bots %}
                       <div class="row">
-                          <div class="">
+                          <div class="" style="display: inline-block;">
                               <p class="mb-0">@{{ bot.bot_name }}</p>
                           </div>
-                          <div class="">
+                          <div class="" style="display: inline-block;">
                               <p class="text-muted mb-0">{{ bot.created_at }}</p>
                           </div>
-                          <div class="">
+                          <div class="" style="display: inline-block;">
                               <a class="btn btn-primary" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
                                   Скачать бота
                               </a>
                           </div>
                           <form action="" method="post">
                               {% csrf_token %}
-                            <div class="">
+                            <div class="" style="display: inline-block;">
                               <input type="submit" name="delete_bot {{ bot.id }}" class="btn btn-danger" value="Удалить бота">
                             </div>
                           </form>
