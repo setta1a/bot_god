@@ -69,8 +69,8 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
             bot.write(end_file.read())
 
     cmd = f"pyinstaller --noconfirm --onefile --console --distpath '{os.getcwd()}/staticroot/BOT' '{os.getcwd()}/staticroot/BOT/{short_name}.py'"
-    if bot_os != 'win':
-        cmd = "sudo " + cmd
+    if bot_os == 'win':
+        cmd = cmd.replace("--console", "")
     os.system(cmd)
 
 @app.task
