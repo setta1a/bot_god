@@ -40,7 +40,7 @@
                               <p class="mb-0 col-3">
                                 @{{ bot.bot_name }}
                               </p>
-                              <p class="text-muted mb-0 col-3">
+                              <p class="text-muted mb-0 col-2">
                                 {{ bot.created_at }}
                               </p>
                               <a class="btn btn-primary col-2" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
@@ -48,7 +48,7 @@
                               </a>
                           <form action="" method="post">
                               {% csrf_token %}
-                              <input type="submit" name="delete_bot {{ bot.id }}" class="btn btn-danger col-3" value="Удалить бота">
+                              <input type="submit" name="delete_bot {{ bot.id }}" class="btn btn-danger col-2" value="Удалить бота">
                           </form>
                       </div>
                   {% endfor %}
