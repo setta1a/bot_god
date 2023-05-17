@@ -37,22 +37,18 @@
                 {% if bots %}
                   {% for bot in bots %}
                       <div class="row">
-                          <div class="" style="display: inline-block;">
-                              <p class="mb-0">@{{ bot.bot_name }}</p>
-                          </div>
-                          <div class="" style="display: inline-block;">
-                              <p class="text-muted mb-0">{{ bot.created_at }}</p>
-                          </div>
-                          <div class="" style="display: inline-block;">
+                              <p class="mb-0">
+                                @{{ bot.bot_name }}
+                              </p>
+                              <p class="text-muted mb-0">
+                                {{ bot.created_at }}
+                              </p>
                               <a class="btn btn-primary" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
                                   Скачать бота
                               </a>
-                          </div>
                           <form action="" method="post">
                               {% csrf_token %}
-                            <div class="" style="display: inline-block;">
                               <input type="submit" name="delete_bot {{ bot.id }}" class="btn btn-danger" value="Удалить бота">
-                            </div>
                           </form>
                       </div>
                   {% endfor %}
@@ -75,13 +71,6 @@
   </div>
 </section>
 <script>
-  //{'id': ['933403584'], 
-  //'first_name': ['Andrey'], 
-  //'last_name': ['Sitalo'],
-  // 'username': ['setta1a'],
-  // 'photo_url': ['https://t.me/i/userpic/320/Lp6c03i3aYHMrmcvMPuK14KXQsPs_8kk3X1qG7lgXMg.jpg'], 
-  //'auth_date': ['1682535097'], 
-  //'hash': ['e258c0fcd556be776d66e58c6cc1664b3619e89f65c783fe7d18e4589250a343']}
   let tg_data = tg_response.innerHTML
   let index = 0
   let rindex = 0
