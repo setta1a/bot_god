@@ -46,7 +46,7 @@
                               <a class="btn btn-primary col-2" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
                                   Скачать бота
                               </a>
-                          <form action="" method="post">
+                          <form action="" method="post" style="display: inline-block;">
                               {% csrf_token %}
                               <input type="submit" name="delete_bot {{ bot.id }}" class="btn btn-danger col-2" value="Удалить бота">
                           </form>
