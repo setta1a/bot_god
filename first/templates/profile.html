@@ -37,10 +37,10 @@
                 {% if bots %}
                   {% for bot in bots %}
                       <div class="row">
-                              <p class="mb-0 col-3">
+                              <p class="mb-0 col-3" style="margin: auto;">
                                 @{{ bot.bot_name }}
                               </p>
-                              <p class="text-muted mb-0 col-3">
+                              <p class="text-muted mb-0 col-3" style="margin: auto;">
                                 {{ bot.created_at }}
                               </p>
                               <a class="btn btn-primary fs-3 p-0 col-1 offset-1" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
