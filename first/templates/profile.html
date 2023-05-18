@@ -46,9 +46,9 @@
                               <a class="btn btn-primary fs-2 p-0 col-1 offset-1" href="/download_bot/?preset={{bot.bot_name}}&os={{ bot.os }}">
                                 &#8595;
                               </a>
-                          <form action="" method="post" style="display: inline;" class="col-1">
+                          <form action="" method="post" style="display: inline;" class="col-1 offset-1">
                               {% csrf_token %}
-                              <input type="submit" name="delete_bot {{ bot.id }}" class="btn btn-danger fs-2 offset-1" value="&#10060;">
+                              <input type="submit" name="delete_bot {{ bot.id }}" class="btn btn-danger" value="&#10060;">
                           </form>
                       </div>
                   {% endfor %}
