@@ -28,7 +28,6 @@ dj_project/settings.py
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
