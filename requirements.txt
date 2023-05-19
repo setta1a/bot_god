@@ -7,11 +7,6 @@ oauthlib==3.2.2
 pdf2docx==0.5.6
 pdf2image==1.16.3
 Pillow==9.2.0
-<<<<<<< HEAD
-=======
-pyinstaller==5.10.1
-pyinstaller-hooks-contrib==2023.2
->>>>>>> f1e3d173f8fd8d0c2f8a4f5435aec553f2457bfe
 pyTelegramBotAPI==4.11.0
 python-docx==0.8.11
 pytube==12.1.3
