@@ -13,11 +13,15 @@ def reloader(message):
 
 @bot.message_handler(commands=["конечно"])
 def f(message):
-    bot.send_message(message.chat.id, "Перезагрузка компьютера...")
-    if platform.system() == "Windows":
-        os.system('reboot')
-    elif platform.system() == "Linux":
-        subprocess.check_call(['systemctl', 'reboot', '-i'])
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        bot.send_message(message.chat.id, "Перезагрузка компьютера...")
+        if platform.system() == "Windows":
+            os.system('reboot')
+        elif platform.system() == "Linux":
+            subprocess.check_call(['systemctl', 'reboot', '-i'])
+    else:
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
 
 
 menu.append(telebot.types.BotCommand("/reload", "Перезгрузка компьютера"))
