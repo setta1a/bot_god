@@ -14,11 +14,15 @@ def offer(message):
 
 @bot.message_handler(commands=["да"])
 def off(message):
-    a = telebot.types.ReplyKeyboardRemove()
-    bot.send_message(message.chat.id, "Выключение...",reply_markup=a)
-    if platform.system()=="Windows":
-        os.system('shutdown -p')
-    elif platform.system()=="Linux":
-        subprocess.Popen(['shutdown', '-h', 'now'])
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        a = telebot.types.ReplyKeyboardRemove()
+        bot.send_message(message.chat.id, "Выключение...",reply_markup=a)
+        if platform.system()=="Windows":
+            os.system('shutdown -p')
+        elif platform.system()=="Linux":
+            subprocess.Popen(['shutdown', '-h', 'now'])
+    else:
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
 menu.append(telebot.types.BotCommand("/off", "Выключает компьютер"))
 

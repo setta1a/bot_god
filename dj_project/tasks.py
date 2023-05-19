@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 from .celerys import app
 
 @app.task
-def generate_bot(short_name: str, function_names: list, file_names: list, token: str, bot_os):
+def generate_bot(short_name: str, function_names: list, file_names: list, token: str, bot_os : str, user_name: str):
     file_dir = os.getcwd() + "/staticroot/BOT"
     if os.path.exists(file_dir):
         shutil.rmtree(file_dir)
@@ -17,6 +17,7 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
     with open(f"staticroot/BOT/{short_name}.py", "w") as bot:
         with open("first/botTelegram/start_template.py", 'r') as start_file:
             bot.write(start_file.read())
+            bot.write(f"USER_DEFAULT = {user_name}")
             bot.write("bot = TeleBot('" + token + "')")
 
         if "Pdf ==> Docx" in function_names or "Pdf ==> Jpg" in function_names or "MP4 ==> MP3" in function_names:
