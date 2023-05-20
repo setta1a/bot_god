@@ -22,7 +22,7 @@ def api_check_bot(request):
     if request.method == "GET" and request.GET.get("bot_name", "") != "":
         bot_name = request.GET['bot_name']
         cnt = BotPreSets.objects.filter(bot_name=bot_name).count()
-        res = (cnt == 0)
+        res = (cnt != 0)
         context['has_bot'] = res
     return JsonResponse(context)
 
