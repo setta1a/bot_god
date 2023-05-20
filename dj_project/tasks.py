@@ -72,7 +72,7 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
     cmd = f"pyinstaller --noconfirm --onefile --console --distpath '{os.getcwd()}/staticroot/BOT' '{os.getcwd()}/staticroot/BOT/{short_name}.py'"
     if bot_os == 'win':
         os.system(f"cd {os.getcwd()}/staticroot/BOT")
-        cmd = f"docker run -v '%cd%:/src/' batonogov/pyinstaller-windows 'pyinstaller --onefile {short_name}.py'"
+        cmd = f"docker run -v \"$(pwd):/src/\" batonogov/pyinstaller-windows 'pyinstaller --onefile {short_name}.py'"
     os.system(cmd)
 
 @app.task
