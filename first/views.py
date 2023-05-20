@@ -52,7 +52,7 @@ def create_bot(request):
                         function_preset = FuncForPresets(func_name=function, bot=bot_preset)
                         function_preset.save()
 
-                    result = generate_bot.delay(short_name, function_names, file_names, token, bot_os, request.user.name)
+                    result = generate_bot.delay(short_name, function_names, file_names, token, bot_os, request.user.username)
                     return redirect(f"../download_bot/?os={bot_os}&file={short_name}")
 
     return render(request, "create_bot.html", context)
@@ -77,7 +77,7 @@ def download_bot(request):
             context['file'] = bot_name
             context['os'] = bot_preset.os
             context['bot_status'] = ""
-            result = generate_bot.delay(bot_name, function_names, file_names, bot_preset.token, bot_preset.os, request.user.name)
+            result = generate_bot.delay(bot_name, function_names, file_names, bot_preset.token, bot_preset.os, request.user.username)
             context['bot_status'] = str(result.state)
             if (str(result.state) != "SUCCESS"):
                 context['bot_status'] = ""
