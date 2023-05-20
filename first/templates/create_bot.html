@@ -264,7 +264,7 @@
         function load_data_async() 
         {
             let r = new XMLHttpRequest()
-            r.open(method="GET", url=`api/bot_check/?bot_name=${shortname.value}`, async=true)
+            r.open(method="GET", url=`/api/bot_check/?bot_name=${shortname.value}`, async=true)
             r.onload = function () {
                 data = JSON.parse(r.response)
                 ajax_status.innerHTML = data.status
