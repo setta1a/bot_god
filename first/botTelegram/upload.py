@@ -2,8 +2,12 @@
 
 @bot.message_handler(commands=["upload"])
 def messc(message):
-    bot.send_message(message.from_user.id, "Укажите путь до файла: ")
-    bot.register_next_step_handler(message, downfile_process)
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        bot.send_message(message.from_user.id, "Укажите путь до файла: ")
+        bot.register_next_step_handler(message, downfile_process)
+    else:
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
 
 
 def downfile_process(message):

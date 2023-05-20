@@ -5,8 +5,12 @@ import ctypes
 
 @bot.message_handler(commands=["wallpaper"])
 def wallpaper(message):
-    msg = bot.send_message(message.chat.id, "Отправьте картинку:")
-    bot.register_next_step_handler(msg, set_wallpaper)
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        msg = bot.send_message(message.chat.id, "Отправьте картинку:")
+        bot.register_next_step_handler(msg, set_wallpaper)
+    else:
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
 
 
 @bot.message_handler(content_types=["photo"])
