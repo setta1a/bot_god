@@ -67,17 +67,6 @@
     'use strict';
 
 
-    const mysql = require('mysql2');
- 
-    // create the connection to database
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'vasya',
-        pass: "promprog",
-        database: 'bot_god_db'
-    });
-
-
     //создание класса карточки
 
     class Card{
@@ -200,13 +189,6 @@
 
         //модалка при создании бота
         create.addEventListener("click", () => {
-            if (connection.query(`SELECT * FROM first_botpresets WHERE bot_name="${shortname.value}"`).length != 0) {
-                modal_header.innerHTML = "Ошибка"
-                modal_content_text.innerHTML = "Вы уже создавали бота с такими данными. Чтобы создать его заново, удалите существующего бота на странице вашего профиля."
-                syntax_text.classList.add("d-none")
-                modal_gif.src = '../../staticroot/gifs/error.gif'
-            }
-            
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
             modal_graytext.innerHTML = card_values.graytext
             modal_header.innerHTML = "Ваш бот создается..."
