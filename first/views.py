@@ -42,7 +42,6 @@ def create_bot(request):
 
             if request.user.is_authenticated:
                 filterargs = {'bot_name': request.POST['short_name'], 'user': request.user}
-                print(BotPreSets.objects.filter(**filterargs).count())
                 if BotPreSets.objects.filter(**filterargs).count() == 0:
                     bot_preset = BotPreSets(user=request.user, bot_name=request.POST['short_name'],
                                    created_at=datetime.datetime.now(), token=request.POST['token'],
@@ -53,11 +52,9 @@ def create_bot(request):
                         function_preset = FuncForPresets(func_name=function, bot=bot_preset)
                         function_preset.save()
 
-                    _ = generate_bot.delay(short_name, function_names, file_names, token, bot_os, request.user.name)
+                    result = generate_bot.delay(short_name, function_names, file_names, token, bot_os, request.user.name)
                     return redirect(f"../download_bot/?os={bot_os}&file={short_name}")
-            else:
-                _ = generate_bot.delay(short_name, function_names, file_names, token, bot_os, "AnonymousUser")
-                return redirect(f"../download_bot/?os={bot_os}&file={short_name}")
+
     return render(request, "create_bot.html", context)
 
 def download_bot(request):
