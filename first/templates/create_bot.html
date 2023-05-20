@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block content %}
+<button id="btn_down">Перейти в конец</button>
+<button id="btn_up">Перейти к началу</button>
+
 <div class="modal" id="modal"></div>
 <div class="container">
     <div class="row mt-5">
@@ -223,6 +226,38 @@
                     functions.children[i].classList.remove("d-none")
                 }
             }
+        })
+
+        // window.addEventListener("scroll", () => {
+        //     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        //         mybutton.style.display = "block";
+        //         mybutton2.style.display = "block";
+        //     } else {
+        //         mybutton.style.display = "none";
+        //         mybutton2.style.display = "none";
+        //     }
+        // })
+
+        // function scrollFunction() {
+        //     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        //         mybutton.style.display = "block";
+        //         mybutton2.style.display = "block";
+        //     } else {
+        //         mybutton.style.display = "none";
+        //         mybutton2.style.display = "none";
+        //     }
+        // }
+
+        // Когда пользователь нажимает на кнопку, прокрутите до верхней части документа
+
+        btn_up.addEventListener("click", () => {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        })
+
+        btn_down.addEventListener("click", () => {
+            document.body.scrollTop = 10000;
+            document.documentElement.scrollTop = 10000;
         })
     }
 
