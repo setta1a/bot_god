@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
 
-from first.views import index, create_bot, profile, tech_support, download_bot
+from first.views import index, create_bot, profile, tech_support, download_bot, api_check_bot
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,4 +37,5 @@ urlpatterns = [
     path("tech_support/", tech_support),
     path("telegram_auth/", TemplateView.as_view(template_name='telegram_auth.html')),
     path("download_bot/", download_bot),
+    path("api/bot_check/", api_check_bot),
 ]

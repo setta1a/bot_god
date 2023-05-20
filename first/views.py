@@ -5,6 +5,9 @@ import shutil
 import smtplib
 from distutils.dir_util import copy_tree
 from email.mime.text import MIMEText
+
+from django.http import JsonResponse
+
 from dj_project.tasks import generate_bot, send_email
 
 from django.contrib.auth.decorators import login_required
@@ -14,6 +17,14 @@ from django.shortcuts import render, redirect
 
 from first.models import BotFunctions, BotPreSets, FuncForPresets
 
+def api_check_bot(request):
+    context = dict()
+    if request.method == "GET" and request.GET.get("bot_name", "") != "":
+        bot_name = request.GET['bot_name']
+        cnt = BotPreSets.objects.filter(bot_name=bot_name).count()
+        res = (cnt == 0)
+        context['has_bot'] = res
+    return JsonResponse(context)
 
 def index(request):
     context = {}
