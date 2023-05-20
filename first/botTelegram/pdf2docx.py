@@ -23,10 +23,14 @@ def convert_pdf2docx(input_file: str, output_file: str, pages: Tuple = None):
 
 @bot.message_handler(commands=['pdf2docx'])
 def pdf2docx_command(message):
-    if not os.path.exists('files'):
-        os.mkdir("files")
-    send = bot.send_message(message.chat.id, 'Отправьте pdf файл')
-    bot.register_next_step_handler(send, pdf2docx)
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        if not os.path.exists('files'):
+            os.mkdir("files")
+        send = bot.send_message(message.chat.id, 'Отправьте pdf файл')
+        bot.register_next_step_handler(send, pdf2docx)
+    else:
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
 
 
 def pdf2docx(message):

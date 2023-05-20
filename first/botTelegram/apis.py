@@ -73,89 +73,103 @@ def add_api_step7(message, new_api):
 
 @bot.message_handler(commands=["run_api"])
 def run_api(message):
-    text = list(message.text.split())[-1].lower()
-    run = -1
-    for i in range(len(apis)):
-        api = apis[i]
-        if api["name"].lower() == text or api["command"].lower() == text:
-            run = i
-            break
-    if run != -1:
-        try:
-            run = apis[i]
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        text = list(message.text.split())[-1].lower()
+        run = -1
+        for i in range(len(apis)):
+            api = apis[i]
+            if api["name"].lower() == text or api["command"].lower() == text:
+                run = i
+                break
+        if run != -1:
             try:
-                payload = {}
-                if run["params"] != '-':
-                    params = list(run["params"].split())
-                    for param in params:
-                        key, val = param.split('=')
-                        payload[key] = val
-                    data = requests.get(run["url"], params=payload)
-                else:
-                    data = requests.get(run["url"])
-            except:
-                data = requests.get(run["url"])
-            data = data.json()
-            out = f'{run["name"]}\n'
-            count = 1
-            for param in run["keys"]:
-                path = list(param["path"].split("."))
-                for j in range(len(path)):
-                    if path[j][0] == '[':
-                        new_part = ""
-                        for i in range(1, len(path[j])):
-                            if(path[j][i] == ']'):
-                                break
-                            else:
-                                new_part += path[j][i]
-                        path[j] = int(new_part)
-                val = data
+                run = apis[i]
                 try:
-                    for part in path:
-                        val = val[part]
+                    payload = {}
+                    if run["params"] != '-':
+                        params = list(run["params"].split())
+                        for param in params:
+                            key, val = param.split('=')
+                            payload[key] = val
+                        data = requests.get(run["url"], params=payload)
+                    else:
+                        data = requests.get(run["url"])
                 except:
-                    val = "undefined"
-                out += f"{count}. {param['name']}: {val} \n"
-                count += 1
-            bot.send_message(message.chat.id, out)
-        except:
-            bot.send_message(message.chat.id, "API не работает")
+                    data = requests.get(run["url"])
+                data = data.json()
+                out = f'{run["name"]}\n'
+                count = 1
+                for param in run["keys"]:
+                    path = list(param["path"].split("."))
+                    for j in range(len(path)):
+                        if path[j][0] == '[':
+                            new_part = ""
+                            for i in range(1, len(path[j])):
+                                if (path[j][i] == ']'):
+                                    break
+                                else:
+                                    new_part += path[j][i]
+                            path[j] = int(new_part)
+                    val = data
+                    try:
+                        for part in path:
+                            val = val[part]
+                    except:
+                        val = "undefined"
+                    out += f"{count}. {param['name']}: {val} \n"
+                    count += 1
+                bot.send_message(message.chat.id, out)
+            except:
+                bot.send_message(message.chat.id, "API не работает")
+        else:
+            bot.send_message(message.chat.id, "Такого API нет")
     else:
-        bot.send_message(message.chat.id, "Такого API нет")
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
 
 
 
 
 @bot.message_handler(commands=["list_api"])
 def list_api(message):
-    out = "Список APi: \n"
-    count = 1
-    for api in apis:
-        out += str(count) + '. name: ' + api["name"] + '; command: ' + api["command"] + ';\n'
-        count += 1
-    if(out == ""):
-        bot.send_message(message.chat.id, "Пока нет не одного API")
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        out = "Список APi: \n"
+        count = 1
+        for api in apis:
+            out += str(count) + '. name: ' + api["name"] + '; command: ' + api["command"] + ';\n'
+            count += 1
+        if (out == ""):
+            bot.send_message(message.chat.id, "Пока нет не одного API")
+        else:
+            bot.send_message(message.chat.id, out)
     else:
-        bot.send_message(message.chat.id, out)
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
+
 
 
 @bot.message_handler(commands=["delete_api"])
 def delete_api(message):
-    text = list(message.text.split())[-1].lower()
-    to_remove = -1
-    for i in range(len(apis)):
-        api = apis[i]
-        if api["name"].lower() == text or api["command"].lower() == text:
-            to_remove = i
-            break
-    if(to_remove != -1):
-        deleted_name = apis[to_remove]["name"]
-        apis.pop(to_remove)
-        tmp = f"API {deleted_name} успешно удалено"
-        bot.send_message(message.chat.id, tmp)
-        save_api()
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        text = list(message.text.split())[-1].lower()
+        to_remove = -1
+        for i in range(len(apis)):
+            api = apis[i]
+            if api["name"].lower() == text or api["command"].lower() == text:
+                to_remove = i
+                break
+        if (to_remove != -1):
+            deleted_name = apis[to_remove]["name"]
+            apis.pop(to_remove)
+            tmp = f"API {deleted_name} успешно удалено"
+            bot.send_message(message.chat.id, tmp)
+            save_api()
+        else:
+            bot.send_message(message.chat.id, "Такого API нет")
     else:
-        bot.send_message(message.chat.id, "Такого API нет")
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
+
 
 
 menu.append(telebot.types.BotCommand("/add_api", "Добавить API"))

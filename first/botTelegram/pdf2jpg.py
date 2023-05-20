@@ -5,10 +5,14 @@ from pdf2image import convert_from_path
 
 @bot.message_handler(commands=['pdf2jpg'])
 def pdf2jpg_command(message):
-    if not os.path.exists('files'):
-        os.mkdir("files")
-    send = bot.send_message(message.chat.id, 'Отправьте pdf файл')
-    bot.register_next_step_handler(send, pdf2jpg)
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        if not os.path.exists('files'):
+            os.mkdir("files")
+        send = bot.send_message(message.chat.id, 'Отправьте pdf файл')
+        bot.register_next_step_handler(send, pdf2jpg)
+    else:
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
 
 
 def pdf2jpg(message):

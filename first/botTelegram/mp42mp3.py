@@ -17,10 +17,14 @@ def converttomp3(mp4file, mp3file):
 
 @bot.message_handler(commands=['mp42mp3'])
 def mp42pm3_command(message):
-    if not os.path.exists('files'):
-        os.mkdir("files")
-    send = bot.send_message(message.chat.id, 'Отправьте mp4 файл')
-    bot.register_next_step_handler(send, mp42pm3)
+    user_id = message.from_user.username
+    if user_id == USER_DEFAULT:
+        if not os.path.exists('files'):
+            os.mkdir("files")
+        send = bot.send_message(message.chat.id, 'Отправьте mp4 файл')
+        bot.register_next_step_handler(send, mp42pm3)
+    else:
+        bot.send_message(message.chat.id, "Вы не тот пользователь")
 
 
 def mp42pm3(message):
