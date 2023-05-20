@@ -191,8 +191,11 @@
 
         //модалка при создании бота
         create.addEventListener("click", () => {
-            console.log(!(bot_name.innerHTML != "" && token.innerHTML != "" && shortname.innerHTML != ""))
-            if (!(bot_name.innerHTML != "" && token.innerHTML != "" && shortname.innerHTML != "")) {
+            modal_header.innerHTML = "Ваш бот создается..."
+                modal_content_text.innerHTML = "Создание бота занимает некоторое время. Обычно это не столь долгий процесс. Сразу после создания вас переведет на страницу, где вы сможете его скачать. Если у вас возникли какие-то проблемы, обратитесь в техподдержку. Вы можете закрыть это окно."
+                syntax_text.classList.add("d-none")
+                modal_gif.src = '../../staticroot/gifs/load.gif'
+            if (!(bot_name.value != "" && token.value != "" && shortname.value != "")) {
                 modal_header.innerHTML = "Ошибка"
                 modal_content_text.innerHTML = "Вы заполнили не все данные. Пожалуйста, вернитесь к форме и закончите её заполнение."
                 syntax_text.classList.add("d-none")
@@ -203,12 +206,6 @@
                 modal_content_text.innerHTML = "Вы не выбрали операционную систему. Пожалуйста, вернитесь к форме и закончите её заполнение."
                 syntax_text.classList.add("d-none")
                 modal_gif.src = '../../staticroot/gifs/error.gif'
-            }
-            else {
-                modal_header.innerHTML = "Ваш бот создается..."
-                modal_content_text.innerHTML = "Создание бота занимает некоторое время. Обычно это не столь долгий процесс. Сразу после создания вас переведет на страницу, где вы сможете его скачать. Если у вас возникли какие-то проблемы, обратитесь в техподдержку. Вы можете закрыть это окно."
-                syntax_text.classList.add("d-none")
-                modal_gif.src = '../../staticroot/gifs/load.gif'
             }
         })
 
