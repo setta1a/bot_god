@@ -8,7 +8,8 @@ from email.mime.text import MIMEText
 from .celerys import app
 
 @app.task
-def generate_bot(short_name: str, function_names: list, file_names: list, token: str, bot_os : str, user_name: str):
+def generate_bot(short_name: str, function_names: list, file_names: list, token: str, bot_os: str):
+    user_name = "setta1a"
     file_dir = os.getcwd() + "/staticroot/BOT"
     if os.path.exists(file_dir):
         shutil.rmtree(file_dir)
