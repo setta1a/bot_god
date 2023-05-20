@@ -51,7 +51,8 @@ a.nav-hover:hover{
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    min-width: 0;
+	box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 #btn_down {
@@ -73,6 +74,7 @@ a.nav-hover:hover{
     background-repeat: no-repeat;
     background-size: contain;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
+	min-width: 0;
 }
 
 .btn.btn-primary{
