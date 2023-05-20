@@ -21,7 +21,7 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
     with open(f"staticroot/BOT/{short_name}.py", "w") as bot:
         with open("first/botTelegram/start_template.py", 'r') as start_file:
             bot.write(start_file.read())
-            bot.write(f"USER_DEFAULT = {user_name}\n")
+            bot.write(f"USER_DEFAULT = \"{user_name}\" \n")
             bot.write("bot = TeleBot('" + token + "')")
 
         if "Pdf ==> Docx" in function_names or "Pdf ==> Jpg" in function_names or "MP4 ==> MP3" in function_names:
