@@ -13,6 +13,10 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
     if os.path.exists(file_dir):
         shutil.rmtree(file_dir)
     os.mkdir(file_dir)
+    with open("requirements.txt") as req:
+        req_txt = req.read()
+        with open("staticroot/BOT/requirements.txt") as bot_req:
+            bot_req.write(req_txt)
 
     with open(f"staticroot/BOT/{short_name}.py", "w") as bot:
         with open("first/botTelegram/start_template.py", 'r') as start_file:
