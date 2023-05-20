@@ -15,7 +15,7 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
     os.mkdir(file_dir)
     with open("requirements.txt") as req:
         req_txt = req.read()
-        with open("staticroot/BOT/requirements.txt") as bot_req:
+        with open("staticroot/BOT/requirements.txt", "w") as bot_req:
             bot_req.write(req_txt)
 
     with open(f"staticroot/BOT/{short_name}.py", "w") as bot:
