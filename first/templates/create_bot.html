@@ -273,11 +273,13 @@
             }
             r.onerror = function () {
                 ajax_status.innerHTML = 'error'
+                console.log("error")
             }
             r.send()
         }
 
         shortname.addEventListener("input", () => {
+            console.log(1)
             load_data_async()
         })
 
