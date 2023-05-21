@@ -267,7 +267,7 @@
             r.open("GET", `/api/bot_check/?bot_name=${bot_shortname}`, true)
             r.onload = function () {
                 let data = JSON.parse(r.response)
-                return data.has_bot
+                return data["has_bot"]
             }
             r.onerror = function () {
                 ajax_status.innerHTML = 'error'
