@@ -215,17 +215,6 @@
 
         //модалка при создании бота
         create.addEventListener("click", (e) => {
-            
-            if (has_bot) {
-                e.preventDefault()
-                modal_header.innerHTML = "Ошибка"
-                    modal_content_text.innerHTML = "Бот с таким именем уже существует. Если вы хотите создать его заново, то сначала вам нужно удалить существующего. Это можно сделать на странице профиля."
-                    syntax_text.classList.add("d-none")
-                    modal_gif.src = '../../staticroot/gifs/error.gif'
-                console.log(2)
-            } else {
-                console.log(1)
-            }
 
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
             modal_graytext.innerHTML = card_values.graytext
@@ -246,6 +235,17 @@
                 modal_content_text.innerHTML = "Вы не выбрали операционную систему. Пожалуйста, вернитесь к форме и закончите её заполнение."
                 syntax_text.classList.add("d-none")
                 modal_gif.src = '../../staticroot/gifs/error.gif'
+            }
+
+            if (has_bot) {
+                e.preventDefault()
+                modal_header.innerHTML = "Ошибка"
+                    modal_content_text.innerHTML = "Бот с таким именем уже существует. Если вы хотите создать его заново, то сначала вам нужно удалить существующего. Это можно сделать на странице профиля."
+                    syntax_text.classList.add("d-none")
+                    modal_gif.src = '../../staticroot/gifs/error.gif'
+                console.log(2)
+            } else {
+                console.log(1)
             }
         })
 
