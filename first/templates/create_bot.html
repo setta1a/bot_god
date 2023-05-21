@@ -261,14 +261,13 @@
         })
 
 
-        function load_data_async() 
+        function load_data_async(bot_shortname) 
         {
             let r = new XMLHttpRequest()
-            r.open("GET", `/api/bot_check/?bot_name=${shortname.value}`, true)
+            r.open("GET", `/api/bot_check/?bot_name=${bot_shortname}`, true)
             r.onload = function () {
                 let data = JSON.parse(r.response)
-                console.log(`/api/bot_check/?bot_name=${shortname.value}`)
-                console.log(data)
+                return data.has_bot
             }
             r.onerror = function () {
                 ajax_status.innerHTML = 'error'
@@ -279,7 +278,7 @@
 
         shortname.addEventListener("input", () => {
             console.log(1)
-            load_data_async()
+            console.log(load_data_async(shortname.value))
         })
 
         
