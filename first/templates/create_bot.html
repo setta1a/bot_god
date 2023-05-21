@@ -198,6 +198,7 @@
 
         //модалка при создании бота
         create.addEventListener("click", (e) => {
+            e.preventDefault()
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
             modal_graytext.innerHTML = card_values.graytext
             modal_header.innerHTML = "Ваш бот создается..."
@@ -211,7 +212,6 @@
                 let data = JSON.parse(r.response)
                 console.log(data, data.has_bot)
                 if (data.has_bot) {
-                    e.preventDefault()
                     modal_header.innerHTML = "Ошибка"
                     modal_content_text.innerHTML = "Бот с таким именем уже существует. Если вы хотите создать его заново, то сначала вам нужно удалить существующего. Это можно сделать на странице профиля."
                     syntax_text.classList.add("d-none")
