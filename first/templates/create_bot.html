@@ -267,6 +267,7 @@
             r.open("GET", `/api/bot_check/?bot_name=${shortname.value}/`, true)
             r.onload = function () {
                 let data = JSON.parse(r.response)
+                console.log(`/api/bot_check/?bot_name=${shortname.value}/`)
                 console.log(data)
             }
             r.onerror = function () {
