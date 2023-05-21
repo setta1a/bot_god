@@ -196,11 +196,10 @@
                 modal_gif.src = '../../staticroot/gifs/load.gif'
         })
 
-        //модалка при создании бота
-        create.addEventListener("click", (e) => {
-            e.preventDefault()
+        let has_bot = false
+
+        shortname.addEventListener("input", () => {
             let r = new XMLHttpRequest()
-            let has_bot = false
             r.open("GET", `/api/bot_check/?bot_name=${shortname.value}`, true)
             r.onload = function () {
                 let data = JSON.parse(r.response)
@@ -217,7 +216,12 @@
                 console.log("error")
             }
             r.send()
+        })
 
+
+        //модалка при создании бота
+        create.addEventListener("click", (e) => {
+            
             if (has_bot) {
                 e.preventDefault()
                 console.log(2)
@@ -246,6 +250,8 @@
                 modal_gif.src = '../../staticroot/gifs/error.gif'
             }
         })
+
+
 
 
         //поиск по названию и описанию карточек
