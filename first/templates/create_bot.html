@@ -20,7 +20,7 @@
                 <input id="shortname" required type="text" class="form-control m-1" placeholder="Bot short name" name="short_name">
                 <button type="button" id="get_data" class="btn card-text text-primary text-end" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop"
-                        style="font-size: 24px; margin-right: 30px;display: inline-block;">Где взять данные?
+                        style="font-size: 24px; margin-right: 100px;display: inline-block; margin-left: 0;">Где взять данные?
                 </button>
                 <div class="modal fade" style="margin-top: 15vh;" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -191,7 +191,7 @@
 
         get_data.addEventListener("click", () => {
             modal_header.innerHTML = "Где взять данные"
-                modal_content_text.innerHTML = "<a href='https://youtu.be/3DqfSIQ_IKc'>Чтобы посмотреть видео с подробной инструкцией о том, как получить данные для создания бота, нажмите на этот текст</a>"
+                modal_content_text.innerHTML = "<a href='https://youtu.be/3DqfSIQ_IKc' target='blank'>Чтобы посмотреть видео с подробной инструкцией о том, как получить данные для создания бота, нажмите на этот текст</a>"
                 syntax_text.classList.add("d-none")
                 modal_gif.src = '../../staticroot/gifs/load.gif'
         })
