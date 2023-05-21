@@ -15,7 +15,7 @@
         <form class="col-8 offset-2 form p-2" method="POST" action="" style=""><br>
             {% csrf_token %}
             <div class="col-10 offset-1">
-                <input id="token" required type="text" class="form-control m-1" placeholder="Bot TOKEN" name="token">
+                <input id="token" required type="password" class="form-control m-1" placeholder="Bot TOKEN" name="token">
                 <input id="bot_name" required type="text" class="form-control m-1" placeholder="Bot name" name="name">
                 <input id="shortname" required type="text" class="form-control m-1" placeholder="Bot short name" name="short_name">
                 <button type="button" id="get_data" class="btn card-text text-primary text-end" data-bs-toggle="modal"
@@ -203,6 +203,7 @@
             r.open("GET", `/api/bot_check/?bot_name=${shortname.value}`, true)
             r.onload = function () {
                 let data = JSON.parse(r.response)
+                has_bot = data.has_bot
                 console.log(data, data.has_bot)
                 if (data.has_bot) {
                     modal_header.innerHTML = "Ошибка"
