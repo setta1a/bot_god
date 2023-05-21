@@ -18,7 +18,7 @@
                 <input id="token" required type="text" class="form-control m-1" placeholder="Bot TOKEN" name="token">
                 <input id="bot_name" required type="text" class="form-control m-1" placeholder="Bot name" name="name">
                 <input id="shortname" required type="text" class="form-control m-1" placeholder="Bot short name" name="short_name">
-                <button type="button" id="question" class="btn card-text text-primary text-end" data-bs-toggle="modal"
+                <button type="button" id="get_data" class="btn card-text text-primary text-end" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop"
                         style="font-size: 24px; margin-right: 30px;display: inline-block;">Где взять данные?
                 </button>
@@ -62,7 +62,6 @@
             </div>
             <input href="" class="card-text btn btn-primary col-4 offset-4 p-3 fs-4" type="submit" id="create" data-bs-toggle="modal"
             data-bs-target="#staticBackdrop" value="Отправить">
-
         </form>
     </div>
 </div>
@@ -190,6 +189,13 @@
         })
 
 
+        get_data.addEventListener("click", () => {
+            modal_header.innerHTML = "Где взять данные"
+                modal_content_text.innerHTML = "<a href='https://youtu.be/3DqfSIQ_IKc'>Чтобы посмотреть видео с подробной инструкцией о том, как получить данные для создания бота, нажмите на этот текст</a>"
+                syntax_text.classList.add("d-none")
+                modal_gif.src = '../../staticroot/gifs/load.gif'
+        })
+
         //модалка при создании бота
         create.addEventListener("click", () => {
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
@@ -275,27 +281,6 @@
         btn_down.addEventListener("click", () => {
             document.body.scrollTop = 10000;
             document.documentElement.scrollTop = 10000;
-        })
-
-
-        function load_data_async(bot_shortname) 
-        {
-            let r = new XMLHttpRequest()
-            r.open("GET", `/api/bot_check/?bot_name=${bot_shortname}`, true)
-            r.onload = function () {
-                let data = JSON.parse(r.response)
-            }
-            r.onerror = function () {
-                ajax_status.innerHTML = 'error'
-                console.log("error")
-            }
-            r.send()
-            return data["has_bot"]
-        }
-
-        shortname.addEventListener("input", () => {
-            console.log(1)
-            console.log(load_data_async(shortname.value))
         })
 
         
