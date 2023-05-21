@@ -264,10 +264,10 @@
         function load_data_async() 
         {
             let r = new XMLHttpRequest()
-            r.open("GET", `/api/bot_check/?bot_name=${shortname.value}/`, true)
+            r.open("GET", `/api/bot_check/?bot_name=${shortname.value}`, true)
             r.onload = function () {
                 let data = JSON.parse(r.response)
-                console.log(`/api/bot_check/?bot_name=${shortname.value}/`)
+                console.log(`/api/bot_check/?bot_name=${shortname.value}`)
                 console.log(data)
             }
             r.onerror = function () {
