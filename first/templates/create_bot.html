@@ -199,14 +199,8 @@
         //модалка при создании бота
         create.addEventListener("click", (e) => {
             e.preventDefault()
-            modal_gif.src = '../../staticroot/gifs/' + card_values.modal
-            modal_graytext.innerHTML = card_values.graytext
-            modal_header.innerHTML = "Ваш бот создается..."
-            modal_content_text.innerHTML = "Создание бота занимает некоторое время. Обычно это не столь долгий процесс. Сразу после создания вас переведет на страницу, где вы сможете его скачать. Если у вас возникли какие-то проблемы, обратитесь в техподдержку. Вы можете закрыть это окно."
-            syntax_text.classList.add("d-none")
-            modal_gif.src = '../../staticroot/gifs/load.gif'
-            
             let r = new XMLHttpRequest()
+            let has_bot = false
             r.open("GET", `/api/bot_check/?bot_name=${shortname.value}`, true)
             r.onload = function () {
                 let data = JSON.parse(r.response)
@@ -223,6 +217,17 @@
                 console.log("error")
             }
             r.send()
+
+
+            e.preventDefault()
+            modal_gif.src = '../../staticroot/gifs/' + card_values.modal
+            modal_graytext.innerHTML = card_values.graytext
+            modal_header.innerHTML = "Ваш бот создается..."
+            modal_content_text.innerHTML = "Создание бота занимает некоторое время. Обычно это не столь долгий процесс. Сразу после создания вас переведет на страницу, где вы сможете его скачать. Если у вас возникли какие-то проблемы, обратитесь в техподдержку. Вы можете закрыть это окно."
+            syntax_text.classList.add("d-none")
+            modal_gif.src = '../../staticroot/gifs/load.gif'
+            
+            
             if (!(bot_name.value != "" && token.value != "" && shortname.value != "")) {
                 modal_header.innerHTML = "Ошибка"
                 modal_content_text.innerHTML = "Вы заполнили не все данные. Пожалуйста, вернитесь к форме и закончите её заполнение."
