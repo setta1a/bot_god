@@ -201,26 +201,27 @@
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
             modal_graytext.innerHTML = card_values.graytext
             modal_header.innerHTML = "Ваш бот создается..."
-                modal_content_text.innerHTML = "Создание бота занимает некоторое время. Обычно это не столь долгий процесс. Сразу после создания вас переведет на страницу, где вы сможете его скачать. Если у вас возникли какие-то проблемы, обратитесь в техподдержку. Вы можете закрыть это окно."
-                syntax_text.classList.add("d-none")
-                modal_gif.src = '../../staticroot/gifs/load.gif'
-                let r = new XMLHttpRequest()
-                r.open("GET", `/api/bot_check/?bot_name=${shortname.value}`, true)
-                r.onload = function () {
-                    let data = JSON.parse(r.response)
-                    console.log(data, data.has_bot)
-                    if (data.has_bot) {
-                        modal_header.innerHTML = "Ошибка"
-                        modal_content_text.innerHTML = "Бот с таким именем уже существует. Если вы хотите создать его заново, то сначала вам нужно удалить существующего. Это можно сделать на странице профиля."
-                        syntax_text.classList.add("d-none")
-                        modal_gif.src = '../../staticroot/gifs/error.gif'
-                    }
+            modal_content_text.innerHTML = "Создание бота занимает некоторое время. Обычно это не столь долгий процесс. Сразу после создания вас переведет на страницу, где вы сможете его скачать. Если у вас возникли какие-то проблемы, обратитесь в техподдержку. Вы можете закрыть это окно."
+            syntax_text.classList.add("d-none")
+            modal_gif.src = '../../staticroot/gifs/load.gif'
+            
+            let r = new XMLHttpRequest()
+            r.open("GET", `/api/bot_check/?bot_name=${shortname.value}`, true)
+            r.onload = function () {
+                let data = JSON.parse(r.response)
+                console.log(data, data.has_bot)
+                if (data.has_bot) {
+                    modal_header.innerHTML = "Ошибка"
+                    modal_content_text.innerHTML = "Бот с таким именем уже существует. Если вы хотите создать его заново, то сначала вам нужно удалить существующего. Это можно сделать на странице профиля."
+                    syntax_text.classList.add("d-none")
+                    modal_gif.src = '../../staticroot/gifs/error.gif'
                 }
-                r.onerror = function () {
-                    ajax_status.innerHTML = 'error'
-                    console.log("error")
-                }
-                r.send()
+            }
+            r.onerror = function () {
+                ajax_status.innerHTML = 'error'
+                console.log("error")
+            }
+            r.send()
             if (!(bot_name.value != "" && token.value != "" && shortname.value != "")) {
                 modal_header.innerHTML = "Ошибка"
                 modal_content_text.innerHTML = "Вы заполнили не все данные. Пожалуйста, вернитесь к форме и закончите её заполнение."
