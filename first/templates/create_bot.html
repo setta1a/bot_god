@@ -266,9 +266,7 @@
             let r = new XMLHttpRequest()
             r.open("GET", `/api/bot_check/?bot_name=${shortname.value}/`, true)
             r.onload = function () {
-                data = JSON.parse(r.response)
-                ajax_status.innerHTML = data.status
-                ajax_data.innerHTML = data.data
+                let data = JSON.parse(r.response)
                 console.log(data)
             }
             r.onerror = function () {
