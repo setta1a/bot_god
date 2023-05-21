@@ -218,8 +218,13 @@
             }
             r.send()
 
+            if (has_bot) {
+                e.preventDefault()
+                console.log(2)
+            } else {
+                console.log(1)
+            }
 
-            e.preventDefault()
             modal_gif.src = '../../staticroot/gifs/' + card_values.modal
             modal_graytext.innerHTML = card_values.graytext
             modal_header.innerHTML = "Ваш бот создается..."
