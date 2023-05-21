@@ -81,6 +81,12 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
 
 
 def index(request):
+    """
+        Главная страница
+
+        :param request: объект с деталями HTTP-запроса
+        :return: **context** - объект с деталями HTTP-ответа (пустой)
+    """
     context = {}
     if request.method == "GET":
         print(request.GET)
@@ -91,6 +97,13 @@ def telegram_auth(request):
     return render(request, "telegram_auth.html", context)
 
 def create_bot(request):
+    """
+        Страница создания бота
+
+        :param request: объект с деталями HTTP-запроса
+        :return: **context** - объект с деталями HTTP-ответа (пустой)
+        :return: **redirect** - перекидование на страницу оплаты
+    """
     context = {}
     if request.method == "POST":
         if 'functions' in request.POST and 'os' in request.POST and 'short_name' in request.POST and 'token' in request.POST and 'name' in request.POST:
@@ -153,12 +166,13 @@ def profile(request):
     """
         Страница профиля пользователя
 
-        :param request: объект с деталями HTTP-запроса
-        :return: Объект с деталями HTTP-ответа
+        :param request: объект с деталями HTTP-запроса, **id** пользователя
+        :return: **context** - объект с деталями HTTP-ответа
     """
     context = {}
     context['bots'] = BotPreSets.objects.filter(user=request.user)
     return render(request, "profile.html", context)
+
 
 
 def tech_support(request):
@@ -213,5 +227,6 @@ def tech_support(request):
 
             except Exception as _ex:
                 print(f"{_ex}\nCheck your login or password please!")
-
     return render(request, "tech_support.html", context)
+
+# Create your views here.
