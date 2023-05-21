@@ -20,7 +20,7 @@
                 <input id="shortname" required type="text" class="form-control m-1" placeholder="Bot short name" name="short_name">
                 <button type="button" id="question" class="btn card-text text-primary text-end" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop"
-                        style="font-size: 24px; margin-right: 10px;display: inline-block;">Где взять данные?
+                        style="font-size: 24px; margin-right: 30px;display: inline-block;">Где взять данные?
                 </button>
                 <div class="modal fade" style="margin-top: 15vh;" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -264,6 +264,7 @@
         function load_data_async() 
         {
             let r = new XMLHttpRequest()
+            console.log(r)
             r.open(method="GET", url="/api/bot_check/?bot_name=${shortname.value}/", async=true)
             r.onload = function () {
                 data = JSON.parse(r.response)
