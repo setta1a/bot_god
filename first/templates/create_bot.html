@@ -204,13 +204,6 @@
             r.onload = function () {
                 let data = JSON.parse(r.response)
                 has_bot = data.has_bot
-                console.log(data, data.has_bot)
-                if (data.has_bot) {
-                    modal_header.innerHTML = "Ошибка"
-                    modal_content_text.innerHTML = "Бот с таким именем уже существует. Если вы хотите создать его заново, то сначала вам нужно удалить существующего. Это можно сделать на странице профиля."
-                    syntax_text.classList.add("d-none")
-                    modal_gif.src = '../../staticroot/gifs/error.gif'
-                }
             }
             r.onerror = function () {
                 ajax_status.innerHTML = 'error'
@@ -225,6 +218,10 @@
             
             if (has_bot) {
                 e.preventDefault()
+                modal_header.innerHTML = "Ошибка"
+                    modal_content_text.innerHTML = "Бот с таким именем уже существует. Если вы хотите создать его заново, то сначала вам нужно удалить существующего. Это можно сделать на странице профиля."
+                    syntax_text.classList.add("d-none")
+                    modal_gif.src = '../../staticroot/gifs/error.gif'
                 console.log(2)
             } else {
                 console.log(1)
