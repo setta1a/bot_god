@@ -1,4 +1,4 @@
-# BotGad
+# BotGod
 
 ## Getting started
 
