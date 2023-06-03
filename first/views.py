@@ -5,7 +5,7 @@ import shutil
 import smtplib
 from distutils.dir_util import copy_tree
 from email.mime.text import MIMEText
-
+from functionClass import BotFunction
 from django.http import JsonResponse
 
 from dj_project.tasks import generate_bot, send_email
@@ -14,8 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-
 from first.models import BotFunctions, BotPreSets, FuncForPresets
+
 
 def api_check_bot(request):
     context = dict()
@@ -25,6 +25,7 @@ def api_check_bot(request):
         res = (cnt != 0)
         context['has_bot'] = res
     return JsonResponse(context)
+
 
 def index(request):
     """
@@ -38,9 +39,11 @@ def index(request):
         print(request.GET)
     return render(request, "index.html", context)
 
+
 def telegram_auth(request):
     context = {}
     return render(request, "telegram_auth.html", context)
+
 
 def create_bot(request):
     """
@@ -51,6 +54,13 @@ def create_bot(request):
         :return: **redirect** - перекидование на страницу оплаты
     """
     context = {}
+    context['bot_functions'] = []
+    for filename in os.listdir(os.getcwd() + '/functions_info'):
+        with open(os.path.join(os.getcwd() + '/functions_info', filename), 'r') as f:
+            fields = f.readlines()
+            os_availability = list(map(int, fields[3].split()))
+            context['bot_functions'].append(BotFunction(fields[0], fields[1], fields[2], os_availability, fields[4], fields[5], fields[6]))
+
     if request.method == "POST":
         if 'functions' in request.POST and 'os' in request.POST and 'short_name' in request.POST and 'token' in request.POST and 'name' in request.POST:
             function_names = request.POST.getlist('functions')
@@ -68,18 +78,21 @@ def create_bot(request):
                 filterargs = {'bot_name': request.POST['short_name'], 'user': request.user}
                 if BotPreSets.objects.filter(**filterargs).count() == 0:
                     bot_preset = BotPreSets(user=request.user, bot_name=request.POST['short_name'],
-                                   created_at=datetime.datetime.now(), token=request.POST['token'],
-                                   os=request.POST['os'])
+                                            created_at=datetime.datetime.now(), token=request.POST['token'],
+                                            os=request.POST['os'])
                     bot_preset.save()
 
                     for function in functions:
                         function_preset = FuncForPresets(func_name=function, bot=bot_preset)
                         function_preset.save()
 
-                    result = generate_bot.delay(short_name, function_names, file_names, token, bot_os, request.user.username)
+                    _ = generate_bot.delay(short_name, function_names, file_names, token, bot_os,
+                                                request.user.username)
                     return redirect(f"../download_bot/?os={bot_os}&file={short_name}")
 
+
     return render(request, "create_bot.html", context)
+
 
 def download_bot(request):
     context = {}
@@ -101,7 +114,8 @@ def download_bot(request):
             context['file'] = bot_name
             context['os'] = bot_preset.os
             context['bot_status'] = ""
-            result = generate_bot.delay(bot_name, function_names, file_names, bot_preset.token, bot_preset.os, request.user.username)
+            result = generate_bot.delay(bot_name, function_names, file_names, bot_preset.token, bot_preset.os,
+                                        request.user.username)
             context['bot_status'] = str(result.state)
             if (str(result.state) != "SUCCESS"):
                 context['bot_status'] = ""
@@ -110,6 +124,7 @@ def download_bot(request):
                 return render(request, "download_bot.html", context)
 
     return render(request, "download_bot.html", context)
+
 
 @login_required(login_url='/telegram_auth/')
 def profile(request):
@@ -185,6 +200,3 @@ def tech_support(request):
             except Exception as _ex:
                 print(f"{_ex}\nCheck your login or password please!")
     return render(request, "tech_support.html", context)
-
-
-
