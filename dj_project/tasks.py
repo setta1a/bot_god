@@ -13,10 +13,21 @@ def generate_bot(short_name: str, function_names: list, file_names: list, token:
     if os.path.exists(file_dir):
         shutil.rmtree(file_dir)
     os.mkdir(file_dir)
+    additional_libs = {
+        "Вики": ["wikipedia==1.4.0\n"],
+        "Анекдот": ["beautifulsoup4==4.12.2"],
+        "Pdf ==> Docx": ["pdf2docx==0.5.6\n", "python-docx==0.8.11\n"],
+        "Pdf ==> Jpg": ["pdf2image==1.16.3\n"],
+        "Скачать видео/плейлист с Ютуба": ["pytube==12.1.3\n"],
+    }
     with open("requirements.txt") as req:
         req_txt = req.read()
         with open("staticroot/BOT/requirements.txt", "w") as bot_req:
             bot_req.write(req_txt)
+            for func_name in function_names:
+                if func_name in additional_libs:
+                    for lib in additional_libs[func_name]:
+                        bot_req.write(lib)
 
     with open(f"staticroot/BOT/{short_name}.py", "w") as bot:
         with open("first/botTelegram/start_template.py", 'r') as start_file:
