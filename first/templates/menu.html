@@ -7,9 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarText" style="margin-left: 60px">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                {% if request.user.is_authenticated %}
                     <a class="nav-link nav-hover text-light m-2 fs-5" href="/create_bot/">Создать бота</a>
-                {% endif %}
             </li>
             <li class="nav-item active">
                 <a class="nav-link text-light m-2 nav-hover icon-link icon-link-hover fs-5" href="/tech_support/">Поддержка</a>
