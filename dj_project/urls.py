@@ -25,12 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", index),
     path('create_bot/', create_bot),
-    path('login/', auth_views.LoginView.as_view(
-        extra_context={
-            "pagetitle": "Auth",
-            "pageheader": "Авторизация"
-        }
-    )),
     path('auth/', include('social_django.urls', namespace='social')),
     path('logout/', auth_views.LogoutView.as_view()),
     path('profile/', profile, name='profile'),
